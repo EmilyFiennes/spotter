@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   has_many :events
   has_many :participations
-  validates :first_name, presence: true, length: { minimum: 2 }
-  validates :last_name, presence: true, length: { minimum: 2 }
-  validates :address, presence: true, uniqueness: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, uniqueness: true
 end
