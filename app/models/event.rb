@@ -5,5 +5,5 @@ class Event < ApplicationRecord
   validates :activity, presence: true
   validates :user, presence: true
   validates :address, presence: true
-  validate :max_participants, presence: true
+  validates :max_participants, presence: true
 end
