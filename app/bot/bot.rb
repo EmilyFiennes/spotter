@@ -2,6 +2,7 @@ require 'facebook/messenger'
 
 include Facebook::Messenger
 
+#@threads_controller = ThreadsController.new()
 
 Facebook::Messenger::Thread.set(
   {
@@ -9,6 +10,20 @@ Facebook::Messenger::Thread.set(
     greeting: {
       text: 'Welcome to Spotter! Ready to rumble?!'
     }
+  },
+  access_token: ENV["ACCESS_TOKEN"]
+)
+
+
+Facebook::Messenger::Thread.set(
+  {
+    setting_type: 'call_to_actions',
+    thread_state: 'new_thread',
+    call_to_actions: [
+      {
+        payload: 'GET_STARTED'
+      }
+    ]
   },
   access_token: ENV["ACCESS_TOKEN"]
 )
@@ -68,7 +83,11 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
+
   case postback.payload
+  when 'GET_STARTED'
+    text = "Welcome to spotter"
+    Acitivty_conytollrt_
   when 'HUMAN_LIKED'
     text = 'That makes bot happy!'
   when 'HUMAN_DISLIKED'

@@ -1,0 +1,2 @@
+class ParticipationsController
+end
