@@ -249,7 +249,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
 
-  config.omniauth :facebook, ENV["FB_APP_ID"], ENV["FB_APP_SECRET"],
+  config.omniauth :facebook, ENV["APP_ID"], ENV["APP_SECRET"],
     scope: 'email',
     info_fields: 'email, first_name, last_name, gender',
     image_size: 'square',  # 50x50, guaranteed ratio

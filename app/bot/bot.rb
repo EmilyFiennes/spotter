@@ -2,6 +2,18 @@ require 'facebook/messenger'
 
 include Facebook::Messenger
 
+
+Facebook::Messenger::Thread.set(
+  {
+    setting_type: 'greeting',
+    greeting: {
+      text: 'Welcome to Spotter! Ready to rumble?!'
+    }
+  },
+  access_token: ENV["ACCESS_TOKEN"]
+)
+
+
 Bot.on :message do |message|
   puts "Received '#{message.inspect}' from #{message.sender}"
 
