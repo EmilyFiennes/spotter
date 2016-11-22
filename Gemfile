@@ -17,6 +17,8 @@ gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'autoprefixer-rails'
 
+# New gemfiles
+gem 'omniauth-facebook'
 gem 'facebook-messenger'
 
 group :development, :test do
