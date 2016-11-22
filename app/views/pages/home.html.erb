@@ -1,2 +1,8 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="container text-center">
+  <h1>Spotter</h1>
+  <div class="btn btn-default facebook-btn">
+    <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
+    Sign up with Facebook
+    <%= link_to "", omniauth_authorize_path(:user, :facebook), class: "link" %>
+  </div>
+</div>
