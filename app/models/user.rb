@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook]
   has_many :events
-  has_many :participations
+  has_many :participations, dependent: :destroy
+  has_many :participating_events, through: :participations, source: :event # les évènements auxquels tu t'es inscrit
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :email, uniqueness: true
