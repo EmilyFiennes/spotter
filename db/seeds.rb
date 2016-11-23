@@ -71,8 +71,8 @@ end
 events = []
 10.times do
   events << Event.create(
-    start_at: Date.today + (0..5).to_a.sample,
-    end_at: Date.today + (6..10).to_a.sample,
+    start_at: DateTime.now + (0..5).to_a.sample,
+    end_at: DateTime.now + (6..10).to_a.sample,
     address: event_addresses.sample,
     user: users.sample,
     description: descriptions.sample,
@@ -84,15 +84,15 @@ events = []
 end
 
 # Generating 30 participations
-#user = users.sample
-#event = events.sample
-#30.times do
-#  unless event.participants >= event.max_participants && event.participants.include?(user)
-#    Participation.create(
-#      user: user,
-#      event: event
-#      )
-#  end
-#end
+30.times do
+  user = users.sample
+  event = events.sample
+  unless event.participants.count >= event.max_participants && event.participants.include?(user)
+    Participation.create(
+      user: user,
+      event: event
+      )
+  end
+end
 
 print "seed complete"
