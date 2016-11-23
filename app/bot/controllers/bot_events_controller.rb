@@ -3,23 +3,23 @@ class BotEventsController
     @bot_events_view = BotEventsView.new
   end
 
-  def index(postback)
-    if @events_activity == "All"
-      if @event_today
-        events = Event.where(start_at = DateToday)
-      else
-        events = Event.where(start_at > DateToday)
-      end
-    else
-      activity = Activity.find_by(name: @events_activity)
-      if @event_today
-        events = Event.where(activity: activity, start_at = DateToday)
-      else
-        events = Event.where(activity: activity, start_at > DateToday)
-      end
-    end
-    @bot_events_view.show_list(events, postback)
-  end
+  # def index(postback)
+  #   if @events_activity == "All"
+  #     if @event_today
+  #       events = Event.where(start_at = DateToday)
+  #     else
+  #       events = Event.where(start_at > DateToday)
+  #     end
+  #   else
+  #     activity = Activity.find_by(name: @events_activity)
+  #     if @event_today
+  #       events = Event.where(activity: activity, start_at = DateToday)
+  #     else
+  #       events = Event.where(activity: activity, start_at > DateToday)
+  #     end
+  #   end
+  #   @bot_events_view.show_list(events, postback)
+  # end
 
   def new(postback)
   end
