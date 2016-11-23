@@ -1,0 +1,51 @@
+<div class="container">
+  <div class="event-banner">
+    <div id="map" style="width: 100%; height: 250px;"></div>
+      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+      <script type="text/javascript">
+        var myLatlng = new google.maps.LatLng(44.8581914, -0.5687107);
+        var myOptions = {
+        zoom: 12,
+        center: myLatlng,
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        styles: [{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}]
+        };
+        var map = new google.maps.Map(document.getElementById('map'), myOptions);
+        var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: "You are here!"
+        });
+      </script>
+    <div class="event-date text-center">
+      <h1>🗓</h1>
+      <p><%= @start_at %></p>
+    </div>
+    <div class="event-banner-title">
+      <h1><%= @event.activity.name %> session </h1>
+      <p><%= @event.address %></p>
+    </div>
+  </div>
+  <div class="event-description">
+
+      <div class="event-description-owner">
+        <div class="event-description-owner-picture">
+          <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large owner-picture"}%>
+        </div>
+        <div class="event-description-owner-content">
+          <p>This event is organised by
+          <%= link_to do %>
+            <strong><%= @event.user.first_name %> <%=@event.user.last_name %></strong>
+          <% end %>
+          </p>
+          <p>"<%= @event.description %>"</p>
+        </div>
+      </div>
+    <div class="event-description-cancel">
+      <%= link_to do %>
+        <p>Cancel my participation</p>
+      <% end %>
+    </div>
+  </div>
+</div>
