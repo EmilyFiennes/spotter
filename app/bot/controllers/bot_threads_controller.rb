@@ -5,6 +5,9 @@ class BotThreadsController
 
   def welcome(message)
     @bot_threads_view.welcome_message(message)
+  end
+
+  def initial_choice(message)
     @bot_threads_view.initial_choice(message)
   end
 

@@ -38,6 +38,9 @@ Bot.on :message do |message|
   case message.text
   when /hello/i
     @bot_threads_controller.welcome(message)
+    @bot_threads_controller.initial_choice(message)
+  when "start_again"
+    @bot_threads_controller.initial_choice(message)
   else
     message.reply(
       text: "Say 'hello' to start"
