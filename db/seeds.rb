@@ -41,6 +41,7 @@ users = [] # Generating 5 users (girls)
     password: "secret",
     address: user_addresses.sample,
     bio: Faker::StarWars.quote,
+    facebook_picture_url: picture_girl.sample,
     gender: "woman",
     email: "#{first_name}.#{last_name}@gmail.com",
     #facebook_messenger_psid:
@@ -58,6 +59,7 @@ end
     password: "secret",
     address: user_addresses.sample,
     bio: Faker::StarWars.quote,
+    facebook_picture_url: picture_boy.sample,
     gender: "man",
     email: "#{first_name}.#{last_name}@gmail.com",
     #facebook_messenger_psid:
@@ -66,8 +68,9 @@ end
 
 
 # Generating 10 events
+events = []
 10.times do
-  event = Event.new(
+  events << Event.create(
     start_at: Date.today + (0..5).to_a.sample,
     end_at: Date.today + (6..10).to_a.sample,
     address: event_addresses.sample,
@@ -78,8 +81,18 @@ end
     activity: activities.sample,
     max_participants: (1..6).to_a.sample
   )
-  event.save
 end
 
+# Generating 30 participations
+#user = users.sample
+#event = events.sample
+#30.times do
+#  unless event.participants >= event.max_participants && event.participants.include?(user)
+#    Participation.create(
+#      user: user,
+#      event: event
+#      )
+#  end
+#end
 
 print "seed complete"
