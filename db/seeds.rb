@@ -25,9 +25,9 @@ picture_boy = ["https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/e15/1
 
 # Generating 20 activities
 activities = []
-20.times do
+activity_names.each do |activity_name|
   activities << Activity.create(
-  name: activity_names.sample
+  name: activity_name
   )
 end
 
