@@ -1,0 +1,2 @@
+class BotParticipationsController
+end

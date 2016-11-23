@@ -1,2 +1,0 @@
-class EventsView
-end

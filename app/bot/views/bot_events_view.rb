@@ -1,0 +1,2 @@
+class BotEventsView
+end
