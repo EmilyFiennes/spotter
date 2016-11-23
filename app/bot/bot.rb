@@ -1,7 +1,4 @@
 require 'facebook/messenger'
-require_relative 'controllers/bot_threads_controller'
-require_relative 'controllers/bot_events_controller'
-require_relative 'controllers/bot_participations_controller'
 
 include Facebook::Messenger
 
@@ -41,26 +38,27 @@ Bot.on :message do |message|
   case message.text
   when /hello/i
     @bot_threads_controller.welcome(message)
-
   else
     message.reply(
-      text: 'You are now marked for extermination.'
-    )
-
-    message.reply(
-      text: 'Have a nice day.'
+      text: "Say 'hello' to start"
     )
   end
 end
 
 Bot.on :postback do |postback|
 
-  # case postback.payload
-  # when 'FIND'
-  #   @bot_events_controller.index
+  case postback.payload
+  when 'FIND'
+    @bot_threads_controller.gets_day(postback)
   # when 'CREATE'
-  #   @bot_events_controller.new
-  # end
+  #   @bot_events_controller.new(postback)
+  when /date/i
+    @bot_events_controller.set_date(postback)
+    @bot_threads_controller.gets_activity(postback)
+  when /activity/i
+    @bot_events_controller.set_activity(postback)
+    @bot_events_controller.index(postback)
+  end
 
 end
 
