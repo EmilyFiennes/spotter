@@ -1,0 +1,44 @@
+.container {
+    border-radius: 5px;
+    border: 1px solid #b2b8c1;
+}
+
+.card {
+  background-color: #b2b8c1;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 30px auto;
+  width: 450px;
+  height: 600px;
+  text-align: left;
+  & h1 {
+    color: white;
+    font-weight: bold;
+    padding-left: 30%
+  }
+  & h2 {
+    color: white;
+    padding-left: 5%;
+    font-size: 150%
+  }
+  & p {
+    color: white;
+    padding-left: 5%
+  }
+}
+
+
+.avatar-container {
+    background-image: url(https://slab.adopteunmec.com/uploads/2013/09/article_photo_profil_pecho_542x276.jpg);
+    height: 200px;
+    width: 200px;
+    background-size: cover;
+    background-position: center center;
+    border-radius: 50%;
+}
+
+
+
+
+
+
