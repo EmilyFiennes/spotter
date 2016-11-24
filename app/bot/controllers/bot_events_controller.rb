@@ -6,14 +6,14 @@ class BotEventsController
    def index(postback)
     if @events_activity == "All"
       if @event_today
-        events = Event.where("start_at <=?", Date.today.midnight)
+        events = Event.where("start_at <= ?", Date.tomorrow.midnight)
       else
-        events = Event.where("start_at > ?", Date.today.midnight)
+        events = Event.where("start_at > ?", Date.tomorrow.midnight)
       end
     else
       activity = Activity.find_by(name: @events_activity)
       if @event_today
-        events = Event.where("start_at < ? and activity_id =?", Date.today.midnight, activity)
+        events = Event.where("start_at <= ? and activity_id =?", Date.today.midnight, activity)
       else
         events = Event.where("start_at > ? and activity_id =?", Date.today.midnight, activity)
       end
