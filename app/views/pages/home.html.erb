@@ -28,19 +28,21 @@
 
 </div>
 
-<div class="testimonial-container text-center">
-  <p>More than 5000 members all over the world...</p>
+<div class="container">
+  <div class="testimonial-container text-center">
+    <p>More than 5000 members all over the world...</p>
+  </div>
+    <div class="item-container">
+      <% User.all.sample(10).each do |user| %>
+        <div class="event-participant-picture">
+          <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
-<div class="item-container">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-  <img src="http://placehold.it/80x80" alt="" class="img-circle">
-</div>
+
+
+
+
 
