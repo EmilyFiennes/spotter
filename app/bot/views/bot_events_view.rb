@@ -34,6 +34,7 @@ class BotEventsView
       )
     end
 
+    if event_elements.present?
       postback.reply(
           text: "I didn't find what I'm looking for :-(",
           quick_replies: [
@@ -42,5 +43,6 @@ class BotEventsView
             payload:"start_again"
           ]
       )
+    end
   end
 end
