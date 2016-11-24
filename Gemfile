@@ -21,6 +21,7 @@ gem 'autoprefixer-rails'
 # New gemfiles
 gem 'omniauth-facebook'
 gem 'facebook-messenger'
+gem "geocoder"
 
 group :development, :test do
   gem 'binding_of_caller'
