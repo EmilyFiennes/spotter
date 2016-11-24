@@ -1,19 +1,45 @@
-<div class="text-center container">
-  <h1>Spotter</h1>
-
+<div class="wrapper" style="background-image: linear-gradient(-225deg, rgba(0, 101, 168, 0.6) 0%, rgba(0, 36, 61, 0.6) 50%), url(<%= image_url('background_homepage.jpg') %>)">
+  <div class="wrapper-content">
+    <div class="mycard">
+      <%= image_tag 'exemple_googlemap.png', class: "mycard-image" %>
+    </div>
+  <div class="mytext">
+      <%= image_tag 'logo_spotter.png' %>
+      <h1>Do not train alone anymore</h1>
+      <p>Join us and your trainings will be more efficient and funnier</p>
   <div class="btn-block">
-    <%= link_to omniauth_authorize_path(:user, :facebook), {class: "btn btn-default facebook-btn"} do %>
-      <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
-      Sign up with Facebook
-    <% end %>
-  </div>
-
+        <%= link_to omniauth_authorize_path(:user, :facebook), {class: "btn btn-default facebook-btn"} do %>
+        <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
+        Sign up with Facebook
+        <% end %>
   <div class="btn-block">
     <div class="fb-messengermessageus"
-      messenger_app_id="<%= ENV["APP_ID"] %>"
-      page_id="<%= ENV["PAGE_ID"] %>"
-      color="white"
-      size="xlarge" >
+        messenger_app_id="<%= ENV["APP_ID"] %>"
+        page_id="<%= ENV["PAGE_ID"] %>"
+        color="white"
+        size="xlarge">
+      </div>
+        </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+
+<div class="testimonial-container text-center">
+  <p>More than 5000 members all over the world...</p>
+</div>
+<div class="item-container">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+  <img src="http://placehold.it/80x80" alt="" class="img-circle">
+</div>
+
