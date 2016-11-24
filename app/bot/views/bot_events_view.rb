@@ -34,11 +34,15 @@ class BotEventsView
       )
     end
 
-    postback.reply(
-      quick_replies: [
-        {content_type: "text", title:"I didn't find what I'm looking for.", payload: "start_again"}
-      ]
-    )
-
+    if event_elements.present?
+      postback.reply(
+          text: "I didn't find what I'm looking for :-(",
+          quick_replies: [
+            content_type: "text",
+            title: "Start again",
+            payload:"start_again"
+          ]
+      )
+    end
   end
 end

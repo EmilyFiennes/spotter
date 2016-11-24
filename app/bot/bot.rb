@@ -39,7 +39,7 @@ Bot.on :message do |message|
   when /hello/i
     @bot_threads_controller.welcome(message)
     @bot_threads_controller.initial_choice(message)
-  when "start_again"
+  when "Start again"
     @bot_threads_controller.initial_choice(message)
   else
     message.reply(
@@ -60,8 +60,9 @@ Bot.on :postback do |postback|
     @bot_threads_controller.gets_activity(postback)
   when /activity/i
     @bot_events_controller.set_activity(postback)
-    @bot_events_controller.index(postback)
+    @bot_events_controller.index(postback
   end
+
 
 end
 
