@@ -7,4 +7,7 @@ class Event < ApplicationRecord
   validates :user, presence: true
   validates :address, presence: true
   validates :max_participants, presence: true
+
+  geocoded_by :address
+  after_validation :geocode, if: :address_changed?
 end

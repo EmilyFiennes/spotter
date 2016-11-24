@@ -28,24 +28,47 @@
     </div>
   </div>
   <div class="event-description">
-
-      <div class="event-description-owner">
-        <div class="event-description-owner-picture">
-          <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large owner-picture"}%>
-        </div>
-        <div class="event-description-owner-content">
-          <p>This event is organised by
-          <%= link_to do %>
-            <strong><%= @event.user.first_name %> <%=@event.user.last_name %></strong>
-          <% end %>
-          </p>
-          <p>"<%= @event.description %>"</p>
+    <div class="row">
+      <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+        <div class="event-description-owner padding-20 margin-20">
+          <div class="event-description-owner-picture">
+            <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large owner-picture"}%>
+          </div>
+          <div class="event-description-owner-content">
+            <p>This event is organised by
+            <%= link_to do %>
+              <strong><%= @event.user.first_name %> <%=@event.user.last_name %></strong>
+            <% end %>
+            </p>
+            <p>"<%= @event.description %>"</p>
+          </div>
         </div>
       </div>
-    <div class="event-description-cancel">
-      <%= link_to do %>
-        <p>Cancel my participation</p>
-      <% end %>
+      <div class="col-xs-12 col-sm-5 col-sm-offset-1">
+        <div class="event-participants padding-20 margin-20">
+          <% @event.participants.each do |participant| %>
+            <div class="event-participant-picture">
+              <%= link_to do %>
+                <%= image_tag participant.facebook_picture_url, {class: "avatar-large owner-picture"} %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @event.participants.count > 0 %>
+            <p class="text-center"><%= @event.participants.count %> Participants 💪🏼</p>
+          <% else %>
+            <p>No participants yet ⛄️</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12 col-sm-offset-8 col-sm-4">
+        <div class="event-description-cancel margin-20">
+          <%= link_to do %>
+            <p>Cancel my participation</p>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>
