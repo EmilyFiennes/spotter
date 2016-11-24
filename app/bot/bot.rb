@@ -60,10 +60,8 @@ Bot.on :postback do |postback|
     @bot_threads_controller.gets_activity(postback)
   when /activity/i
     @bot_events_controller.set_activity(postback)
-    @bot_events_controller.index(postback
+    @bot_events_controller.index(postback)
   end
-
-
 end
 
 Bot.on :delivery do |delivery|
