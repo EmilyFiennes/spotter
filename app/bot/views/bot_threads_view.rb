@@ -1,7 +1,4 @@
 class BotThreadsView
-  include ActionView::Helpers
-  include ActionView::Helpers::AssetTagHelper
-  include ActionView::Helpers::AssetUrlHelper
 
   def welcome_message(message)
     message.reply(
@@ -26,13 +23,29 @@ class BotThreadsView
     )
   end
 
+  def location(postback)
+    postback.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: 'Where should be the playground?',
+          buttons: [
+            { type: 'postback', title: 'Around me', payload: 'around_me' },
+            { type: 'postback', title: 'Type an address', payload: 'address' }
+          ]
+        }
+      }
+    )
+  end
+
   def now_or_later(postback)
     postback.reply(
       attachment: {
         type: 'template',
         payload: {
           template_type: 'button',
-          text: 'Are you looking for an event today or later?',
+          text: 'When are you free?',
           buttons: [
             { type: 'postback', title: 'Today', payload: 'date_today' },
             { type: 'postback', title: 'Later', payload: 'date_later' }

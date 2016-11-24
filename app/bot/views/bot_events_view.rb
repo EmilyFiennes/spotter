@@ -1,6 +1,13 @@
 class BotEventsView
+
   def initialize
     @bot_threads_view = BotThreadsView.new
+  end
+
+  def address(postback)
+    postback.reply(
+      text: 'Please enter an address',
+    )
   end
 
   def show_list(events, postback)
@@ -9,10 +16,7 @@ class BotEventsView
       event_elements << {
         title: "#{event.activity.name} with #{event.user.first_name}",
         subtitle: "#{event.description}, starting on #{event.start_at.strftime('%d-%m-%Y')} at #{event.start_at.strftime('%H:%M')}",
-        # item_url: "",
-        image_url: "https://maps.googleapis.com/maps/api/staticmap?zoom=13&size=600x300&maptype=roadmap
-          &markers=color:red%7C#{event.latitude},#{event.longitude}
-          &key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+        image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
         buttons: [
           { type: 'postback', title: "Participate", payload: "PARTICIPATE_#{event.id}" }
         ]
@@ -25,6 +29,13 @@ class BotEventsView
       )
       @bot_threads_view.activity_list(postback)
     else
+      event_elements << {
+        title: "I didn't find what I'm looking for :-(",
+        buttons: [
+          { type: 'postback', title: "Start again", payload: "start_again" }
+        ]
+      }
+
       postback.reply(
         attachment: {
           type: "template",
@@ -35,16 +46,81 @@ class BotEventsView
         }
       )
     end
+  end
 
-    if event_elements.present?
-      postback.reply(
-          text: "I didn't find what I'm looking for :-(",
-          quick_replies: [
-            content_type: "text",
-            title: "Start again",
-            payload:"start_again"
+  def create_now_or_later(postback)
+    postback.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: 'Do you want to create an event for today or later?',
+          buttons: [
+            { type: 'postback', title: 'Today', payload: 'choice_today' },
+            { type: 'postback', title: 'Later', payload: 'choice_later' }
           ]
+        }
+      }
+    )
+  end
+
+  def enter_date(postback)
+    postback.reply(
+      text: "Please enter the date of your activity e.g. 24/11/2016"
       )
-    end
+  end
+
+  def enter_start_time(postback)
+    postback.reply(
+      text: "Please enter the time your activity will start at eg. 17h30"
+      )
+  end
+
+  def enter_end_time(postback)
+    postback.reply(
+      text: "Please enter the time your activity will end at e.g. 19h30")
+  end
+
+  def full_activity_list(postback)
+    postback.reply(
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [
+            {
+            title: "Running",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'activity_running' }
+            ]},
+            {
+            title: "Swimming",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'activity_swimming' }
+            ]},
+            {
+            title: "Soccer",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'activity_soccer' }
+            ]},
+            {
+            title: "Tennis",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'activity_tennis' }
+            ]},
+            {
+            title: "Surprise me",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'activity_suprise' }
+            ]}
+          ]
+        }
+      }
+    )
   end
 end
