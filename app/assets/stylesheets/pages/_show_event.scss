@@ -1,6 +1,6 @@
 .container {
   width: 800px;
-  height: 500px;
+  height: auto;
   margin: 40px auto;
   border: 1px solid #CCCCCC;
   border-radius: 10px;
@@ -55,6 +55,7 @@
 .event-description a {
  text-decoration: none;
  color: black;
+ display: inline-block;
 }
 
 .event-description-owner {
@@ -62,10 +63,9 @@
   left: 15px;
   width: auto;
   max-width: 350px;
-  height: 100px;
+  height: auto;
   background-color: #ededed;
   border-radius: 10px;
-  margin: 30px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -85,7 +85,6 @@
 }
 
 .event-description-cancel {
-  margin: 30px;
   display: inline-block;
 }
 
@@ -96,4 +95,25 @@
 
 .event-description-cancel a:hover {
   font-weight: bolder;
+}
+
+.event-participants {
+  width: auto;
+  display: inline-block;
+}
+
+.event-participants p {
+  padding: 10px;
+}
+
+.event-participant-picture {
+  display: inline-block;
+}
+
+.event-participant-picture img {
+  padding: 0px;
+}
+
+.event-participant-picture img:hover {
+  border: 1px solid #CCCCCC;
 }
