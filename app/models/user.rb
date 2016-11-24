@@ -16,7 +16,7 @@ class User < ApplicationRecord
     user_params.merge! auth.info.slice(:email, :first_name, :last_name)
     user_params[:facebook_picture_url] = auth.info.image
     user_params[:token] = auth.credentials.token
-    user_params[:token_expiry] = Time.at(auth.credentials.expires_at)
+    user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue Time.now + 1000.days
     user_params[:gender] = auth.extra.raw_info.gender
 
     user = User.where(provider: auth.provider, uid: auth.uid).first

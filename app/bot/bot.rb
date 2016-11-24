@@ -6,6 +6,8 @@ include Facebook::Messenger
 @bot_events_controller = BotEventsController.new
 @bot_participations_controller = BotParticipationsController.new
 
+@address_required = false
+
 # Facebook::Messenger::Thread.set(
 #   {
 #     setting_type: 'greeting',
@@ -42,9 +44,15 @@ Bot.on :message do |message|
   when "Start again"
     @bot_threads_controller.initial_choice(message)
   else
-    message.reply(
-      text: "Say 'hello' to start"
-    )
+    if @address_required
+      @address_required = false
+      @bot_events_controller.set_address(message)
+      @bot_events_controller.index(message)
+    else
+      message.reply(
+        text: "Say 'hello' to start"
+      )
+    end
   end
 end
 
@@ -60,7 +68,13 @@ Bot.on :postback do |postback|
     @bot_threads_controller.gets_activity(postback)
   when /activity/i
     @bot_events_controller.set_activity(postback)
+    @bot_threads_controller.gets_location(postback)
+  when 'around_me'
+    @bot_events_controller.set_address_around_me(postback)
     @bot_events_controller.index(postback)
+  when 'address'
+    @address_required = true
+    @bot_events_controller.gets_address(postback)
   end
 end
 
