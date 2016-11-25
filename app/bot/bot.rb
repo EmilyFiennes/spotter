@@ -8,6 +8,34 @@ include Facebook::Messenger
 
 @address_required = false
 
+Facebook::Messenger::Thread.set({
+  setting_type: 'call_to_actions',
+  thread_state: 'existing_thread',
+  call_to_actions: [
+    {
+      type: 'postback',
+      title: 'Find an activity',
+      payload: 'FIND'
+    },
+    {
+      type: 'postback',
+      title: 'Create an activity',
+      payload: 'CREATE'
+    },
+    {
+      type: 'web_url',
+      title: 'View my dashboard',
+      url: 'https://rails-spotter-app.herokuapp.com/users/#{params[:id]}'
+    },
+    {
+      type: 'web_url',
+      title: 'Visit the website',
+      url: 'https://rails-spotter-app.herokuapp.com/'
+    }
+  ]
+  }, access_token: ENV['ACCESS_TOKEN']
+)
+
 # Facebook::Messenger::Thread.set(
 #   {
 #     setting_type: 'greeting',
