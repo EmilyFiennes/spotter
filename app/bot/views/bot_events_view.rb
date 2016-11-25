@@ -119,14 +119,139 @@ class BotEventsView
               { type: 'postback', title: "Select", payload: 'choose_activity Tennis' }
             ]},
             {
-            title: "Surprise me",
+            title: "Bowling",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'choose_activity Suprise' }
-            ]}
+              { type: 'postback', title: "Select", payload: 'choose_activity Bowling' }
+            ]},
+            {
+            title: "Rugby",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'choose_activity Rugby' }
+            ]},
+            {
+            title: "Bowling",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'choose_activity Bowling' }
+            ]},
+            {
+            title: "Petanque",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'choose_activity Petanque' }
+            ]},
+            {
+            title: "Badminton",
+            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            buttons: [
+              { type: 'postback', title: "Select", payload: 'choose_activity Badminton' }
+            ]},
+            # {
+            # title: "Basketball",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Basketball' }
+            # ]},
+            # {
+            # title: "Biking",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Biking' }
+            # ]},
+            # {
+            # title: "Climbing",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Climbing' }
+            # ]},
+            # {
+            # title: "Golf",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Golf' }
+            # ]},
+            # {
+            # title: "Hiking",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Hiking' }
+            # ]},
+            # {
+            # title: "Roller",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Roller' }
+            # ]},
+            # {
+            # title: "Squash",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Squash' }
+            # ]},
+            # {
+            # title: "Surfing",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Surfing' }
+            # ]},
+            # {
+            # title: "Skating",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Skating' }
+            # ]},
+            # {
+            # title: "Volley",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Volley' }
+            # ]},
+            # {
+            # title: "Workout",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Workout' }
+            # ]},
+            # {
+            # title: "Skiing",
+            # image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            # buttons: [
+            #   { type: 'postback', title: "Select", payload: 'choose_activity Skiing' }
+            # ]}
           ]
         }
       }
     )
+  end
+
+  def choose_level(postback)
+    postback.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: 'Who is this event for?',
+          buttons: [
+            { type: 'postback', title: 'Newbies', payload: 'choose_level Newbie' },
+            { type: 'postback', title: 'Intermediates', payload: 'choose_level Intermediate' },
+            { type: 'postback', title: 'Champions', payload: 'choose_level Champion' }
+          ]
+        }
+      }
+    )
+  end
+
+  def enter_max_participants(postback)
+    postback.reply(
+      text: "How many spots are there?"
+      )
+  end
+
+  def enter_event_description(postback)
+    postback.reply(
+      text: "Give your event a great tagline and get filling those spots!"
+      )
   end
 end

@@ -97,6 +97,30 @@ class BotEventsController
     @create_event_data[:address] = message.text
   end
 
+  def gets_level(message)
+    @bot_events_view.choose_level(message)
+  end
+
+  def set_level(postback)
+    @create_event_data[:level] = postback.payload.split.last
+  end
+
+  def gets_max_participants(message)
+    @bot_events_view.enter_max_participants(message)
+  end
+
+  def set_max_participants(message)
+    @create_event_data[:max_participants] = message.text
+  end
+
+  def gets_event_description(postback)
+    @bot_events_view.enter_event_description(postback)
+  end
+
+  def set_event_description(message)
+    @create_event_data[:description] = message.text
+  end
+
   def create(message)
     d = @create_event_data[:date]
     st = @create_event_data[:start_time]
@@ -104,13 +128,16 @@ class BotEventsController
     @create_event_data[:start_at] = DateTime.new(d.year, d.month, d.day, st.hour, st.min)
     @create_event_data[:end_at] = DateTime.new(d.year, d.month, d.day, et.hour, et.min)
     activity = Activity.find_by(name: @create_event_data[:activity])
-    byebug
     Event.create(
       start_at: @create_event_data[:start_at],
       end_at: @create_event_data[:end_at],
       activity: activity,
       address: @create_event_data[:address],
+      level: @create_event_data[:level],
+      max_participants: @create_event_data[:max_participants],
+      description: @create_event_data[:description],
       user: User.last
+
       )
   end
 end

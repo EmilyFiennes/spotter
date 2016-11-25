@@ -42,6 +42,9 @@ Facebook::Messenger::Thread.set({
 @create_start_time_required = false
 @create_end_time_required = false
 @create_address_required = false
+@create_max_participants_required = false
+@create_event_description_required = false
+@coco = false
 
 Bot.on :message do |message|
   timestamp = message.messaging['timestamp'].to_i / 1000
@@ -76,6 +79,17 @@ Bot.on :message do |message|
     elsif @create_address_required
       @create_address_required = false
       @bot_events_controller.set_create_address(message)
+      @bot_events_controller.gets_level(message)
+    elsif @create_max_participants_required
+      @create_max_participants_required = false
+      @bot_events_controller.set_max_participants(message)
+      #@create_event_description_required = true
+      @coco = true
+    #elsif @create_event_description_required
+    elsif @coco
+      @create_event_description_required = false
+      @bot_events_controller.gets_event_description(message)
+      @bot_events_controller.set_event_description(message)
       @bot_events_controller.create(message)
     else
       message.reply(
@@ -115,6 +129,10 @@ Bot.on :postback do |postback|
     @bot_events_controller.set_create_activity(postback)
     @create_address_required = true
     @bot_events_controller.gets_address(postback)
+  when /choose_level/
+    @bot_events_controller.set_level(postback)
+    @create_max_participants_required = true
+    @bot_events_controller.gets_max_participants(postback)
   end
 end
 
