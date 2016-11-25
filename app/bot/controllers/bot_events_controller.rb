@@ -16,7 +16,7 @@ class BotEventsController
     @find_event_data[:address] = message.text
   end
 
-  def set_date(postback)
+  def set_find_date(postback)
     if postback.payload ==  'find_date_today'
       @find_event_data[:today] = true
     elsif postback.payload ==  'find_date_later'
@@ -61,7 +61,7 @@ class BotEventsController
     @bot_events_view.choose_date(postback)
   end
 
-  def set_date(message)
+  def set_create_date(message)
     @create_event_data[:date] = Date.parse(message.text)
   end
 
