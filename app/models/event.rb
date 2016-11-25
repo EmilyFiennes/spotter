@@ -4,9 +4,9 @@ class Event < ApplicationRecord
   has_many :participations, dependent: :destroy
   has_many :participants, through: :participations, source: :user
   validates :activity, presence: true
-  validates :user, presence: true
+  # validates :user, presence: true
   validates :address, presence: true
-  validates :max_participants, presence: true
+  # validates :max_participants, presence: true
 
   geocoded_by :address
   after_validation :geocode, if: :address_changed?
