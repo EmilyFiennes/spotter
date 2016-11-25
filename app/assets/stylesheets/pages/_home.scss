@@ -27,7 +27,7 @@
 
 
 .wrapper {
-    padding: 70px;
+    padding: 90px;
     background-size: cover;
 }
 
@@ -40,6 +40,9 @@
 
 .mytext {
   color: white;
+  & p {
+    font-size: larger;
+  }
 }
 
 .mytext h2 {
@@ -68,19 +71,30 @@
 .testimonial-container{
   color: black;
   font-size: 22px;
+  margin: 15px;
   & p {
     margin: 10px;
   }
 }
 
 .user-picture {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
 }
 
 .event-participant-picture{
   width: auto;
   display: inline-block;
-  padding: 0px;
 }
+
+.comments{
+  padding : 50px;
+  padding-top: 20px;
+  & p {
+    margin: 2px;
+  }
+}
+
+
+
 

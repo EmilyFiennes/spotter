@@ -15,6 +15,10 @@ class BotThreadsController
     @bot_threads_view.location(postback)
   end
 
+  def gets_address(postback)
+    @bot_threads_view.address(postback)
+  end
+
   def gets_day(postback)
     @bot_threads_view.now_or_later(postback)
   end

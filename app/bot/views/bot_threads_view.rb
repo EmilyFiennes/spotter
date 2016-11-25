@@ -31,11 +31,17 @@ class BotThreadsView
           template_type: 'button',
           text: 'Where should be the playground?',
           buttons: [
-            { type: 'postback', title: 'Around me', payload: 'around_me' },
-            { type: 'postback', title: 'Type an address', payload: 'address' }
+            { type: 'postback', title: 'Around me', payload: 'find_around_me' },
+            { type: 'postback', title: 'Type an address', payload: 'find_address' }
           ]
         }
       }
+    )
+  end
+
+  def address(postback)
+    postback.reply(
+      text: 'Please enter an address',
     )
   end
 
@@ -47,8 +53,8 @@ class BotThreadsView
           template_type: 'button',
           text: 'When are you free?',
           buttons: [
-            { type: 'postback', title: 'Today', payload: 'date_today' },
-            { type: 'postback', title: 'Later', payload: 'date_later' }
+            { type: 'postback', title: 'Today', payload: 'find_date_today' },
+            { type: 'postback', title: 'Later', payload: 'find_date_later' }
           ]
         }
       }
@@ -66,31 +72,31 @@ class BotThreadsView
             title: "Running",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'activity_running' }
+              { type: 'postback', title: "Select", payload: 'find_activity Running' }
             ]},
             {
             title: "Swimming",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'activity_swimming' }
+              { type: 'postback', title: "Select", payload: 'find_activity Swimming' }
             ]},
             {
             title: "Soccer",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'activity_soccer' }
+              { type: 'postback', title: "Select", payload: 'find_activity Soccer' }
             ]},
             {
             title: "Tennis",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'activity_tennis' }
+              { type: 'postback', title: "Select", payload: 'find_activity Tennis' }
             ]},
             {
             title: "Surprise me",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'activity_suprise' }
+              { type: 'postback', title: "Select", payload: 'find_activity  Surprise' }
             ]}
           ]
         }
