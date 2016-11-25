@@ -147,17 +147,11 @@
   padding-top: 10px;
 }
 
-.event-description-cancel {
-  display: inline-block;
-}
-
-.event-description-cancel p {
-  color: black;
-  font-size: 10px;
-}
-
-.event-description-cancel a:hover {
-  font-weight: bolder;
+// Map
+.map {
+  margin: 20px auto;
+  height: 300px;
+  width: 500px;
 }
 
 // Mobile View
