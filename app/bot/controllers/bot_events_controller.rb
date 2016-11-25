@@ -104,7 +104,6 @@ class BotEventsController
     @create_event_data[:start_at] = DateTime.new(d.year, d.month, d.day, st.hour, st.min)
     @create_event_data[:end_at] = DateTime.new(d.year, d.month, d.day, et.hour, et.min)
     activity = Activity.find_by(name: @create_event_data[:activity])
-    byebug
     Event.create(
       start_at: @create_event_data[:start_at],
       end_at: @create_event_data[:end_at],

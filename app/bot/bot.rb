@@ -23,8 +23,7 @@ Bot.on :message do |message|
   case message.text
   when /hello/i
     @bot_threads_controller.welcome(message)
-    @bot_threads_controller.initial_choice(message)
-  when "Start again"
+    user_identification(message)
     @bot_threads_controller.initial_choice(message)
   else
     if @find_address_required
@@ -87,9 +86,35 @@ Bot.on :postback do |postback|
     @bot_events_controller.set_create_activity(postback)
     @create_address_required = true
     @bot_events_controller.gets_address(postback)
+  when "start_again"
+    @bot_threads_controller.initial_choice(postback)
   end
 end
 
-Bot.on :delivery do |delivery|
-  puts "Delivered message(s) #{delivery.ids}"
+
+def user_identification(message)
+  user = User.find_by(messenger_id: message.sender['id'])
+  if user.nil?
+    user_data_file = RestClient.get "https://graph.facebook.com/v2.6/#{message.sender['id']}?access_token=#{ENV['ACCESS_TOKEN']}"
+    user_data = JSON.parse(user_data_file)
+    messenger_picture_stamp = user_data['profile_pic'].scan(/\d{8,}/).second
+    user = User.where(picture_stamp: messenger_picture_stamp)
+    if user.present?
+      user.update(messenger_id: message.sender['id'])
+    else
+      user = User.create(
+        first_name: user_data['first_name'],
+        last_name: user_data['last_name'],
+        gender: user_data['gender'],
+        messenger_id: message.sender['id'],
+        picture_stamp: messenger_picture_stamp,
+      )
+    end
+  end
 end
+
+# API request with messenger_id >> https://scontent.xx.fbcdn.net/v/t1.0-1/13707549_        10153613412591046  _47027652010636828_n.jpg?oh=82af0fc733f6ff004fb5a792a35c61b2&oe=58C3425D
+# facebook_picture_url          >> https://graph.facebook.com/v2.6/                        10153922001001046  /picture?type=square
+# API request with me           >> https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13707549_ 10153613412591046  _47027652010636828_n.jpg?oh=21f43a15129adfc8d95db5a98c9af850&oe=58B95A67"
+
+
