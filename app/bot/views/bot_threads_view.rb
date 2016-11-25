@@ -96,7 +96,7 @@ class BotThreadsView
             title: "Surprise me",
             image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
             buttons: [
-              { type: 'postback', title: "Select", payload: 'find_activity_suprise' }
+              { type: 'postback', title: "Select", payload: 'find_activity  Surprise' }
             ]}
           ]
         }

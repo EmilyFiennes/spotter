@@ -33,7 +33,7 @@ Bot.on :message do |message|
       @bot_events_controller.index(message)
     elsif @create_date_required
       @create_date_required = false
-      @bot_events_controller.set_date(message)
+      @bot_events_controller.set_create_date(message)
       @bot_events_controller.gets_start_time(message)
       @create_start_time_required = true
     elsif @create_start_time_required
@@ -65,7 +65,7 @@ Bot.on :postback do |postback|
   when 'CREATE'
     @bot_events_controller.gets_day(postback)
   when /find_date/
-    @bot_events_controller.set_date(postback)
+    @bot_events_controller.set_find_date(postback)
     @bot_threads_controller.gets_activity(postback)
   when /find_activity/
     @bot_events_controller.set_find_activity(postback)
