@@ -6,6 +6,34 @@ include Facebook::Messenger
 @bot_events_controller = BotEventsController.new
 @bot_participations_controller = BotParticipationsController.new
 
+Facebook::Messenger::Thread.set({
+  setting_type: 'call_to_actions',
+  thread_state: 'existing_thread',
+  call_to_actions: [
+    {
+      type: 'postback',
+      title: 'Find an activity',
+      payload: 'FIND'
+    },
+    {
+      type: 'postback',
+      title: 'Create an activity',
+      payload: 'CREATE'
+    },
+    {
+      type: 'web_url',
+      title: 'View my dashboard',
+      url: 'https://rails-spotter-app.herokuapp.com/users/#{params[:id]}'
+    },
+    {
+      type: 'web_url',
+      title: 'Visit the website',
+      url: 'https://rails-spotter-app.herokuapp.com/'
+    }
+  ]
+  }, access_token: ENV['ACCESS_TOKEN']
+)
+
 # Find event variables
 @find_address_required = false
 
