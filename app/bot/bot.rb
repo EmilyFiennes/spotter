@@ -62,10 +62,11 @@ Bot.on :message do |message|
       @bot_events_controller.set_address(message)
       @bot_events_controller.index(message)
     elsif @create_date_required
-      @create_date_required = false
-      @bot_events_controller.set_create_date(message)
-      @bot_events_controller.gets_start_time(message)
-      @create_start_time_required = true
+      if @bot_events_controller.set_create_date(message)
+        @bot_events_controller.gets_start_time(message)
+        @create_date_required = false
+        @create_start_time_required = true
+      end
     elsif @create_start_time_required
       @create_start_time_required = false
       @bot_events_controller.set_start_time(message)

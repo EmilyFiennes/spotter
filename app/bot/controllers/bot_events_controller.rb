@@ -65,9 +65,10 @@ class BotEventsController
     date = Time.parse(message.text)
     if date < Date.today
       @bot_events_view.choose_later_start_date(message)
-
+      return false
     else
       @create_event_data[:date] = Date.parse(message.text)
+      return true
     end
   end
 
