@@ -62,7 +62,13 @@ class BotEventsController
   end
 
   def set_create_date(message)
-    @create_event_data[:date] = Date.parse(message.text)
+    date = Time.parse(message.text)
+    if date < Date.today
+      @bot_events_view.choose_later_start_date(message)
+
+    else
+      @create_event_data[:date] = Date.parse(message.text)
+    end
   end
 
   def gets_start_time(postback)
@@ -81,8 +87,24 @@ class BotEventsController
     @create_event_data[:end_time] = Time.parse(message.text)
   end
 
-  def gets_activity(message)
-    @bot_events_view.full_activity_list(message)
+  def gets_activity_1(message)
+    @bot_events_view.full_list_1(message)
+  end
+
+  def gets_activity_2(postback)
+    @bot_events_view.full_list_2(postback)
+  end
+
+  def gets_activity_3(postback)
+    @bot_events_view.full_list_3(postback)
+  end
+
+  def gets_activity_4(postback)
+    @bot_events_view.full_list_4(postback)
+  end
+
+  def gets_activity_5(postback)
+    @bot_events_view.full_list_5(postback)
   end
 
   def set_create_activity(postback)
@@ -105,8 +127,8 @@ class BotEventsController
     @create_event_data[:level] = postback.payload.split.last
   end
 
-  def gets_max_participants(message)
-    @bot_events_view.enter_max_participants(message)
+  def gets_max_participants(postback)
+    @bot_events_view.enter_max_participants(postback)
   end
 
   def set_max_participants(message)
