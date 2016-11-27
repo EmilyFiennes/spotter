@@ -34,61 +34,53 @@ Facebook::Messenger::Thread.set({
   }, access_token: ENV['ACCESS_TOKEN']
 )
 
-# Find event variables
-@find_address_required = false
-
-# Create event variable
-@create_date_required = false
-@create_start_time_required = false
-@create_end_time_required = false
-@create_address_required = false
-@create_max_participants_required = false
-@create_event_description_required = false
-
 Bot.on :message do |message|
   timestamp = message.messaging['timestamp'].to_i / 1000
   date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
   puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
+  session = BotUserSessionRepository.find_or_create(message.sender['id'])
+  puts session.inspect
 
   case message.text
   when /hello/i
-    @bot_threads_controller.welcome(message)
-    @bot_threads_controller.initial_choice(message)
+    @bot_threads_controller.welcome(session, message)
+    @bot_threads_controller.initial_choice(session, message)
   when "Start again"
-    @bot_threads_controller.initial_choice(message)
+    session = BotUserSessionRepository.create(message.sender['id'])
+    @bot_threads_controller.initial_choice(session, message)
   else
-    if @find_address_required
-      @find_address_required = false
-      @bot_events_controller.set_address(message)
-      @bot_events_controller.index(message)
-    elsif @create_date_required
-      if @bot_events_controller.set_create_date(message)
-        @bot_events_controller.gets_start_time(message)
-        @create_date_required = false
-        @create_start_time_required = true
+    if session.find_address_required
+      session.find_address_required = false
+      @bot_events_controller.set_address(session, message)
+      @bot_events_controller.index(session, message)
+    elsif session.create_date_required
+      if @bot_events_controller.set_create_date(session, message)
+        @bot_events_controller.gets_start_time(session, message)
+        session.create_date_required = false
+        session.create_start_time_required = true
       end
-    elsif @create_start_time_required
-      @create_start_time_required = false
-      @bot_events_controller.set_start_time(message)
-      @bot_events_controller.gets_end_time(message)
-      @create_end_time_required = true
-    elsif @create_end_time_required
-      @create_end_time_required = false
-      @bot_events_controller.set_end_time(message)
-      @bot_events_controller.gets_activity_1(message)
-    elsif @create_address_required
-      @create_address_required = false
-      @bot_events_controller.set_create_address(message)
-      @bot_events_controller.gets_level(message)
-    elsif @create_max_participants_required
-      @create_max_participants_required = false
-      @bot_events_controller.set_max_participants(message)
-      @bot_events_controller.gets_event_description(message)
-      @create_event_description_required = true
-    elsif @create_event_description_required
-      @create_event_description_required = false
-      @bot_events_controller.set_event_description(message)
-      @bot_events_controller.create(message)
+    elsif session.create_start_time_required
+      session.create_start_time_required = false
+      @bot_events_controller.set_start_time(session, message)
+      @bot_events_controller.gets_end_time(session, message)
+      session.create_end_time_required = true
+    elsif session.create_end_time_required
+      session.create_end_time_required = false
+      @bot_events_controller.set_end_time(session, message)
+      @bot_events_controller.gets_activity_1(session, message)
+    elsif session.create_address_required
+      session.create_address_required = false
+      @bot_events_controller.set_create_address(session, message)
+      @bot_events_controller.gets_level(session, message)
+    elsif session.create_max_participants_required
+      session.create_max_participants_required = false
+      @bot_events_controller.set_max_participants(session, message)
+      @bot_events_controller.gets_event_description(session, message)
+      session.create_event_description_required = true
+    elsif session.create_event_description_required
+      session.create_event_description_required = false
+      @bot_events_controller.set_event_description(session, message)
+      @bot_events_controller.create(session, message)
     else
       message.reply(
         text: "Now where are your manners? Say 'hello' to start 😎"
@@ -98,49 +90,55 @@ Bot.on :message do |message|
 end
 
 Bot.on :postback do |postback|
+  puts "Received '#{postback.inspect}' from #{postback.sender}"
+  session = BotUserSessionRepository.find_or_create(postback.sender['id'])
+  puts session.inspect
 
   case postback.payload
   when 'FIND'
-    @bot_threads_controller.gets_day(postback)
+    @bot_threads_controller.gets_day(session, postback)
   when 'CREATE'
-    @bot_events_controller.gets_day(postback)
+    @bot_events_controller.gets_day(session, postback)
   when /find_date/
-    @bot_events_controller.set_find_date(postback)
-    @bot_threads_controller.gets_activity(postback)
+    @bot_events_controller.set_find_date(session, postback)
+    @bot_threads_controller.gets_activity(session, postback)
   when /find_activity/
-    @bot_events_controller.set_find_activity(postback)
-    @bot_threads_controller.gets_location(postback)
+    @bot_events_controller.set_find_activity(session, postback)
+    @bot_threads_controller.gets_location(session, postback)
   when 'find_around_me'
-    @bot_events_controller.set_address_around_me(postback)
-    @bot_events_controller.index(postback)
+    @bot_events_controller.set_address_around_me(session, postback)
+    @bot_events_controller.index(session, postback)
   when 'find_address'
-    @find_address_required = true
-    @bot_threads_controller.gets_address(postback)
+    session.find_address_required = true
+    @bot_threads_controller.gets_address(session, postback)
   when /choose_date_today/
-    @bot_events_controller.set_date_today(postback)
-    @create_start_time_required = true
-    @bot_events_controller.gets_start_time(postback)
+    @bot_events_controller.set_date_today(session, postback)
+    session.create_start_time_required = true
+    @bot_events_controller.gets_start_time(session, postback)
   when /choose_date_later/
-    @create_date_required = true
-    @bot_events_controller.gets_date(postback)
+    session.create_date_required = true
+    @bot_events_controller.gets_date(session, postback)
   when /choose_activity/
-    @bot_events_controller.set_create_activity(postback)
-    @create_address_required = true
-    @bot_events_controller.gets_address(postback)
+    @bot_events_controller.set_create_activity(session, postback)
+    session.create_address_required = true
+    @bot_events_controller.gets_address(session, postback)
   when /choose_level/
-    @bot_events_controller.set_level(postback)
-    @create_max_participants_required = true
-    @bot_events_controller.gets_max_participants(postback)
+    @bot_events_controller.set_level(session, postback)
+    session.create_max_participants_required = true
+    @bot_events_controller.gets_max_participants(session, postback)
   when /view_more_activities_2/
-    @bot_events_controller.gets_activity_2(postback)
+    @bot_events_controller.gets_activity_2(session, postback)
   when /view_more_activities_3/
-    @bot_events_controller.gets_activity_3(postback)
+    @bot_events_controller.gets_activity_3(session, postback)
   when /view_more_activities_4/
-    @bot_events_controller.gets_activity_4(postback)
+    @bot_events_controller.gets_activity_4(session, postback)
   when /view_more_activities_5/
-    @bot_events_controller.gets_activity_5(postback)
+    @bot_events_controller.gets_activity_5(session, postback)
   when /view_more_activities_1/
-    @bot_events_controller.gets_activity_1(postback)
+    @bot_events_controller.gets_activity_1(session, postback)
+  when /start_again/
+    session = BotUserSessionRepository.create(postback.sender['id'])
+    @bot_threads_controller.initial_choice(session, postback)
   end
 end
 
