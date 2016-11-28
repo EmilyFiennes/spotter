@@ -14,7 +14,7 @@ class BotEventsView
         subtitle: "#{event.description}, starting on #{event.start_at.strftime('%d-%m-%Y')} at #{event.start_at.strftime('%H:%M')}",
         image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
         buttons: [
-          { type: 'postback', title: "Participate", payload: "PARTICIPATE_#{event.id}" }
+          { type: 'postback', title: "Participate", payload: "participate #{event.id}" }
         ]
       }
     end
@@ -42,6 +42,25 @@ class BotEventsView
         }
       )
     end
+  end
+
+  def show_event(reponse, event)
+    response.reply(
+        attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: {
+              title: "#{event.activity.name} with #{event.user.first_name}",
+              subtitle: "#{event.description}, starting on #{event.start_at.strftime('%d-%m-%Y')} at #{event.start_at.strftime('%H:%M')}",
+              image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+              buttons: [
+                { type: 'postback', title: "Participate", payload: "participate #{event.id}" }
+              ]
+            }
+          }
+        }
+      )
   end
 
 
@@ -373,22 +392,6 @@ class BotEventsView
       text: "Give your event a great tagline and get filling those spots!"
       )
   end
-
-  # def testing(postback)
-  #   postback.reply(
-  #     attachment: {
-  #       type: 'template',
-  #       payload: {
-  #         template_type: 'button',
-  #         text: 'Would you like to enter a description?',
-  #         buttons: [
-  #           { type: 'postback', title: 'Yes', payload: 'yes' },
-  #           { type: 'postback', title: 'No', payload: 'no' }
-  #         ]
-  #       }
-  #     }
-  #   )
-  # end
 
 
 end
