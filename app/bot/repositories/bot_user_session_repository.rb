@@ -1,6 +1,6 @@
 class BotUserSessionRepository
+    @@sessions ||= {}
 
-  @@sessions = {}
 
   def self.find_or_create(message)
     unless @@sessions.has_key?(message.sender['id'])
@@ -12,6 +12,4 @@ class BotUserSessionRepository
   def self.create(message)
     @@sessions[message.sender['id']] = BotUserSession.new(message)
   end
-
-
 end

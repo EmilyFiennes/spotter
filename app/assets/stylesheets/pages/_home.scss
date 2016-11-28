@@ -27,12 +27,12 @@
 
 
 .wrapper {
-    padding: 90px;
+    padding: 65px;
     background-size: cover;
 }
 
 .wrapper-content {
-  width: 70%;
+  width: 75%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,7 +41,17 @@
 .mytext {
   color: white;
   & p {
-    font-size: larger;
+    font-size: 17px;
+    font-family: Poppins;
+    font-weight: lighter;
+    opacity: 80%;
+  }
+    & h1 {
+    font-family: Roboto Condensed;
+    font-size: 46px;
+    font-weight: bold;
+    opacity: 100%;
+    letter-spacing: 2px;
   }
 }
 
@@ -54,6 +64,7 @@
   background-color: white;
   border-radius: 25px;
   padding: 15px;
+  width: 216px;
 }
 
 .mycard-image {
@@ -73,7 +84,11 @@
   font-size: 22px;
   margin: 15px;
   & p {
-    margin: 10px;
+    margin: 20px;
+    font-family: Roboto Condensed;
+    opacity: 50%;
+    letter-spacing: 0,5px;
+    font-size: 21px;
   }
 }
 
@@ -92,8 +107,12 @@
   padding-top: 20px;
   & p {
     margin: 2px;
+    font-family: Poppins;
+    opacity: 90%;
+    font-style: italic;
   }
 }
+
 
 
 

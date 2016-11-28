@@ -1,31 +1,36 @@
+
 <div class="wrapper" style="background-image: linear-gradient(-225deg, rgba(0, 101, 168, 0.6) 0%, rgba(0, 36, 61, 0.6) 50%), url(<%= image_url('background_homepage.jpg') %>)">
-  <div class="wrapper-content">
-    <div class="mycard">
-      <%= image_tag 'exemple_googlemap.png', class: "mycard-image" %>
-    </div>
-  <div class="mytext">
-      <%= image_tag 'logo_spotter.png' %>
-      <h1>Don't train alone anymore</h1>
-      <p>Join us and your trainings will be more efficient and more fun.</p>
-  <div class="btn-block">
-        <%= link_to omniauth_authorize_path(:user, :facebook), {class: "btn btn-default facebook-btn"} do %>
-        <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
-        Sign up with Facebook
-        <% end %>
-  <div class="btn-block">
-    <div class="fb-messengermessageus"
-        messenger_app_id="<%= ENV["APP_ID"] %>"
-        page_id="<%= ENV["PAGE_ID"] %>"
-        color="white"
-        size="xlarge">
-      </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="wrapper-content">
+        <div class="col-md-2">
+          <div class="mycard">
+            <%= image_tag 'exemple_googlemap.png', class: "mycard-image" %>
+          </div>
         </div>
+        <div class="col-md-8">
+          <div class="mytext">
+            <%= image_tag 'logo_spotter.png' %>
+            <h1>Don't train alone anymore</h1>
+            <p>Join us and your trainings will be more efficient and more fun.</p>
+            <div class="btn-block">
+              <%= link_to omniauth_authorize_path(:user, :facebook), {class: "btn btn-default facebook-btn"} do %>
+              <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
+              Sign up with Facebook
+              <% end %>
+              <div class="btn-block">
+                <div class="fb-messengermessageus"
+              messenger_app_id="<%= ENV["APP_ID"] %>"
+              page_id="<%= ENV["PAGE_ID"] %>"
+              color="white"
+              size="xlarge"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
 </div>
 
 <div class="container">
@@ -39,18 +44,18 @@
         </div>
       <% end %>
     </div>
-    <div class="comments">
-    <div class= "text-center">
+      <div class="comments">
+        <div class= "text-center">
         <p>"A great experience: sport really is better together. I met reliable people around me, which motivated me to get stronger."</p>
         </div>
-    <div class="users-comments">
+      <div class="users-comments">
         <div class= "text-center">
           <strong>Eric B.</strong>
-            </div>
-          </div>
         </div>
       </div>
+    </div>
   </div>
+
 
 
 
