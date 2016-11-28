@@ -9,7 +9,6 @@ class User < ApplicationRecord
   has_many :participating_events, through: :participations, source: :event # les évènements auxquels tu t'es inscrit
   validates :first_name, presence: true
   validates :last_name, presence: true
-  # validates :email, uniqueness: true
 
   def self.find_for_facebook_oauth(auth)
     user_params = auth.to_h.slice(:provider, :uid)
@@ -19,14 +18,13 @@ class User < ApplicationRecord
     user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue Time.now + 1000.days
     user_params[:gender] = auth.extra.raw_info.gender
 
-    if user_params[:picture_stamp].nil?
-      facebook_id = auth.extra.raw_info.id
-      user_data_file = RestClient.get "https://graph.facebook.com/v2.6/me?fields=picture&access_token=#{ENV['FB-GRAPH-ACCESS-TOKEN']}"
-      user_data = JSON.parse(user_data_file)
-      user_params[:picture_stamp] = user_data['picture']['data']['url'].scan(/\d{8,}/).second
-    end
+    user_data_file = RestClient.get "https://graph.facebook.com/v2.6/me?fields=picture&access_token=#{ENV['FB-GRAPH-ACCESS-TOKEN']}"
+    user_data = JSON.parse(user_data_file)
+    user_params[:picture_stamp] = user_data['picture']['data']['url'].scan(/\d{8,}/).second
+
 
     user = User.where(provider: auth.provider, uid: auth.uid).first
+    user = User.where(picture_stamp: user_params[:picture_stamp]).first
     user ||= User.where(email: auth.info.email).first # User did a regular sign up in the past.
     if user
       user.update(user_params)

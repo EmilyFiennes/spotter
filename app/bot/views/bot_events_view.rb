@@ -88,6 +88,12 @@ class BotEventsView
       )
   end
 
+  def choose_later_end_time(postback)
+    postback.reply(
+      text: "Oops it looks like your end time is before your start time for this event. Try choosing a new end time."
+      )
+  end
+
   def enter_address(postback)
     postback.reply(
       text: "Please enter an address for your activity. This can be the meeting point. Alternatively, you'll be able to add specific details to the event description in just a jiffy. Be a specific as possible 😉."
