@@ -27,6 +27,7 @@ gem 'rest-client'
 group :development, :test do
   gem 'binding_of_caller'
   gem 'better_errors'
+  gem 'rubocop'
 
   gem 'pry-byebug'
   gem 'pry-rails'

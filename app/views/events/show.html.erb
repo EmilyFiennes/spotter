@@ -1,74 +1,68 @@
 <div class="audrey-container">
   <div class="event-banner">
-    <div id="map" style="width: 100%; height: 250px;"></div>
-      <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
-      <script type="text/javascript">
-        var myLatlng = new google.maps.LatLng(44.8581914, -0.5687107);
-        var myOptions = {
-        zoom: 12,
-        center: myLatlng,
-        scrollwheel: false,
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        styles: [{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}]
-        };
-        var map = new google.maps.Map(document.getElementById('map'), myOptions);
-        var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: "You are here!"
-        });
-      </script>
-    <div class="event-date text-center">
-      <h1>🗓</h1>
-      <p><%= @start_at %></p>
-    </div>
-    <div class="event-banner-title">
-      <h1><%= @event.activity.name %> session </h1>
-      <p><%= @event.address %></p>
-    </div>
+    <%= link_to root_path do %>
+      <%= image_tag "logo_spotter.png" %>
+    <% end %>
+    <h1 class="text-center"><%= @event.activity.name %> session </h1>
   </div>
-  <div class="event-description">
-    <div class="row">
-      <div class="col-xs-12 col-sm-5 col-sm-offset-1">
-        <div class="event-description-owner padding-20 margin-20">
-          <div class="event-description-owner-picture">
-            <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large owner-picture"}%>
-          </div>
-          <div class="event-description-owner-content">
-            <p>This event is organised by
+  <div class="event-information">
+    <div class="event-information-left">
+      <div class="left-block">
+        <%= image_tag "icon-date.png" %>
+      </div>
+      <div class="right-block">
+        <div class="top-block">
+          <p><%= @start_at %></p>
+        </div>
+        <div class="bottom-block">
+          <p><%= @end_at %></p>
+        </div>
+      </div>
+    </div>
+    <div class="event-information-middle">
+      <div class="left-block">
+        <%= image_tag "icon-place.png" %>
+      </div>
+      <div class="right-block">
+        <div class="top-block">
+          <p>Address</p>
+        </div>
+        <div class="bottom-block">
+          <p><%= @event.address %></p>
+        </div>
+      </div>
+    </div>
+    <div class="event-information-right">
+      <div class="top-block-center">
+        <% if @event.participants.count > 0 %>
+          <p class="text-center"><%= @event.participants.count %> Participants 💪🏼</p>
+        <% else %>
+          <p>No participants yet ⛄️</p>
+        <% end %>
+      </div>
+      <div class="bottom-block-center">
+        <% @event.participants.first(5).each do |participant| %>
+          <div class="event-participant-picture">
             <%= link_to do %>
-              <strong><%= @event.user.first_name %> <%=@event.user.last_name %></strong>
+              <%= image_tag participant.facebook_picture_url, {class: "avatar owner-picture"} %>
             <% end %>
-            </p>
-            <p>"<%= @event.description %>"</p>
           </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-5 col-sm-offset-1">
-        <div class="event-participants padding-20 margin-20">
-          <% @event.participants.each do |participant| %>
-            <div class="event-participant-picture">
-              <%= link_to do %>
-                <%= image_tag participant.facebook_picture_url, {class: "avatar-large owner-picture"} %>
-              <% end %>
-            </div>
-          <% end %>
-          <% if @event.participants.count > 0 %>
-            <p class="text-center"><%= @event.participants.count %> Participants 💪🏼</p>
-          <% else %>
-            <p>No participants yet ⛄️</p>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-sm-offset-8 col-sm-4">
-        <div class="event-description-cancel margin-20">
-          <%= link_to do %>
-            <p>Cancel my participation</p>
-          <% end %>
-        </div>
+        <% end %>
       </div>
     </div>
   </div>
+  <div class="event-owner">
+    <div class="event-owner-picture">
+      <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large"}%>
+    </div>
+    <div class="event-owner-content">
+      <p class="text-center">Organised by
+      <%= link_to do %>
+        <strong><%= @event.user.first_name %></strong>
+      <% end %>
+      </p>
+      <p class="text-center">"<%= @event.description %>"</p>
+    </div>
+  </div>
+  <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>');">
 </div>

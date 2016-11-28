@@ -62,7 +62,14 @@ class BotEventsController
   end
 
   def set_create_date(message)
-    @create_event_data[:date] = Date.parse(message.text)
+    date = Time.parse(message.text)
+    if date < Date.today
+      @bot_events_view.choose_later_start_date(message)
+      return false
+    else
+      @create_event_data[:date] = Date.parse(message.text)
+      return true
+    end
   end
 
   def gets_start_time(postback)
@@ -81,8 +88,24 @@ class BotEventsController
     @create_event_data[:end_time] = Time.parse(message.text)
   end
 
-  def gets_activity(message)
-    @bot_events_view.full_activity_list(message)
+  def gets_activity_1(message)
+    @bot_events_view.full_list_1(message)
+  end
+
+  def gets_activity_2(postback)
+    @bot_events_view.full_list_2(postback)
+  end
+
+  def gets_activity_3(postback)
+    @bot_events_view.full_list_3(postback)
+  end
+
+  def gets_activity_4(postback)
+    @bot_events_view.full_list_4(postback)
+  end
+
+  def gets_activity_5(postback)
+    @bot_events_view.full_list_5(postback)
   end
 
   def set_create_activity(postback)
@@ -97,6 +120,30 @@ class BotEventsController
     @create_event_data[:address] = message.text
   end
 
+  def gets_level(message)
+    @bot_events_view.choose_level(message)
+  end
+
+  def set_level(postback)
+    @create_event_data[:level] = postback.payload.split.last
+  end
+
+  def gets_max_participants(postback)
+    @bot_events_view.enter_max_participants(postback)
+  end
+
+  def set_max_participants(message)
+    @create_event_data[:max_participants] = message.text
+  end
+
+  def gets_event_description(postback)
+    @bot_events_view.enter_event_description(postback)
+  end
+
+  def set_event_description(message)
+    @create_event_data[:description] = message.text
+  end
+
   def create(message)
     d = @create_event_data[:date]
     st = @create_event_data[:start_time]
@@ -109,7 +156,11 @@ class BotEventsController
       end_at: @create_event_data[:end_at],
       activity: activity,
       address: @create_event_data[:address],
+      level: @create_event_data[:level],
+      max_participants: @create_event_data[:max_participants],
+      description: @create_event_data[:description],
       user: User.last
+
       )
   end
 end

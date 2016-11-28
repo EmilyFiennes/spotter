@@ -6,6 +6,34 @@ include Facebook::Messenger
 @bot_events_controller = BotEventsController.new
 @bot_participations_controller = BotParticipationsController.new
 
+Facebook::Messenger::Thread.set({
+  setting_type: 'call_to_actions',
+  thread_state: 'existing_thread',
+  call_to_actions: [
+    {
+      type: 'postback',
+      title: 'Find an activity',
+      payload: 'FIND'
+    },
+    {
+      type: 'postback',
+      title: 'Create an activity',
+      payload: 'CREATE'
+    },
+    {
+      type: 'web_url',
+      title: 'View my dashboard',
+      url: 'https://rails-spotter-app.herokuapp.com/users/#{params[:id]}'
+    },
+    {
+      type: 'web_url',
+      title: 'Visit the website',
+      url: 'https://rails-spotter-app.herokuapp.com/'
+    }
+  ]
+  }, access_token: ENV['ACCESS_TOKEN']
+)
+
 # Find event variables
 @find_address_required = false
 
@@ -14,6 +42,8 @@ include Facebook::Messenger
 @create_start_time_required = false
 @create_end_time_required = false
 @create_address_required = false
+@create_max_participants_required = false
+@create_event_description_required = false
 
 Bot.on :message do |message|
   timestamp = message.messaging['timestamp'].to_i / 1000
@@ -31,10 +61,11 @@ Bot.on :message do |message|
       @bot_events_controller.set_address(message)
       @bot_events_controller.index(message)
     elsif @create_date_required
-      @create_date_required = false
-      @bot_events_controller.set_create_date(message)
-      @bot_events_controller.gets_start_time(message)
-      @create_start_time_required = true
+      if @bot_events_controller.set_create_date(message)
+        @bot_events_controller.gets_start_time(message)
+        @create_date_required = false
+        @create_start_time_required = true
+      end
     elsif @create_start_time_required
       @create_start_time_required = false
       @bot_events_controller.set_start_time(message)
@@ -43,14 +74,23 @@ Bot.on :message do |message|
     elsif @create_end_time_required
       @create_end_time_required = false
       @bot_events_controller.set_end_time(message)
-      @bot_events_controller.gets_activity(message)
+      @bot_events_controller.gets_activity_1(message)
     elsif @create_address_required
       @create_address_required = false
       @bot_events_controller.set_create_address(message)
+      @bot_events_controller.gets_level(message)
+    elsif @create_max_participants_required
+      @create_max_participants_required = false
+      @bot_events_controller.set_max_participants(message)
+      @bot_events_controller.gets_event_description(message)
+      @create_event_description_required = true
+    elsif @create_event_description_required
+      @create_event_description_required = false
+      @bot_events_controller.set_event_description(message)
       @bot_events_controller.create(message)
     else
       message.reply(
-        text: "Say 'hello' to start"
+        text: "Now where are your manners? Say 'hello' to start 😎"
       )
     end
   end
@@ -88,6 +128,20 @@ Bot.on :postback do |postback|
     @bot_events_controller.gets_address(postback)
   when "start_again"
     @bot_threads_controller.initial_choice(postback)
+  when /choose_level/
+    @bot_events_controller.set_level(postback)
+    @create_max_participants_required = true
+    @bot_events_controller.gets_max_participants(postback)
+  when /view_more_activities_2/
+    @bot_events_controller.gets_activity_2(postback)
+  when /view_more_activities_3/
+    @bot_events_controller.gets_activity_3(postback)
+  when /view_more_activities_4/
+    @bot_events_controller.gets_activity_4(postback)
+  when /view_more_activities_5/
+    @bot_events_controller.gets_activity_5(postback)
+  when /view_more_activities_1/
+    @bot_events_controller.gets_activity_1(postback)
   end
 end
 

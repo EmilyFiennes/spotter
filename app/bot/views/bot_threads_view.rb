@@ -2,7 +2,7 @@ class BotThreadsView
 
   def welcome_message(message)
     message.reply(
-      text: 'Welcome to Spotter.',
+      text: "Welcome to Spotter. Hurrah, and thanks for joining us!  We hope you're feeling energetic 🏃🏋 ⛹",
     )
     message.type
   end
@@ -13,7 +13,7 @@ class BotThreadsView
         type: 'template',
         payload: {
           template_type: 'button',
-          text: 'What do you want to do?',
+          text: 'Are you looking to find an event, or to create a new one?',
           buttons: [
             { type: 'postback', title: 'Find an event', payload: 'FIND' },
             { type: 'postback', title: 'Create an event', payload: 'CREATE' }
@@ -29,9 +29,9 @@ class BotThreadsView
         type: 'template',
         payload: {
           template_type: 'button',
-          text: 'Where should be the playground?',
+          text: 'Where should your playground be?',
           buttons: [
-            { type: 'postback', title: 'Around me', payload: 'find_around_me' },
+            { type: 'postback', title: 'Search around me', payload: 'find_around_me' },
             { type: 'postback', title: 'Type an address', payload: 'find_address' }
           ]
         }
@@ -41,7 +41,7 @@ class BotThreadsView
 
   def address(postback)
     postback.reply(
-      text: 'Please enter an address',
+      text: 'Please enter an address. To find the best spots, try to be a specific as possible 👍',
     )
   end
 

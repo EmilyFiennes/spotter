@@ -1,5 +1,6 @@
+// Event Banner
 .audrey-container {
-  width: 800px;
+  width: 80%;
   height: auto;
   margin: 40px auto;
   border: 1px solid #CCCCCC;
@@ -8,93 +9,104 @@
 }
 
 .event-banner {
-  height: 250px;
+  height: 200px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   position: relative;
+  background-color: grey;
 }
 
-.event-date {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
-  background-color: white;
-  height: 140px;
-  width: 140px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 10px 0px #656565;
+.event-banner h1 {
+  text-transform: uppercase;
+  color: white;
+}
+
+.event-banner img {
+  padding: 15px;
+  width: 100px;
+}
+
+// Event Information
+.event-information {
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  background-color: #F3F3F3;
+}
+
+.event-information-left {
+  flex: 3;
+  height: 100%;
+  display: flex;
+}
+
+.event-information-middle {
+  flex: 3;
+  height: 100%;
+  display: flex;
+}
+
+.event-information-right {
+  flex: 3;
+  height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.left-block {
+  height: 100%;
+  width: 40%;
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-.event-date p {
-  font-size: 13px;
-  font-weight: bolder;
-}
-
-.event-banner-title {
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  border-radius: 10px;
-  padding: 15px;
-  box-shadow: 2px 2px 10px 0px #656565;
-  background-color: white;
-}
-
-.event-banner-title h1 {
-  font-size: 35px;
-}
-
-.event-banner-title h1 p {
-  margin: 0px;
-  font-weight: bolder;
-}
-
-.event-description a {
- text-decoration: none;
- color: black;
- display: inline-block;
-}
-
-.event-description-owner {
-  top: 15px;
-  left: 15px;
-  width: auto;
-  max-width: 350px;
-  height: auto;
-  background-color: #ededed;
-  border-radius: 10px;
+.right-block {
+  height: 100%;
+  width: 60%;
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  flex-direction: column;
+}
+
+.top-block {
+  width: 100%;
+  height: 50%;
+  display: flex;
   align-items: center;
+  justify-content: flex-start;
+  padding-top: 45px;
 }
 
-.owner-picture {
-  padding: 10px;
+.top-block-center {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 45px;
 }
 
-.event-description-owner-content p {
-  font-size: 13px;
-  margin: 0px;
-  padding: 10px;
-  text-decoration: none;
-  color: black;
+.bottom-block {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-bottom: 20px;
 }
 
-.event-description-cancel {
-  display: inline-block;
+.bottom-block-center {
+  width: 100%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 30px;
 }
 
-.event-description-cancel p {
-  color: black;
-  font-size: 10px;
-}
-
-.event-description-cancel a:hover {
-  font-weight: bolder;
+.event-information p {
+  font-size: 15px;
 }
 
 .event-participants {
@@ -116,4 +128,36 @@
 
 .event-participant-picture img:hover {
   border: 1px solid #CCCCCC;
+}
+
+// Event Owner
+
+.event-owner {
+ display: flex;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+ padding: 30px;
+}
+
+.event-owner-content p:first-child {
+  text-transform: uppercase;
+  font-weight: bolder;
+  font-size: 12px;
+  padding-top: 10px;
+}
+
+// Map
+.map {
+  margin: 20px auto;
+  height: 300px;
+  width: 500px;
+}
+
+// Mobile View
+@media (max-width: 768px) {
+  .event-information {
+    flex-direction: column;
+    height: 600px;
+  }
 }
