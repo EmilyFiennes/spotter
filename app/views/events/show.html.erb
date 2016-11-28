@@ -1,68 +1,73 @@
-<div class="audrey-container">
-  <div class="event-banner">
-    <%= link_to root_path do %>
-      <%= image_tag "logo_spotter.png" %>
-    <% end %>
-    <h1 class="text-center"><%= @event.activity.name %> session </h1>
-  </div>
-  <div class="event-information">
-    <div class="event-information-left">
-      <div class="left-block">
-        <%= image_tag "icon-date.png" %>
-      </div>
-      <div class="right-block">
-        <div class="top-block">
-          <p><%= @start_at %></p>
-        </div>
-        <div class="bottom-block">
-          <p><%= @end_at %></p>
-        </div>
-      </div>
+<div class="event-banner" style="background-image: url('https://static.pexels.com/photos/141631/pexels-photo-141631.jpeg'); background-repeat:no-repeat; background-size:100% auto;">
+  <%= link_to root_path do %>
+    <%= image_tag "logo_spotter.png" %>
+  <% end %>
+  <h1 class="text-center"><%= @event.activity.name %> session </h1>
+</div>
+<div class="event-information">
+  <div class="event-information-left">
+    <div class="left-block">
+      <%= image_tag "icon-date.png" %>
     </div>
-    <div class="event-information-middle">
-      <div class="left-block">
-        <%= image_tag "icon-place.png" %>
+    <div class="right-block">
+      <div class="top-block">
+        <p><strong><%= @start_at %></strong></p>
       </div>
-      <div class="right-block">
-        <div class="top-block">
-          <p>Address</p>
-        </div>
-        <div class="bottom-block">
-          <p><%= @event.address %></p>
-        </div>
-      </div>
-    </div>
-    <div class="event-information-right">
-      <div class="top-block-center">
-        <% if @event.participants.count > 0 %>
-          <p class="text-center"><%= @event.participants.count %> Participants 💪🏼</p>
-        <% else %>
-          <p>No participants yet ⛄️</p>
-        <% end %>
-      </div>
-      <div class="bottom-block-center">
-        <% @event.participants.first(5).each do |participant| %>
-          <div class="event-participant-picture">
-            <%= link_to do %>
-              <%= image_tag participant.facebook_picture_url, {class: "avatar owner-picture"} %>
-            <% end %>
-          </div>
-        <% end %>
+      <div class="bottom-block">
+        <p class="poppins"><%= @end_at %></p>
       </div>
     </div>
   </div>
+  <div class="event-information-middle">
+    <div class="left-block">
+      <%= image_tag "icon-place.png" %>
+    </div>
+    <div class="right-block">
+      <div class="top-block">
+        <p><strong>Address</strong></p>
+      </div>
+      <div class="bottom-block">
+        <p class="poppins"><%= @event.address %></p>
+      </div>
+    </div>
+  </div>
+  <div class="event-information-right">
+    <div class="top-block-center">
+      <% if @event.participants.count > 0 %>
+        <p class="text-center"><strong><%= @event.participants.count %> <%= "participant".pluralize(@event.participants.count)%></strong></p>
+      <% else %>
+        <p><strong>No participants yet ⛄️</strong></p>
+      <% end %>
+    </div>
+    <div class="bottom-block-center">
+      <% @event.participants.first(5).each do |participant| %>
+        <div class="event-participant-picture">
+          <%= link_to do %>
+            <%= image_tag participant.facebook_picture_url, {class: "avatar owner-picture"} %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div>
+<div class="event-description">
   <div class="event-owner">
     <div class="event-owner-picture">
       <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large"}%>
     </div>
     <div class="event-owner-content">
-      <p class="text-center">Organised by
-      <%= link_to do %>
-        <strong><%= @event.user.first_name %></strong>
-      <% end %>
-      </p>
-      <p class="text-center">"<%= @event.description %>"</p>
+      <p class="text-center"><strong>Organised by
+        <%= link_to do %>
+          <%= @event.user.first_name %>
+        <% end %>
+      </strong></p>
+      <p class="text-center poppins">" <%= @event.description %> "</p>
     </div>
   </div>
-  <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>');">
+  <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=650x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>'); background-repeat:no-repeat; background-size:100% auto;">
+  </div>
 </div>
+<footer>
+  <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
+</footer>
