@@ -1,4 +1,5 @@
 class BotUserSessionRepository
+
   @@sessions = {}
 
   def self.find_or_create(message)
