@@ -38,15 +38,16 @@ Bot.on :message do |message|
   timestamp = message.messaging['timestamp'].to_i / 1000
   date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
   puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
-  session = BotUserSessionRepository.find_or_create(message.sender['id'])
+  session = BotUserSessionRepository.find_or_create(message)
   puts session.inspect
 
   case message.text
   when /hello/i
+    user_identification(message)
     @bot_threads_controller.welcome(session, message)
     @bot_threads_controller.initial_choice(session, message)
   when "Start again"
-    session = BotUserSessionRepository.create(message.sender['id'])
+    session = BotUserSessionRepository.create(message)
     @bot_threads_controller.initial_choice(session, message)
   else
     if session.find_address_required
@@ -91,7 +92,7 @@ end
 
 Bot.on :postback do |postback|
   puts "Received '#{postback.inspect}' from #{postback.sender}"
-  session = BotUserSessionRepository.find_or_create(postback.sender['id'])
+  session = BotUserSessionRepository.find_or_create(postback)
   puts session.inspect
 
   case postback.payload
@@ -136,12 +137,14 @@ Bot.on :postback do |postback|
     @bot_events_controller.gets_activity_5(session, postback)
   when /view_more_activities_1/
     @bot_events_controller.gets_activity_1(session, postback)
-  when /start_again/
-    session = BotUserSessionRepository.create(postback.sender['id'])
+  when "start_again"
+    session = BotUserSessionRepository.create(postback)
     @bot_threads_controller.initial_choice(session, postback)
   end
 end
 
-Bot.on :delivery do |delivery|
-  puts "Delivered message(s) #{delivery.ids}"
-end
+# API request with messenger_id >> https://scontent.xx.fbcdn.net/v/t1.0-1/13707549_        10153613412591046  _47027652010636828_n.jpg?oh=82af0fc733f6ff004fb5a792a35c61b2&oe=58C3425D
+# facebook_picture_url          >> https://graph.facebook.com/v2.6/                        10153922001001046  /picture?type=square
+# API request with me           >> https://scontent.xx.fbcdn.net/v/t1.0-1/p50x50/13707549_ 10153613412591046  _47027652010636828_n.jpg?oh=21f43a15129adfc8d95db5a98c9af850&oe=58B95A67"
+
+

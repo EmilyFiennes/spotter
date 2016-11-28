@@ -147,6 +147,7 @@ class BotEventsController
     session.create_event_data[:start_at] = DateTime.new(d.year, d.month, d.day, st.hour, st.min)
     session.create_event_data[:end_at] = DateTime.new(d.year, d.month, d.day, et.hour, et.min)
     activity = Activity.find_by(name: session.create_event_data[:activity])
+    user = User.find_by(messenger_id: message.sender['id'])
     Event.create(
       start_at: session.create_event_data[:start_at],
       end_at: session.create_event_data[:end_at],
@@ -155,8 +156,7 @@ class BotEventsController
       level: session.create_event_data[:level],
       max_participants: session.create_event_data[:max_participants],
       description: session.create_event_data[:description],
-      user: User.last
-
+      user: user
       )
   end
 end
