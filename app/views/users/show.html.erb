@@ -1,23 +1,49 @@
-
-  <div class="container">
-
-  <div class="raw">
-    <div class="col-xs-6">
-      <div class="avatar">
-        <div class="avatar-container" style="background-image: url(https://avatars.githubusercontent.com/u/22102033?v=3);">
+<div class="wrapper">
+  <div class="class-avatar">
+  </div>
+  <h1>Ses prochaines sessions</h1>
+  <div class="class-event">
+    <div class="container">
+      <% @user.events.each do |event| %>
+        <div class="row">
+          <div class="col-xs-3">
+            <%= image_tag 'icon-date.png' %>
+          </div>
+          <div class="col-xs-3">
+            <div class="activity-card">
+              <div class="acivity-date-logo">
+                <%= image_tag 'icon-date.png' %>
+              </div>
+              <div class="activity-date">
+              <%= event.start_at %>
+              <%= event.end_at %>
+              </div>
+              <div class="activity-button">
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="activity-address-logo">
+            <%= image_tag 'icon-place.png' %>
+            </div>
+            <div class="activity-address">
+                <%= event.address %>
+            </div>
+          </div>
+          <div class="col-xs-3">
+            <div class="activity-participants">
+              <% if event.participants.count > 0 %>
+                <p><%= event.participants.count %>
+                <%= "participant".pluralize(event.participants.count) %></p>
+              <% else %>
+                <p>No participants yet</p>
+              <% end %>
+              <div class="avatar-participants">
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   </div>
-
-    <div class="text-center">
-      <div class="card">
-          <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-          <h2><%= @user.email %></h2>
-            <p><%= @user.bio %></p>
-          <h2><%= @user.address %></h2>
-          <h2> My favorite activities </h2>
-      </div>
-    </div>
-  </div>
-
+</div>
