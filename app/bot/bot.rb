@@ -48,7 +48,7 @@ Bot.on :message do |message|
     @bot_threads_controller.initial_choice(message)
   else
     user = current_user(message)
-    case user.session[:step]
+    case user.session['step']
     when "enter_find_address"
       @bot_events_controller.set_address(message)
       @bot_events_controller.index(message)
@@ -72,7 +72,7 @@ Bot.on :message do |message|
     when "enter_description"
       @bot_events_controller.set_event_description(message)
       @bot_events_controller.create(message)
-      @bot_events_controller.show(message)
+      @bot_events_controller.show_event(message)
     else
       message.reply(
         text: "Now where are your manners? Say 'hello' to start 😎"
@@ -102,7 +102,7 @@ Bot.on :postback do |postback|
     @bot_threads_controller.gets_address(postback)
   when /participate/
     @bot_participations_controller.create_participation(postback)
-    @bot_events_controller.show(postback)
+    @bot_events_controller.show_participation(postback)
   when /choose_date_today/
     @bot_events_controller.set_date_today(postback)
     @bot_events_controller.gets_start_time(postback)
