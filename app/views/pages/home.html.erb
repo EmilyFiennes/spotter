@@ -10,9 +10,11 @@
         </div>
         <div class="col-md-8">
           <div class="mytext">
-            <%= image_tag 'logo_spotter.png' %>
-            <h1>Don't train alone anymore</h1>
-            <p>Join us and your trainings will be more efficient and more fun.</p>
+            <%= image_tag 'logo_spotter.svg' %>
+            <h1>Stop training on your own</h1>
+            <!-- <h1>Don't train alone anymore</h1> -->
+            <p>Join us for fun and efficient activities.</p>
+            <!-- <p>Join us and your trainings will be more efficient and more fun.</p> -->
             <div class="btn-block">
               <%= link_to omniauth_authorize_path(:user, :facebook), {class: "btn btn-default facebook-btn"} do %>
               <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
@@ -33,28 +35,27 @@
   </div>
 </div>
 
-<div class="container">
+<div class="community-section">
   <div class="testimonial-container text-center">
-    <p>More than 5000 members all over the world...</p>
+    <p>Take part of Spotter's fantastic community</p>
   </div>
-    <div class="item-container">
-      <% User.all.sample(10).each do |user| %>
-        <div class="event-participant-picture">
-          <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
-        </div>
-      <% end %>
-    </div>
-      <div class="comments">
-        <div class= "text-center">
-        <p>"A great experience: sport really is better together. I met reliable people around me, which motivated me to get stronger."</p>
-        </div>
-      <div class="users-comments">
-        <div class= "text-center">
-          <strong>Eric B.</strong>
-        </div>
+  <div class="item-container">
+    <% User.all.sample(8).each do |user| %>
+      <div class="event-participant-picture">
+        <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
       </div>
+    <% end %>
+  </div>
+  <div class="comments">
+    <div class= "text-center">
+    <p>"A great experience: sport really is better together. I met reliable people around me, which motivated me to get stronger." - Eric B.</p>
     </div>
   </div>
+</div>
+
+<div class="footer">
+  <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
+</div>
 
 
 
