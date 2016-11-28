@@ -21,7 +21,7 @@ class User < ApplicationRecord
 
     if user_params[:picture_stamp].nil?
       facebook_id = auth.extra.raw_info.id
-      user_data_file = RestClient.get "https://graph.facebook.com/v2.6/me?fields=picture&access_token=#{ENV['FB-GRAPH-ACESS-TOKEN']}"
+      user_data_file = RestClient.get "https://graph.facebook.com/v2.6/me?fields=picture&access_token=#{ENV['FB-GRAPH-ACCESS-TOKEN']}"
       user_data = JSON.parse(user_data_file)
       user_params[:picture_stamp] = user_data['picture']['data']['url'].scan(/\d{8,}/).second
     end

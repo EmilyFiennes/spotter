@@ -81,7 +81,15 @@ class BotEventsController
   end
 
   def set_end_time(session, message)
-    session.create_event_data[:end_time] = Time.parse(message.text)
+    start_time = session.create_event_data[:start_time]
+    end_time = Time.parse(message.text)
+    if start_time <= end_time
+      @bot_events_view.choose_later_end_time(message)
+      return false
+    else
+      session.create_event_data[:end_time] = Time.parse(message.text)
+      return true
+    end
   end
 
   def gets_activity_1(session, message)

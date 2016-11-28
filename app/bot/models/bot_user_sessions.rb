@@ -26,7 +26,7 @@ class BotUserSession
 
   def user_identification(message)
     user = User.find_by(messenger_id: message.sender['id'])
-    if @user.nil?
+    if user.nil?
       user_data_file = RestClient.get "https://graph.facebook.com/v2.6/#{message.sender['id']}?access_token=#{ENV['ACCESS_TOKEN']}"
       user_data = JSON.parse(user_data_file)
       picture_stamp = user_data['profile_pic'].scan(/\d{8,}/).second
@@ -39,7 +39,7 @@ class BotUserSession
           last_name: user_data['last_name'],
           gender: user_data['gender'],
           messenger_id: message.sender['id'],
-          picture_stamp: picture_stamp,
+          picture_stamp: picture_stamp
         )
       end
     end
