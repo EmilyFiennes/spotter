@@ -43,7 +43,6 @@ Bot.on :message do |message|
 
   case message.text
   when /hello/i
-    user_identification(message)
     @bot_threads_controller.welcome(session, message)
     @bot_threads_controller.initial_choice(session, message)
   when "Start again"
