@@ -34,13 +34,16 @@ class BotUserSession
       if user.present?
         user.update(messenger_id: message.sender['id'])
       else
-        user = User.create(
+        user = User.new(
           first_name: user_data['first_name'],
           last_name: user_data['last_name'],
           gender: user_data['gender'],
           messenger_id: message.sender['id'],
           picture_stamp: picture_stamp
         )
+        user.email = "#{message.sender['id']}@facebook.com"
+        user.password = Devise.friendly_token[0,20]  # Fake password for validation
+        user.save
       end
     end
   end
