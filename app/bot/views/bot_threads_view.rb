@@ -2,8 +2,9 @@ class BotThreadsView
 
   def welcome_message(message)
     message.reply(
-      text: "Welcome to Spotter. Hurrah, and thanks for joining us!  We hope you're feeling energetic 🏃🏋 ⛹",
+      text: "Welcome to Spotter. Hurrah, and thanks for joining us!  We hope you're feeling energetic 🏃🏋 ⛹"
     )
+
     message.type
   end
 
@@ -31,11 +32,22 @@ class BotThreadsView
           template_type: 'button',
           text: 'Where should your playground be?',
           buttons: [
-            { type: 'postback', title: 'Search around me', payload: 'find_around_me' },
+            { type: 'postback', title: 'Send location', payload: 'find_location' },
             { type: 'postback', title: 'Type an address', payload: 'find_address' }
           ]
         }
       }
+    )
+  end
+
+  def my_location(postback)
+    postback.reply(
+      text: 'Indicate your location',
+      quick_replies: [
+        {
+          content_type: 'location'
+        }
+      ]
     )
   end
 

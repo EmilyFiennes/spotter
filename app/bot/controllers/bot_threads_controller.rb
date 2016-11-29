@@ -35,9 +35,16 @@ class BotThreadsController
 
   def gets_location(response)
     user = current_user(response)
-    user.session["step"] = "choose_find_address"
+    user.session["step"] = "choose_find_my_location"
     user.save
     @bot_threads_view.location(response)
+  end
+
+  def gets_my_location(response)
+    user = current_user(response)
+    user.session["step"] = "enter_find_my_location"
+    user.save
+    @bot_threads_view.my_location(response)
   end
 
   def gets_address(response)
