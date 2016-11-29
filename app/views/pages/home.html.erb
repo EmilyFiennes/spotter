@@ -40,7 +40,9 @@
     <div class="item-container">
       <% User.all.sample(10).each do |user| %>
         <div class="event-participant-picture">
-          <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
+          <% unless user.facebook_picture_url.nil? %>
+            <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
+          <% end %>
         </div>
       <% end %>
     </div>

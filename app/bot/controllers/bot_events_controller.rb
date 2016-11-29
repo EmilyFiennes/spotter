@@ -48,7 +48,6 @@ class BotEventsController
         events = Event.where("start_at > ? and activity_id = ? and available = ?", Date.today.midnight, activity, true).near(user.session['find_event_data']['address'], 10)
       end
     end
-    user.session['step'] = "show_event"
     user.save
     @bot_events_view.show_list(events, response)
   end
@@ -75,12 +74,14 @@ class BotEventsController
   end
 
   def gets_date(response)
+    user = current_user(response)
     user.session['step'] = "enter_create_date"
     user.save
     @bot_events_view.choose_date(response)
   end
 
   def set_create_date(response)
+    user = current_user(response)
     date = Time.parse(response.text)
     if date < Date.today
       @bot_events_view.choose_later_start_date(response)
@@ -164,7 +165,7 @@ class BotEventsController
 
   def set_create_address(response)
     user = current_user(response)
-    user.session['create_event_data']['activity_name'] = response.text
+    user.session['create_event_data']['address'] = response.text
     user.save
   end
 
@@ -225,7 +226,6 @@ class BotEventsController
       description: user.session['create_event_data']['description'],
       user: user
       )
-    # Do not work
   end
 
   def show_event(response)

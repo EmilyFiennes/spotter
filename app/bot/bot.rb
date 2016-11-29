@@ -44,7 +44,7 @@ Bot.on :message do |message|
     @bot_threads_controller.welcome(message)
     User.messenger_identification(message)
     @bot_threads_controller.initial_choice(message)
-  when "Start again"
+  when /start again/i
     @bot_threads_controller.initial_choice(message)
   else
     user = current_user(message)
