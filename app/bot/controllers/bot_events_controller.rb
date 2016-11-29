@@ -57,6 +57,11 @@ class BotEventsController
     @bot_events_view.show_participation(response, event)
   end
 
+  # def show_participation_confirmation(response, event)
+  #   user = current_user(response)
+  #   user.session["step"] = "confirmation"
+  #   user.save
+  # end
 
   # Create Event
 

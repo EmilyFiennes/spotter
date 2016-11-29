@@ -44,19 +44,35 @@ class BotEventsView
     end
   end
 
+  def ask_confirm_participation(response, event)
+    payload = "confirm #{event.id}"
+    response.reply(
+      attachment: {
+        type: 'template',
+        payload: {
+          template_type: 'button',
+          text: 'Would you like to confirm your participation at this event?',
+          buttons: [
+            { type: 'postback', title: 'Confirm', payload: payload }
+          ]
+        }
+      }
+    )
+  end
+
   def show_participation(response, event)
     response.reply(
-        attachment: {
+      attachment: {
           type: "template",
           payload: {
             template_type: "generic",
             elements: [
               {
-                title: "#{event.activity.name} with #{event.user.first_name}",
-                subtitle: "#{event.description}, starting on #{event.start_at.strftime('%d-%m-%Y')} at #{event.start_at.strftime('%H:%M')}",
+                title: "Your participation is confirmed!",
+                subtitle: "#{event.activity.name} with #{event.user.first_name}, on #{event.start_at.strftime('%d-%m-%Y')} at #{event.start_at.strftime('%H:%M')}",
                 image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
                 buttons: [
-                  { type: 'postback', title: "Participate", payload: "participate #{event.id}" }
+                  { type: 'postback', title: 'View on website', payload: "view"}
                 ]
               }
             ]
