@@ -8,7 +8,7 @@
   <div class="banner-user-description">
     <%= image_tag @user.facebook_picture_url, {class: "avatar-large"} %>
     <h1><%= @user.first_name %> <%= @user.last_name %></h1>
-    <p class="poppins">Last activity: <%= @user.events.first.activity.name %></p>
+    <p class="poppins">Last activity: <%= @user.participating_events.first.activity.name %></p>
   </div>
 </div>
 <div class="wrapper-container-cards">
@@ -52,7 +52,7 @@
               <div class="block-top-right-bottom">
                 <% event.participants.first(4).each do |participant| %>
                   <div class="event-participant-picture">
-                    <%= link_to do %>
+                    <%= link_to user_path(participant) do %>
                       <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
                     <% end %>
                   </div>
@@ -114,7 +114,7 @@
               <div class="block-top-right-bottom">
                 <% participation.event.participants.first(4).each do |participant| %>
                   <div class="event-participant-picture">
-                    <%= link_to do %>
+                    <%= link_to user_path(participant) do %>
                       <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
                     <% end %>
                   </div>
