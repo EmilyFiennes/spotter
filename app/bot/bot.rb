@@ -56,6 +56,9 @@ Bot.on :message do |message|
   else
     user = current_user(message)
     case user.session['step']
+    when "enter_find_my_location"
+      @bot_events_controller.set_location(message)
+      @bot_events_controller.index(message)
     when "enter_find_address"
       @bot_events_controller.set_address(message)
       @bot_events_controller.index(message)
@@ -103,9 +106,8 @@ Bot.on :postback do |postback|
   when /find_activity/
     @bot_events_controller.set_find_activity(postback)
     @bot_threads_controller.gets_location(postback)
-  when 'find_around_me'
-    @bot_events_controller.set_address_around_me(postback)
-    @bot_events_controller.index(postback)
+  when 'find_location'
+    @bot_threads_controller.gets_my_location(postback)
   when 'find_address'
     @bot_threads_controller.gets_address(postback)
   when /participate/

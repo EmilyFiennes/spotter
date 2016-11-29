@@ -20,9 +20,10 @@ class BotEventsController
     user.save
   end
 
-  def set_address_around_me(response)
+  def set_location(response)
     user = current_user(response)
-    user.session['find_event_data']['address'] = "Bordeaux, France"
+    user.session['find_event_data']['lat'] = response.attachments.first['payload']['coordinates']['lat']
+    user.session['find_event_data']['long'] = response.attachments.first['payload']['coordinates']['long']
     user.save
   end
 
@@ -34,18 +35,24 @@ class BotEventsController
 
   def index(response)
     user = current_user(response)
+    unless user.session['find_event_data']['address'].nil?
+      position = user.session['find_event_data']['address']
+    else
+      position = [user.session['find_event_data']['lat'], user.session['find_event_data']['long']]
+    end
+    midnight = Date.tomorrow.midnight
     if user.session['find_event_data']['activity_name'] == "Surprise"
       if user.session['find_event_data']['today']
-        events = Event.where("start_at <= ? and available = ?", Date.tomorrow.midnight, true).near(user.session['find_event_data']['address'], 10)
+        events = Event.where("start_at <= ? and available = ?", midnight, true).near(position, 10)
       else
-        events = Event.where("start_at > ? and available = ?", Date.tomorrow.midnight, true).near(user.session['find_event_data']['address'], 10)
+        events = Event.where("start_at > ? and available = ?", midnight, true).near(position, 10)
       end
     else
       activity = Activity.find_by(name: user.session['find_event_data']['activity_name'])
       if user.session['find_event_data']['today']
-        events = Event.where("start_at <= ? and activity_id = ? and available = ?", Date.today.midnight, activity, true).near(user.session['find_event_data']['address'], 10)
+        events = Event.where("start_at <= ? and activity_id = ? and available = ?", midnight, activity, true).near(position, 10)
       else
-        events = Event.where("start_at > ? and activity_id = ? and available = ?", Date.today.midnight, activity, true).near(user.session['find_event_data']['address'], 10)
+        events = Event.where("start_at > ? and activity_id = ? and available = ?", midnight, activity, true).near(position, 10)
       end
     end
     user.save
@@ -61,9 +68,6 @@ class BotEventsController
   # Create Event
 
   def gets_day(response)
-    user = current_user(response)
-    user.session['step'] = "choose_create_date"
-    user.save
     @bot_events_view.choose_now_or_later(response)
   end
 
@@ -135,9 +139,6 @@ class BotEventsController
   end
 
   def gets_activity_1(response)
-    user = current_user(response)
-    user.session['step'] = "choose_create_activity"
-    user.save
     @bot_events_view.full_list_1(response)
   end
 
@@ -177,9 +178,6 @@ class BotEventsController
   end
 
   def gets_level(response)
-    user = current_user(response)
-    user.session['step'] = "choose_create_level"
-    user.save
     @bot_events_view.choose_level(response)
   end
 
