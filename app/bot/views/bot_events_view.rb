@@ -109,9 +109,9 @@ class BotEventsView
       )
   end
 
-  def choose_later_end_time(postback)
+  def choose_correct_time(postback)
     postback.reply(
-      text: "Oops it looks like your end time is before your start time for this event. Try choosing a new end time."
+      text: "Oops it looks like that time might be in the past, or you have not entered the correct time. Try 8:00 or 17:30 for example."
       )
   end
 

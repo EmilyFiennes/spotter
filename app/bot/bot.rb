@@ -57,8 +57,9 @@ Bot.on :message do |message|
         @bot_events_controller.gets_start_time(message)
       end
     when "enter_start_time"
-      @bot_events_controller.set_start_time(message)
-      @bot_events_controller.gets_end_time(message)
+      if @bot_events_controller.set_start_time(message)
+         @bot_events_controller.gets_end_time(message)
+      end
     when "enter_end_time"
       if @bot_events_controller.set_end_time(message)
         @bot_events_controller.gets_activity_1(message)
