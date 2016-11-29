@@ -28,6 +28,7 @@ class BotEventsView
     else
       event_elements << {
         title: "I didn't find what I'm looking for 😢 ",
+        image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480456235/no_event_ejqe0o.png",
         buttons: [
           { type: 'postback', title: "Start again", payload: "start_again" }
         ]
@@ -154,7 +155,7 @@ class BotEventsView
             },
             {
               title: "Bowling",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454946/bowling_yusozi.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Bowling' }
               ]
@@ -168,7 +169,7 @@ class BotEventsView
             },
             {
               title: "Tennis",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454973/tennis_qiusvb.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Tennis' }
               ]
@@ -195,8 +196,8 @@ class BotEventsView
           top_element_style: "compact",
           elements: [
             {
-              title: "Badminton",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              title: "Basketball",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454939/basketball_tkllyn.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Basketball' }
               ]
@@ -209,15 +210,15 @@ class BotEventsView
               ]
             },
             {
-              title: "Climbing",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              title: "Soccer",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454934/soccer_dmfmyq.png",
               buttons: [
-                { type: 'postback', title: "Select", payload: 'choose_activity Climbing' }
+                { type: 'postback', title: "Select", payload: 'choose_activity Soccer' }
               ]
             },
             {
               title: "Rugby",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454927/rugby_s8fruc.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Rugby' }
               ]

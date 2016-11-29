@@ -19,13 +19,8 @@ Facebook::Messenger::Thread.set({
   call_to_actions: [
     {
       type: 'postback',
-      title: 'Find an activity',
-      payload: 'FIND'
-    },
-    {
-      type: 'postback',
-      title: 'Create an activity',
-      payload: 'CREATE'
+      title: 'Start again',
+      payload: 'start_again'
     },
     {
       type: 'web_url',
