@@ -1,5 +1,5 @@
-<div class="event-banner" style="background-image: url('https://static.pexels.com/photos/141631/pexels-photo-141631.jpeg'); background-repeat:no-repeat; background-size:100% auto;">
-  <div class="navbar-spotter">
+<div class="event-banner" style="background-image: url('https://static.pexels.com/photos/141631/pexels-photo-141631.jpeg'); background-repeat:no-repeat; background-size:cover;">
+  <div class="navbar-event">
     <%= link_to root_path do %>
       <%= image_tag "logo_spotter.svg" %>
     <% end %>
@@ -45,7 +45,7 @@
       <% @event.participants.first(5).each do |participant| %>
         <div class="event-participant-picture">
           <%= link_to do %>
-            <%= image_tag participant.facebook_picture_url, {class: "avatar owner-picture"} %>
+            <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
           <% end %>
         </div>
       <% end %>
