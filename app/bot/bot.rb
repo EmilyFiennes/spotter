@@ -29,11 +29,6 @@ Facebook::Messenger::Thread.set({
     },
     {
       type: 'web_url',
-      title: 'View my dashboard',
-      url: 'https://rails-spotter-app.herokuapp.com/users/#{params[:id]}'
-    },
-    {
-      type: 'web_url',
       title: 'Visit the website',
       url: 'https://rails-spotter-app.herokuapp.com/'
     }
@@ -42,9 +37,9 @@ Facebook::Messenger::Thread.set({
 )
 
 Bot.on :message do |message|
-  timestamp = message.messaging['timestamp'].to_i / 1000
-  date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
-  puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
+  # timestamp = message.messaging['timestamp'].to_i / 1000
+  # date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
+  # puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
 
   case message.text
   when /hello/i
