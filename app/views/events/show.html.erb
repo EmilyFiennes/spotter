@@ -60,7 +60,7 @@
     </div>
     <div class="event-owner-content">
       <p class="text-center"><strong>Organised by
-        <%= link_to do %>
+        <%= link_to user_path(@event.user) do %>
           <%= @event.user.first_name %>
         <% end %>
       </strong></p>
