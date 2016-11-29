@@ -54,7 +54,7 @@ class BotEventsController
 
   def show_participation(response)
     event = Event.find(response.payload.split.last.to_i)
-    @bot_events_view.show_particiation(response, event)
+    @bot_events_view.show_participation(response, event)
   end
 
 
