@@ -60,4 +60,12 @@ class User < ApplicationRecord
       end
     end
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def display_name
+    full_name.gsub(/\s+.+\s+/, " ").sub(/(?<=\s\S).+/, ".")
+  end
 end
