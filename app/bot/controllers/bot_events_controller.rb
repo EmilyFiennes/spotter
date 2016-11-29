@@ -4,167 +4,237 @@ class BotEventsController
   end
 
   # Find Event
-  def set_address_around_me(session, message)
-    session.find_event_data[:address] = "Bordeaux, France"
-  end
-
-  def set_address(session, message)
-    session.find_event_data[:address] = message.text
-  end
-
-  def set_find_date(session, postback)
-    if postback.payload ==  'find_date_today'
-      session.find_event_data[:today] = true
-    elsif postback.payload ==  'find_date_later'
-      session.find_event_data[:today] = false
+  def set_find_date(response)
+    user = current_user(response)
+    if response.payload ==  'find_date_today'
+      user.session['find_event_data']['today'] = true
+    elsif response.payload ==  'find_date_later'
+      user.session['find_event_data']['today'] = false
     end
+    user.save
   end
 
-  def set_find_activity(session, postback)
-    session.find_event_data[:activity] = postback.payload.split.last
+  def set_find_activity(response)
+    user = current_user(response)
+    user.session['find_event_data']['activity_name'] = response.payload.split.last
+    user.save
   end
 
-  def index(session, postback)
-    if session.find_event_data[:activity] == "Surprise"
-      if session.find_event_data[:today]
-        events = Event.where("start_at <= ?", Date.tomorrow.midnight).near(session.find_event_data[:address], 10)
+  def set_address_around_me(response)
+    user = current_user(response)
+    user.session['find_event_data']['address'] = "Bordeaux, France"
+    user.save
+  end
+
+  def set_address(response)
+    user = current_user(response)
+    user.session['find_event_data']['address'] = response.text
+    user.save
+  end
+
+  def index(response)
+    user = current_user(response)
+    if user.session['find_event_data']['activity_name'] == "Surprise"
+      if user.session['find_event_data']['today']
+        events = Event.where("start_at <= ? and available = ?", Date.tomorrow.midnight, true).near(user.session['find_event_data']['address'], 10)
       else
-        events = Event.where("start_at > ?", Date.tomorrow.midnight).near(session.find_event_data[:address], 10)
+        events = Event.where("start_at > ? and available = ?", Date.tomorrow.midnight, true).near(user.session['find_event_data']['address'], 10)
       end
     else
-      activity = Activity.find_by(name: session.find_event_data[:activity])
-      if session.find_event_data[:today]
-        events = Event.where("start_at <= ? and activity_id =?", Date.today.midnight, activity).near(session.find_event_data[:address], 10)
+      activity = Activity.find_by(name: user.session['find_event_data']['activity_name'])
+      if user.session['find_event_data']['today']
+        events = Event.where("start_at <= ? and activity_id = ? and available = ?", Date.today.midnight, activity, true).near(user.session['find_event_data']['address'], 10)
       else
-        events = Event.where("start_at > ? and activity_id =?", Date.today.midnight, activity).near(session.find_event_data[:address], 10)
+        events = Event.where("start_at > ? and activity_id = ? and available = ?", Date.today.midnight, activity, true).near(user.session['find_event_data']['address'], 10)
       end
     end
-    @bot_events_view.show_list(events, postback)
+    user.save
+    @bot_events_view.show_list(events, response)
+  end
+
+  def show_participation(response)
+    event = Event.find(response.payload.split.last.to_i)
+    @bot_events_view.show_particiation(response, event)
   end
 
 
   # Create Event
 
-  def gets_day(session, postback)
-    @bot_events_view.choose_now_or_later(postback)
+  def gets_day(response)
+    user = current_user(response)
+    user.session['step'] = "choose_create_date"
+    user.save
+    @bot_events_view.choose_now_or_later(response)
   end
 
-  def set_date_today(session, postback)
-    session.create_event_data[:date] = Date.today
+  def set_date_today(response)
+    user = current_user(response)
+    user.session['create_event_data']['date'] = Date.today
+    user.save
   end
 
-  def gets_date(session, postback)
-    @bot_events_view.choose_date(postback)
+  def gets_date(response)
+    user = current_user(response)
+    user.session['step'] = "enter_create_date"
+    user.save
+    @bot_events_view.choose_date(response)
   end
 
-  def set_create_date(session, message)
-    date = Time.parse(message.text)
+  def set_create_date(response)
+    user = current_user(response)
+    date = Time.parse(response.text)
     if date < Date.today
-      @bot_events_view.choose_later_start_date(message)
+      @bot_events_view.choose_later_start_date(response)
       return false
     else
-      session.create_event_data[:date] = Date.parse(message.text)
+      user.session['create_event_data']['date'] = Date.parse(response.text)
+      user.save
       return true
     end
   end
 
-  def gets_start_time(session, postback)
-    @bot_events_view.choose_start_time(postback)
+  def gets_start_time(response)
+    user = current_user(response)
+    user.session['step'] = "enter_start_time"
+    user.save
+    @bot_events_view.choose_start_time(response)
   end
 
-  def set_start_time(session, message)
-    session.create_event_data[:start_time] = Time.parse(message.text)
+  def set_start_time(response)
+    user = current_user(response)
+    user.session['create_event_data']['start_time'] = Time.parse(response.text)
+    user.save
   end
 
-  def gets_end_time(session, message)
-    @bot_events_view.choose_end_time(message)
+  def gets_end_time(response)
+    user = current_user(response)
+    user.session['step'] = "enter_end_time"
+    user.save
+    @bot_events_view.choose_end_time(response)
   end
 
-  def set_end_time(session, message)
-    start_time = session.create_event_data[:start_time]
-    end_time = Time.parse(message.text)
-    if start_time <= end_time
-      @bot_events_view.choose_later_end_time(message)
+  def set_end_time(response)
+    user = current_user(response)
+    start_time = user.session['create_event_data']['start_time']
+    end_time = Time.parse(response.text)
+    if start_time >= end_time
+      @bot_events_view.choose_later_end_time(response)
       return false
     else
-      session.create_event_data[:end_time] = Time.parse(message.text)
+      user.session['create_event_data']['end_time'] = Time.parse(response.text)
+      user.save
       return true
     end
   end
 
-  def gets_activity_1(session, message)
-    @bot_events_view.full_list_1(message)
+  def gets_activity_1(response)
+    user = current_user(response)
+    user.session['step'] = "choose_create_activity"
+    user.save
+    @bot_events_view.full_list_1(response)
   end
 
-  def gets_activity_2(session, postback)
-    @bot_events_view.full_list_2(postback)
+  def gets_activity_2(response)
+    @bot_events_view.full_list_2(response)
   end
 
-  def gets_activity_3(session, postback)
-    @bot_events_view.full_list_3(postback)
+  def gets_activity_3(response)
+    @bot_events_view.full_list_3(response)
   end
 
-  def gets_activity_4(session, postback)
-    @bot_events_view.full_list_4(postback)
+  def gets_activity_4(response)
+    @bot_events_view.full_list_4(response)
   end
 
-  def gets_activity_5(session, postback)
-    @bot_events_view.full_list_5(postback)
+  def gets_activity_5(response)
+    @bot_events_view.full_list_5(response)
   end
 
-  def set_create_activity(session, postback)
-    session.create_event_data[:activity] = postback.payload.split.last
+  def set_create_activity(response)
+    user = current_user(response)
+    user.session['create_event_data']['activity_name'] = response.payload.split.last
+    user.save
   end
 
-  def gets_address(session, message)
-    @bot_events_view.enter_address(message)
+  def gets_address(response)
+    user = current_user(response)
+    user.session['step'] = "enter_create_address"
+    user.save
+    @bot_events_view.enter_address(response)
   end
 
-  def set_create_address(session, message)
-    session.create_event_data[:address] = message.text
+  def set_create_address(response)
+    user = current_user(response)
+    user.session['create_event_data']['address'] = response.text
+    user.save
   end
 
-  def gets_level(session, message)
-    @bot_events_view.choose_level(message)
+  def gets_level(response)
+    user = current_user(response)
+    user.session['step'] = "choose_create_level"
+    user.save
+    @bot_events_view.choose_level(response)
   end
 
-  def set_level(session, postback)
-    session.create_event_data[:level] = postback.payload.split.last
+  def set_level(response)
+    user = current_user(response)
+    user.session['create_event_data']['level'] = response.payload.split.last
+    user.save
   end
 
-  def gets_max_participants(session, postback)
-    @bot_events_view.enter_max_participants(postback)
+  def gets_max_participants(response)
+    user = current_user(response)
+    user.session['step'] = "enter_max_participants"
+    user.save
+    @bot_events_view.enter_max_participants(response)
   end
 
-  def set_max_participants(session, message)
-    session.create_event_data[:max_participants] = message.text
+  def set_max_participants(response)
+    user = current_user(response)
+    user.session['create_event_data']['max_participants'] = response.text.to_i
+    user.save
   end
 
-  def gets_event_description(session, postback)
-    @bot_events_view.enter_event_description(postback)
+  def gets_event_description(response)
+    user = current_user(response)
+    user.session['step'] = "enter_description"
+    user.save
+    @bot_events_view.enter_event_description(response)
   end
 
-  def set_event_description(session, message)
-    session.create_event_data[:description] = message.text
+  def set_event_description(response)
+    user = current_user(response)
+    user.session['create_event_data']['description'] = response.text
+    user.save
   end
 
-  def create(session, message)
-    d = session.create_event_data[:date]
-    st = session.create_event_data[:start_time]
-    et = session.create_event_data[:end_time]
-    session.create_event_data[:start_at] = DateTime.new(d.year, d.month, d.day, st.hour, st.min)
-    session.create_event_data[:end_at] = DateTime.new(d.year, d.month, d.day, et.hour, et.min)
-    activity = Activity.find_by(name: session.create_event_data[:activity])
-    user = User.find_by(messenger_id: message.sender['id'])
+  def create(response)
+    user = current_user(response)
+    d = DateTime.parse(user.session['create_event_data']['date'])
+    st = DateTime.parse(user.session['create_event_data']['start_time'])
+    et = DateTime.parse(user.session['create_event_data']['end_time'])
+    start_at = DateTime.new(d.year, d.month, d.day, st.hour, st.min)
+    end_at = DateTime.new(d.year, d.month, d.day, et.hour, et.min)
+    activity = Activity.find_by(name: user.session['create_event_data']['activity_name'])
     Event.create(
-      start_at: session.create_event_data[:start_at],
-      end_at: session.create_event_data[:end_at],
+      start_at: start_at,
+      end_at: end_at,
       activity: activity,
-      address: session.create_event_data[:address],
-      level: session.create_event_data[:level],
-      max_participants: session.create_event_data[:max_participants],
-      description: session.create_event_data[:description],
+      address: user.session['create_event_data']['address'],
+      level: user.session['create_event_data']['level'],
+      max_participants: user.session['create_event_data']['max_participants'],
+      description: user.session['create_event_data']['description'],
       user: user
       )
+  end
+
+  def show_event(response)
+# TO DO
+  end
+
+  private
+
+  def current_user(response)
+    User.find_by(messenger_id: response.sender['id'])
   end
 end
