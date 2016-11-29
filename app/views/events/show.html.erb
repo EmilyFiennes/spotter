@@ -44,7 +44,7 @@
     <div class="bottom-block-center">
       <% @event.participants.first(5).each do |participant| %>
         <div class="event-participant-picture">
-          <%= link_to do %>
+          <%= link_to user_path(participant) do %>
             <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
           <% end %>
         </div>
