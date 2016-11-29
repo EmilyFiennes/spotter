@@ -55,7 +55,6 @@ class BotEventsController
         events = Event.where("start_at > ? and activity_id = ? and available = ?", midnight, activity, true).near(position, 10)
       end
     end
-    byebug
     user.save
     @bot_events_view.show_list(events, response)
   end
