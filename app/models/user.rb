@@ -22,6 +22,7 @@ class User < ApplicationRecord
     user_data = JSON.parse(user_data_file)
     user_params[:picture_stamp] = user_data['picture']['data']['url'].scan(/\d{8,}/).second
 
+
     user = User.where(provider: auth.provider, uid: auth.uid).first
     user = User.where(picture_stamp: user_params[:picture_stamp]).first
     user ||= User.where(email: auth.info.email).first # User did a regular sign up in the past.

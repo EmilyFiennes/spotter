@@ -32,7 +32,7 @@
 }
 
 .wrapper-content {
-  width: 75%;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -41,14 +41,14 @@
 .mytext {
   color: white;
   & p {
-    font-size: 17px;
+    font-size: 29px;
     font-family: Poppins;
     font-weight: lighter;
     opacity: 80%;
   }
     & h1 {
     font-family: Roboto Condensed;
-    font-size: 46px;
+    font-size: 60px;
     font-weight: bold;
     opacity: 100%;
     letter-spacing: 2px;
@@ -71,6 +71,10 @@
   width: 180px;
 }
 
+.community-section {
+  padding: 50px 0px;
+}
+
 .item-container {
   width: 85%;
   margin: 0 auto;
@@ -86,9 +90,11 @@
   & p {
     margin: 20px;
     font-family: Roboto Condensed;
+    text-transform: uppercase;
     opacity: 50%;
     letter-spacing: 0,5px;
-    font-size: 21px;
+    font-size: 16px;
+    font-weight: bold;
   }
 }
 
@@ -108,12 +114,23 @@
   & p {
     margin: 2px;
     font-family: Poppins;
+    font-size: 13px;
     opacity: 90%;
-    font-style: italic;
   }
 }
 
+.footer {
+  width: 100%;
+  height: 100px;
+  background-color: black;
+}
 
+@media (max-width: 768px) {
+  .item-container {
+    flex-direction: column;
+    height: 600px;
+  }
+}
 
 
 

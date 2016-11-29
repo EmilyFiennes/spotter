@@ -1,7 +1,9 @@
 <div class="event-banner" style="background-image: url('https://static.pexels.com/photos/141631/pexels-photo-141631.jpeg'); background-repeat:no-repeat; background-size:100% auto;">
-  <%= link_to root_path do %>
-    <%= image_tag "logo_spotter.png" %>
-  <% end %>
+  <div class="navbar-spotter">
+    <%= link_to root_path do %>
+      <%= image_tag "logo_spotter.svg" %>
+    <% end %>
+  </div>
   <h1 class="text-center"><%= @event.activity.name %> session </h1>
 </div>
 <div class="event-information">
@@ -11,10 +13,10 @@
     </div>
     <div class="right-block">
       <div class="top-block">
-        <p><strong><%= @start_at %></strong></p>
+        <p><strong><%= @date %></strong></p>
       </div>
       <div class="bottom-block">
-        <p class="poppins"><%= @end_at %></p>
+        <p class="poppins"><%= @start_time %> - <%= @end_time %></p>
       </div>
     </div>
   </div>
@@ -68,6 +70,8 @@
   <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=650x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>'); background-repeat:no-repeat; background-size:100% auto;">
   </div>
 </div>
-<footer>
+<div class="footer">
+  <p class="poppins text-center">“One man can be a crucial ingredient on a team, but one man cannot make a team.” - Kareem Abdul-Jabbar (NBA)</p>
   <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
-</footer>
+</div>
+

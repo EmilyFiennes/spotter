@@ -1,40 +1,20 @@
-
-.card {
-  background-color: #b2b8c1;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: 30px auto;
-  width: 600px;
-  height: 450px;
-  text-align: left;
-  & h1 {
-    color: white;
-    font-weight: bold;
-    padding-left: 30%
-  }
-  & h2 {
-    color: white;
-    padding-left: 5%;
-    font-size: 150%
-  }
-  & p {
-    color: white;
-    padding-left: 5%
-  }
+.class-event{
+  height: 100vh;
 }
 
 
-.avatar-container {
-    height: 150px;
-    width: 150px;
-    background-size: cover;
-    background-position: center center;
-    border-radius: 50%;
-    border: 1px solid black;
+.activity-card{
 }
 
+.activity_date{
+}
 
+.activity_button{
+}
 
+.activity_address{
+}
 
-
+.activity_participants{
+}
 
