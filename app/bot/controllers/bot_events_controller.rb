@@ -68,9 +68,6 @@ class BotEventsController
   # Create Event
 
   def gets_day(response)
-    user = current_user(response)
-    user.session['step'] = "choose_create_date"
-    user.save
     @bot_events_view.choose_now_or_later(response)
   end
 
@@ -142,9 +139,6 @@ class BotEventsController
   end
 
   def gets_activity_1(response)
-    user = current_user(response)
-    user.session['step'] = "choose_create_activity"
-    user.save
     @bot_events_view.full_list_1(response)
   end
 
@@ -184,9 +178,6 @@ class BotEventsController
   end
 
   def gets_level(response)
-    user = current_user(response)
-    user.session['step'] = "choose_create_level"
-    user.save
     @bot_events_view.choose_level(response)
   end
 

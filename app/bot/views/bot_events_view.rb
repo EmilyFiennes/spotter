@@ -18,6 +18,7 @@ class BotEventsView
         ]
       }
     end
+    event_elements = event_elements.sample(4)
 
     if event_elements.empty?
       postback.reply(
