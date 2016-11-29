@@ -84,7 +84,10 @@ Bot.on :message do |message|
       @bot_events_controller.set_event_description(message)
       @bot_events_controller.create(message)
       @bot_events_controller.show_event(message)
-    else
+    # when "confirmation"
+    #   @bot_events_view.show_participation_confirmation(response)
+    #   @bot_events_controller.confirm_participation(response, event)
+    # else
       message.reply(
         text: "Now where are your manners? Say 'hello' to start 😎"
       )
@@ -111,8 +114,7 @@ Bot.on :postback do |postback|
   when 'find_address'
     @bot_threads_controller.gets_address(postback)
   when /participate/
-    @bot_participations_controller.create_participation(postback)
-    @bot_events_controller.show_participation(postback)
+    @bot_participations_controller.confirm_participation(postback)
   when /choose_date_today/
     @bot_events_controller.set_date_today(postback)
     @bot_events_controller.gets_start_time(postback)
@@ -130,6 +132,9 @@ Bot.on :postback do |postback|
     @bot_events_controller.gets_max_participants(postback)
   when "start_again"
     @bot_threads_controller.initial_choice(postback)
+  when /confirm/
+    @bot_participations_controller.create_participation(postback)
+    @bot_events_controller.show_participation(postback)
   end
 end
 

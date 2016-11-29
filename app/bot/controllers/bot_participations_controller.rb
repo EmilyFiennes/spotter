@@ -1,5 +1,15 @@
 class BotParticipationsController
 
+  def initialize
+    @bot_events_view = BotEventsView.new
+  end
+
+  def confirm_participation(response)
+    event = Event.find(response.payload.split.last.to_i)
+    @bot_events_view.ask_confirm_participation(response, event)
+  end
+
+
   def create_participation(response)
     user = current_user(response)
     event = Event.find(response.payload.split.last.to_i)
