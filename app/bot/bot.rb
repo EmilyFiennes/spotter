@@ -7,6 +7,13 @@ include Facebook::Messenger
 @bot_participations_controller = BotParticipationsController.new
 
 Facebook::Messenger::Thread.set({
+  setting_type: 'greeting',
+  greeting: {
+    text: "Don't be shy...go ahead and say hello to get started!"
+  },
+}, access_token: ENV['ACCESS_TOKEN'])
+
+Facebook::Messenger::Thread.set({
   setting_type: 'call_to_actions',
   thread_state: 'existing_thread',
   call_to_actions: [
@@ -114,12 +121,6 @@ Bot.on :postback do |postback|
     @bot_events_controller.gets_address(postback)
   when /view_more_activities_2/
     @bot_events_controller.gets_activity_2(postback)
-  when /view_more_activities_3/
-    @bot_events_controller.gets_activity_3(postback)
-  when /view_more_activities_4/
-    @bot_events_controller.gets_activity_4(postback)
-  when /view_more_activities_5/
-    @bot_events_controller.gets_activity_5(postback)
   when /view_more_activities_1/
     @bot_events_controller.gets_activity_1(postback)
   when /choose_level/
