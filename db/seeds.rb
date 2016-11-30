@@ -20,8 +20,27 @@ first_name_boy = ["Seb", "Mathieu", "Johnny", "Paul", "Henry", "Steve", "Brian",
 levels = ["newbie","intermediate","champion"]
 
 # 10 fake portraits
-picture_girl = ["http://res.cloudinary.com/dfexzh84z/image/upload/v1480502820/g-vaiana_ubjgxr.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502853/g-savannah_jquuus.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502832/g-orsi_wlxigm.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502860/g-nur_izbrhy.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502871/g-morgane_e6nmzo.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502851/g-lea_dgwic4.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502823/g-charlotte_sfakvi.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502808/g-chantal_lfuod2.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502868/g-camille_modmk8.png"]
-picture_boy = ["http://res.cloudinary.com/dfexzh84z/image/upload/v1480502816/b-rudy_krnz6j.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502785/b-pierre_ppcfzm.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502704/b-laurent_phj33i.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502849/b-jimmy_hzwbmy.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502798/b-edouard_fcii8r.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502743/b-benoit_wdhv4n.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502783/b-arnaud_gvtkzi.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502759/b-antoine2_pdtr77.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502689/b-antoine1_qxkv9r.jpg"]
+picture_girl = [
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502820/g-vaiana_ubjgxr.jpg",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502853/g-savannah_jquuus.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502832/g-orsi_wlxigm.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502860/g-nur_izbrhy.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502871/g-morgane_e6nmzo.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502851/g-lea_dgwic4.jpg",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502823/g-charlotte_sfakvi.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502808/g-chantal_lfuod2.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502868/g-camille_modmk8.png"
+]
+picture_boy = ["http://res.cloudinary.com/dfexzh84z/image/upload/v1480502816/b-rudy_krnz6j.jpg",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502785/b-pierre_ppcfzm.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502704/b-laurent_phj33i.jpg",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502849/b-jimmy_hzwbmy.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502798/b-edouard_fcii8r.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502743/b-benoit_wdhv4n.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502783/b-arnaud_gvtkzi.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502759/b-antoine2_pdtr77.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502689/b-antoine1_qxkv9r.jpg"
+]
 
 # Generating 20 activities
 activities = []

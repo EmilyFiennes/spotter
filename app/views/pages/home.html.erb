@@ -39,18 +39,17 @@
       <p>Take part of Spotter's fantastic community</p>
     </div>
     <div class="item-container">
-      <% User.all.sample(20).each do |user| %>
-        <div class="event-participant-picture">
+      <% User.all.sample(19).each do |user| %>
+        <div class="user">
           <% unless user.facebook_picture_url.nil? %>
-            <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
+            <%= image_tag user.facebook_picture_url, {class: "avatar"} %>
           <% end %>
         </div>
       <% end %>
     </div>
     <div class="comments">
-      <div class= "text-center">
-      <p>"A great experience: sport really is better together. I met reliable people around me, which motivated me to get stronger." - Eric B.</p>
-      </div>
+      <p class="poppins text-center"><strong>“One man can be a crucial ingredient on a team, but one man cannot make a team.” - Kareem Abdul-Jabbar (NBA)</strong></p>
+      <p class="poppins text-center credits">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
     </div>
   </div>
 </div>
