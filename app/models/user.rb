@@ -59,6 +59,7 @@ class User < ApplicationRecord
         user.save
       end
     end
+    user
   end
 
   def full_name
