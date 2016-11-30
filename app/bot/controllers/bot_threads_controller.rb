@@ -10,9 +10,9 @@ class BotThreadsController
   def initial_choice(response)
     user = current_user(response)
     user.session = {
-      step:"",
-      find_event_data: {},
-      create_event_data: {}
+      "step" => "",
+      "find_event_data" => {},
+      "create_event_data" => {}
     }
     user.session["step"] = "welcome"
     user.save

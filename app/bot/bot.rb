@@ -44,6 +44,9 @@ Bot.on :message do |message|
     @bot_threads_controller.initial_choice(message)
   else
     case user.session['step']
+    when "welcome"
+      @bot_threads_controller.welcome(message)
+      @bot_threads_controller.initial_choice(message)
     when "enter_find_my_location"
       @bot_events_controller.set_location(message)
       @bot_events_controller.index(message)
