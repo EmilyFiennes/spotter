@@ -68,9 +68,8 @@ end
 
 
 # Generating 20 events
-events = []
 20.times do
-  events << Event.create(
+  Event.create(
     start_at: DateTime.now + (0..5).to_a.sample,
     end_at: DateTime.now + (6..10).to_a.sample,
     address: event_addresses.sample,
@@ -86,7 +85,7 @@ end
 # Generating 40 participations
 40.times do
   user = users.sample
-  event = events.sample
+  event = Event.where.not(user: user).sample
   unless event.participants.count >= event.max_participants && event.participants.include?(user)
     Participation.create(
       user: user,
