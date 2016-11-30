@@ -308,5 +308,46 @@ class BotEventsView
       )
   end
 
+  def ask_confirm_event_info(response, event)
+    response.reply(
+      attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.start_at.strftime('%d-%m-%Y')}. Ends at: #{event.start_at.strftime('%H:%M')}",
+                subtitle: "Max participants: #{event.max_participants}. Event description: #{event.description}",
+                image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+                buttons: [
+                  { type: 'postback', title: 'Create this event', payload: "creation"}
+                ]
+              }
+            ]
+          }
+        }
+      )
+  end
 
+  def show_created_event(response, event)
+    response.reply(
+      attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                title: "Your event #{event.activity.name} with #{event.user.first_name} has been created!",
+                subtitle: "You can view this event on the website",
+                image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+                buttons: [
+                  { type: 'web_url', title: 'View on website', url: "https://rails-spotter-app.herokuapp.com/events/#{event.id}" }
+                ]
+              }
+            ]
+          }
+        }
+      )
+
+  end
 end
