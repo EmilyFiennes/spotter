@@ -64,12 +64,6 @@ class BotEventsController
     @bot_events_view.show_participation(response, event)
   end
 
-  # def show_participation_confirmation(response, event)
-  #   user = current_user(response)
-  #   user.session["step"] = "confirmation"
-  #   user.save
-  # end
-
   # Create Event
 
   def gets_day(response)
@@ -211,26 +205,6 @@ class BotEventsController
     user.session['create_event_data']['description'] = response.text
     user.save
   end
-
-  # def create(response)
-  #   user = current_user(response)
-  #   d = DateTime.parse(user.session['create_event_data']['date'])
-  #   st = DateTime.parse(user.session['create_event_data']['start_time'])
-  #   et = DateTime.parse(user.session['create_event_data']['end_time'])
-  #   start_at = DateTime.new(d.year, d.month, d.day, st.hour, st.min)
-  #   end_at = DateTime.new(d.year, d.month, d.day, et.hour, et.min)
-  #   activity = Activity.find_by(name: user.session['create_event_data']['activity_name'])
-  #   Event.create(
-  #     start_at: start_at,
-  #     end_at: end_at,
-  #     activity: activity,
-  #     address: user.session['create_event_data']['address'],
-  #     level: user.session['create_event_data']['level'],
-  #     max_participants: user.session['create_event_data']['max_participants'],
-  #     description: user.session['create_event_data']['description'],
-  #     user: user
-  #     )
-  # end
 
   def confirm_event_info(response)
     user = current_user(response)
