@@ -1,64 +1,59 @@
 
 <div class="wrapper" style="background-image: linear-gradient(-225deg, rgba(0, 101, 168, 0.6) 0%, rgba(0, 36, 61, 0.6) 50%), url(<%= image_url('background_homepage.jpg') %>)">
-  <div class="container-fluid">
+  <div class="container">
     <div class="row">
-      <div class="wrapper-content">
-        <div class="ccol-xs-6 col-sm-3 col-sm-offset-1 hidden-xs">
+        <div class="col-md-3 col-md-offset-1 hidden-xs hidden-sm">
           <div class="mycard">
-            <%= image_tag 'exemple_googlemap.png', class: "mycard-image", class: "img-responsive" %>
+            <%= image_tag 'spotter-mobile.png' %>
           </div>
         </div>
-        <div class="col-xs-12">
-          <div class="mytext">
-            <%= image_tag 'logo_spotter.svg' %>
-            <h1>Stop training on your own</h1>
-            <!-- <h1>Don't train alone anymore</h1> -->
-            <p>Join us for fun and efficient activities</p>
-            <!-- <p>Join us and your trainings will be more efficient and more fun.</p> -->
+        <div class="col-xs-12 col-md-7">
+          <div class="flex-content">
+            <div class="mytext">
+              <%= image_tag 'logo_spotter.png' %>
+              <h1>Stop training on your own</h1>
+              <!-- <h1>Don't train alone anymore</h1> -->
+              <p>Join us for fun and efficient activities</p>
+              <!-- <p>Join us and your trainings will be more efficient and more fun.</p> -->
+            </div>
             <div class="btn-block">
-              <%= link_to omniauth_authorize_path(:user, :facebook), {class: "btn btn-default facebook-btn"} do %>
-              <span><i class="fa fa-facebook" aria-hidden="true"></i>  </span>
-              Sign up with Facebook
-              <% end %>
-              <div class="btn-block">
-                <div class="fb-messengermessageus"
-              messenger_app_id="<%= ENV["APP_ID"] %>"
-              page_id="<%= ENV["PAGE_ID"] %>"
-              color="white"
-              size="xlarge"></div>
+              <div class="fb-messengermessageus messenger-btn"
+                messenger_app_id="<%= ENV["APP_ID"] %>"
+                page_id="<%= ENV["PAGE_ID"] %>"
+                color="white"
+                size="xlarge">
+              </div>
+              <div class="btn btn-profile">
+                <%= link_to "View my profile", omniauth_authorize_path(:user, :facebook), {class: "link"} %>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </div>
 </div>
 
-<div class="community-section">
-  <div class="testimonial-container text-center">
-    <p>Take part of Spotter's fantastic community</p>
-  </div>
-  <div class="item-container">
-    <% User.all.sample(8).each do |user| %>
-      <div class="event-participant-picture">
-        <% unless user.facebook_picture_url.nil? %>
-          <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
-        <% end %>
+<div class="container">
+  <div class="community-section">
+    <div class="testimonial-container text-center">
+      <p>Take part of Spotter's fantastic community</p>
+    </div>
+    <div class="item-container">
+      <% User.all.sample(20).each do |user| %>
+        <div class="event-participant-picture">
+          <% unless user.facebook_picture_url.nil? %>
+            <%= image_tag user.facebook_picture_url, {class: "img-circle user-picture"} %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div class="comments">
+      <div class= "text-center">
+      <p>"A great experience: sport really is better together. I met reliable people around me, which motivated me to get stronger." - Eric B.</p>
       </div>
-    <% end %>
-  </div>
-  <div class="comments">
-    <div class= "text-center">
-    <p>"A great experience: sport really is better together. I met reliable people around me, which motivated me to get stronger." - Eric B.</p>
     </div>
   </div>
 </div>
-
-<div class="footer">
-  <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
-</div>
-
 
 
 

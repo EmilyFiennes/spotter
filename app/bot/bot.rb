@@ -6,30 +6,30 @@ include Facebook::Messenger
 @bot_events_controller = BotEventsController.new
 @bot_participations_controller = BotParticipationsController.new
 
-Facebook::Messenger::Thread.set({
-  setting_type: 'greeting',
-  greeting: {
-    text: "Don't be shy...go ahead and say hello to get started!"
-  },
-}, access_token: ENV['ACCESS_TOKEN'])
+# Facebook::Messenger::Thread.set({
+#   setting_type: 'greeting',
+#   greeting: {
+#     text: "Don't be shy...go ahead and say hello to get started!"
+#   },
+# }, access_token: ENV['ACCESS_TOKEN'])
 
-Facebook::Messenger::Thread.set({
-  setting_type: 'call_to_actions',
-  thread_state: 'existing_thread',
-  call_to_actions: [
-    {
-      type: 'postback',
-      title: 'Start again',
-      payload: 'start_again'
-    },
-    {
-      type: 'web_url',
-      title: 'Visit the website',
-      url: 'https://rails-spotter-app.herokuapp.com/'
-    }
-  ]
-  }, access_token: ENV['ACCESS_TOKEN']
-)
+# Facebook::Messenger::Thread.set({
+#   setting_type: 'call_to_actions',
+#   thread_state: 'existing_thread',
+#   call_to_actions: [
+#     {
+#       type: 'postback',
+#       title: 'Start again',
+#       payload: 'start_again'
+#     },
+#     {
+#       type: 'web_url',
+#       title: 'Visit the website',
+#       url: 'https://rails-spotter-app.herokuapp.com/'
+#     }
+#   ]
+#   }, access_token: ENV['ACCESS_TOKEN']
+# )
 
 Bot.on :message do |message|
   # timestamp = message.messaging['timestamp'].to_i / 1000
