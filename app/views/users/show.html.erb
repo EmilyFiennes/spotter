@@ -53,7 +53,7 @@
                   <% end %>
                 </div>
                 <div class="block-top-right-bottom">
-                  <% event.participants.first(4).each do |participant| %>
+                  <% event.participants.first(2).each do |participant| %>
                     <div class="event-participant-picture">
                       <%= link_to user_path(participant) do %>
                         <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
@@ -64,14 +64,14 @@
               </div>
             </div>
             <div class="block-bottom">
-              <div class="block-bottom-left-first">
+              <div class="block-bottom-left-first see-button">
                 <%= link_to event_path(event) do %>
-                  <p>SEE EVENT</p>
+                  <p class="text-center">SEE EVENT</p>
                 <% end %>
               </div>
-              <div class="block-bottom-left-second">
+              <div class="block-bottom-left-second cancel-button">
                 <%= link_to do %>
-                  <p>CANCEL EVENT</p>
+                  <p class="text-center">CANCEL EVENT</p>
                 <% end %>
               </div>
             </div>
@@ -116,7 +116,7 @@
                     <h2><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
                   </div>
                   <div class="block-top-right-bottom">
-                    <% participation.event.participants.first(4).each do |participant| %>
+                    <% participation.event.participants.first(2).each do |participant| %>
                       <div class="event-participant-picture">
                         <%= link_to user_path(participant) do %>
                           <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
@@ -127,14 +127,14 @@
                 </div>
               </div>
               <div class="block-bottom">
-                <div class="block-bottom-left-first">
+                <div class="block-bottom-left-first see-button">
                   <%= link_to event_path(participation.event) do %>
-                    <p>SEE EVENT</p>
+                    <p class="text-center">SEE EVENT</p>
                   <% end %>
                 </div>
-                <div class="block-bottom-left-second">
+                <div class="block-bottom-left-second see-button">
                   <%= link_to do %>
-                    <p>CANCEL PARTICIPATION</p>
+                    <p class="text-center">CANCEL PARTICIPATION</p>
                   <% end %>
                 </div>
               </div>
