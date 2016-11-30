@@ -13,7 +13,7 @@
     <% end %>
   </div>
 </div>
-<% if @user == current_user %>
+<div class="wrapper">
   <div class="wrapper-container-cards">
     <div class="container-cards-owner">
       <h2>Events I have organized</h2>
@@ -21,7 +21,7 @@
         <div class="card">
           <div class="card-block-left">
             <div class="block-left">
-              <%= image_tag 'logo_spotter.svg' %>
+              <%= image_tag "#{event.activity.name.downcase}.png" %>
             </div>
           </div>
           <div class="card-block-right">
@@ -80,69 +80,71 @@
       <% end %>
     </div>
   </div>
-  <div class="wrapper-container-cards">
-    <div class="container-cards-participant">
-      <h2>Events I'm participating in</h2>
-      <% @user_participations.each do |participation| %>
-        <div class="card">
-          <div class="card-block-left">
-            <div class="block-left">
-              <%= image_tag 'logo_spotter.svg' %>
+  <% if @user == current_user %>
+    <div class="wrapper-container-cards">
+      <div class="container-cards-participant">
+        <h2>Events I'm participating in</h2>
+        <% @user_participations.each do |participation| %>
+          <div class="card">
+            <div class="card-block-left">
+              <div class="block-left">
+                <%= image_tag "#{participation.event.activity.name.downcase}.png" %>
+              </div>
             </div>
-          </div>
-          <div class="card-block-right">
-            <div class="block-top">
-              <div class="block-top-left">
-                <div class="block-top-left-left">
-                  <%= image_tag 'icon-date.png' %>
+            <div class="card-block-right">
+              <div class="block-top">
+                <div class="block-top-left">
+                  <div class="block-top-left-left">
+                    <%= image_tag 'icon-date.png' %>
+                  </div>
+                  <div class="block-top-left-right">
+                    <h2><%= participation.event.start_at.strftime("%d %b %Y") %></h2>
+                    <p class="poppins"><%= participation.event.start_at.strftime("%H:%m") %> - <%= participation.event.end_at.strftime("%H:%m") %></p>
+                  </div>
                 </div>
-                <div class="block-top-left-right">
-                  <h2><%= participation.event.start_at.strftime("%d %b %Y") %></h2>
-                  <p class="poppins"><%= participation.event.start_at.strftime("%H:%m") %> - <%= participation.event.end_at.strftime("%H:%m") %></p>
+                <div class="block-top-middle">
+                  <div class="block-top-middle-left">
+                    <%= image_tag 'icon-place.png' %>
+                  </div>
+                  <div class="block-top-middle-right">
+                    <h2>Address</h2>
+                    <p class="poppins"><%= participation.event.address %></p>
+                  </div>
+                </div>
+                <div class="block-top-right">
+                  <div class="block-top-right-top">
+                    <h2><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
+                  </div>
+                  <div class="block-top-right-bottom">
+                    <% participation.event.participants.first(4).each do |participant| %>
+                      <div class="event-participant-picture">
+                        <%= link_to user_path(participant) do %>
+                          <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
               </div>
-              <div class="block-top-middle">
-                <div class="block-top-middle-left">
-                  <%= image_tag 'icon-place.png' %>
+              <div class="block-bottom">
+                <div class="block-bottom-left-first">
+                  <%= link_to event_path(participation.event) do %>
+                    <p>SEE EVENT</p>
+                  <% end %>
                 </div>
-                <div class="block-top-middle-right">
-                  <h2>Address</h2>
-                  <p class="poppins"><%= participation.event.address %></p>
-                </div>
-              </div>
-              <div class="block-top-right">
-                <div class="block-top-right-top">
-                  <h2><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
-                </div>
-                <div class="block-top-right-bottom">
-                  <% participation.event.participants.first(4).each do |participant| %>
-                    <div class="event-participant-picture">
-                      <%= link_to user_path(participant) do %>
-                        <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
-                      <% end %>
-                    </div>
+                <div class="block-bottom-left-second">
+                  <%= link_to do %>
+                    <p>CANCEL PARTICIPATION</p>
                   <% end %>
                 </div>
               </div>
             </div>
-            <div class="block-bottom">
-              <div class="block-bottom-left-first">
-                <%= link_to event_path(participation.event) do %>
-                  <p>SEE EVENT</p>
-                <% end %>
-              </div>
-              <div class="block-bottom-left-second">
-                <%= link_to do %>
-                  <p>CANCEL PARTICIPATION</p>
-                <% end %>
-              </div>
-            </div>
           </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     </div>
-  </div>
-<% end %>
+  <% end %>
+</div>
 <div class="footer">
   <p class="poppins text-center">“One man can be a crucial ingredient on a team, but one man cannot make a team.” - Kareem Abdul-Jabbar (NBA)</p>
   <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
