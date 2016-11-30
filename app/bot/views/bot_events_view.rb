@@ -34,7 +34,7 @@ class BotEventsView
         title: "I didn't find what I'm looking for 😢 ",
         image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499808/no-result_rrdowh.png",
         buttons: [
-          { type: 'postback', title: "Start again", payload: "start_again" }
+          { type: 'postback', title: "Start again", payload: 'not_found' }
         ]
       }
 
@@ -58,7 +58,8 @@ class BotEventsView
           template_type: 'button',
           text: 'Would you like to confirm your participation at this event?',
           buttons: [
-            { type: 'postback', title: 'Confirm', payload: "confirm #{event.id}"}
+            { type: 'postback', title: 'Confirm', payload: "confirm #{event.id}"},
+            { type: 'postback', title: 'Cancel and start again', payload: "start_again"}
           ]
         }
       }
@@ -119,7 +120,7 @@ class BotEventsView
 
   def choose_later_start_date(postback)
     postback.reply(
-      text: "Oops...🤔 it looks like that date has come and gone. Try choosing a new date."
+      text: "Oops...🤔 it looks like that date has come and gone, or you've not entered the date in the correct format. Try choosing a new date e.g. #{ Date.tomorrow.strftime('%d/%m/%Y')}."
       )
   end
 
@@ -308,5 +309,47 @@ class BotEventsView
       )
   end
 
+  def ask_confirm_event_info(response, event)
+    response.reply(
+      attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.start_at.strftime('%d-%m-%Y')}. Ends at: #{event.start_at.strftime('%H:%M')}",
+                subtitle: "Max participants: #{event.max_participants}. Event description: #{event.description}",
+                image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+                buttons: [
+                  { type: 'postback', title: 'Create this event', payload: "creation"},
+                  { type: 'postback', title: 'Cancel and start again', payload: "start_again"}
+                ]
+              }
+            ]
+          }
+        }
+      )
+  end
 
+  def show_created_event(response, event)
+    response.reply(
+      attachment: {
+          type: "template",
+          payload: {
+            template_type: "generic",
+            elements: [
+              {
+                title: "Your event #{event.activity.name} with #{event.user.first_name} has been created!",
+                subtitle: "You can view this event on the website",
+                image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+                buttons: [
+                  { type: 'web_url', title: 'View on website', url: "https://rails-spotter-app.herokuapp.com/events/#{event.id}" },
+                ]
+              }
+            ]
+          }
+        }
+      )
+
+  end
 end

@@ -74,6 +74,7 @@ class BotThreadsView
   end
 
   def activity_list(postback)
+    postback.type
     postback.reply(
     text: "Choose an activity from the list below, or choose 'surprise me' if you're feeling adventurous..."
     )

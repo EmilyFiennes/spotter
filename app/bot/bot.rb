@@ -72,12 +72,8 @@ Bot.on :message do |message|
       @bot_events_controller.gets_event_description(message)
     when "enter_description"
       @bot_events_controller.set_event_description(message)
-      @bot_events_controller.create(message)
-      @bot_events_controller.show_event(message)
-    # when "confirmation"
-    #   @bot_events_view.show_participation_confirmation(response)
-    #   @bot_events_controller.confirm_participation(response, event)
-    # else
+      @bot_events_controller.confirm_event_info(message)
+    else
       message.reply(
         text: "Now where are your manners? Say 'hello' to start 😎"
       )
@@ -127,6 +123,10 @@ Bot.on :postback do |postback|
   when /confirm/
     @bot_participations_controller.create_participation(postback)
     @bot_events_controller.show_participation(postback)
+  when "creation"
+    @bot_events_controller.create_event(postback)
+  when 'not_found'
+    @bot_threads_controller.gets_day(postback)
   end
 end
 
