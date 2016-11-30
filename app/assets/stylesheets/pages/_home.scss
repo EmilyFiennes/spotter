@@ -3,39 +3,22 @@
  * (margin/padding adjustments)
  * ------------------------------------- */
 
-.btn-block {
-  padding: 2px 0;
-}
-
-.facebook-btn {
-  background-color: #3B5998;
-  color: white;
-  padding: 2px 10px;
-  margin: 10px 0;
-  border-radius: 5px;
-  font-size: 15px;
-  border: 2px solid #3B5998;
-  & span {
-    font-size: 20px;
-  }
-  &:hover {
-    background-color: white;
-    color: #3B5998;
-    border: 2px solid #3B5998;
-  }
-}
-
-
 .wrapper {
-    padding: 75px;
+    padding: 75px 0;
     background-size: cover;
+    min-height: 530px;
 }
 
-.wrapper-content {
-  width: 90%;
+.mycard {
+  img {
+    max-width: 90%;
+  }
+}
+
+.flex-content {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 }
 
 .mytext {
@@ -46,50 +29,73 @@
     font-weight: lighter;
     opacity: 80%;
   }
-    & h1 {
-    font-family: Roboto Condensed;
-    font-size: 60px;
-    font-weight: bold;
-    opacity: 100%;
-    letter-spacing: 2px;
+  & h1 {
+  font-family: "Roboto Condensed";
+  font-size: 50px;
+  font-weight: bold;
+  opacity: 100%;
+  letter-spacing: 2px;
+  };
+  h2 {
+    margin: 0;
+    font-size: 30px;
+    color: white;
   }
 }
 
-.mytext h2 {
-  margin: 0;
-  color: white;
+.btn-block {
+  padding-top: 80px;
+  display: flex;
+  align-items: center;
+  div {
+    margin-right: 30px;
+  }
 }
 
-.mycard {
-  background-color: white;
-  border-radius: 25px;
-  padding: 15px;
-  width: 216px;
+.btn-profile {
+  padding-left: 10px;
+  padding-right: 10px;
+  border: white solid 1px;
+  border-radius: 5px;
+  &:hover {
+    background-color: white;
+  }
+  .link {
+    font-family: Poppins;
+    font-size: 14px;
+    color: white;
+    &:hover {
+    text-decoration: none;
+    color: black;
+    }
+  }
 }
 
-.mycard-image {
-  width: 180px;
+@media (min-width: 1170px) {
+  .mycard {
+    img {
+      height: 380px;
+    }
+  };
+  .flex-content {
+    min-height: 380px;
+  }
 }
+
+
+// community section
 
 .community-section {
-  padding: 20px 0px;
-}
-
-.item-container {
-  width: 85%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 20px 0px 60px 0;
 }
 
 .testimonial-container{
   color: black;
   font-size: 22px;
-  margin: 15px;
+  margin-bottom: 15px;
   & p {
     margin: 20px;
-    font-family: Roboto Condensed;
+    font-family: "Roboto Condensed";
     text-transform: uppercase;
     opacity: 50%;
     letter-spacing: 0,5px;
@@ -98,9 +104,15 @@
   }
 }
 
-.user-picture {
-  width: 70px;
-  height: 70px;
+.item-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.user {
+  margin: 5px;
 }
 
 .event-participant-picture{
@@ -109,28 +121,18 @@
 }
 
 .comments{
-  padding : 50px;
   padding-top: 20px;
   & p {
     margin: 2px;
-    font-family: Poppins;
+    font-family: "Poppins";
     font-size: 13px;
     opacity: 90%;
   }
 }
 
-.footer {
-  width: 100%;
-  height: 100px;
-  background-color: black;
+.credits {
+  padding-top: 10px;
+  color: grey;
 }
-
-@media (max-width: 768px) {
-  .item-container {
-    flex-direction: column;
-    height: 600px;
-  }
-}
-
 
 
