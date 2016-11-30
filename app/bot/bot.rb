@@ -35,16 +35,14 @@ Bot.on :message do |message|
   # timestamp = message.messaging['timestamp'].to_i / 1000
   # date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
   # puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
-
+  user = User.messenger_identification(message)
   case message.text
   when /hello/i
     @bot_threads_controller.welcome(message)
-    User.messenger_identification(message)
     @bot_threads_controller.initial_choice(message)
   when /start again/i
     @bot_threads_controller.initial_choice(message)
   else
-    user = current_user(message)
     case user.session['step']
     when "enter_find_my_location"
       @bot_events_controller.set_location(message)
