@@ -7,6 +7,10 @@ class BotEventsView
   # Find an event
 
   def show_list(events, postback)
+    postback.reply(
+    text: 'Retrieving your results...'
+    )
+    postback.type
     event_elements = [];
     events.each do |event|
       event_elements << {
@@ -22,7 +26,7 @@ class BotEventsView
 
     if event_elements.empty?
       postback.reply(
-        text: 'No one has created an event that matches your criteria 😢. Please choose another activity from the list below, or why not create a new event? To do so, you can select "Create an event" from the menu to the left of the text-input field.😁',
+        text: 'Hmm, it looks like no one has created an event that matches your criteria 🤔. Please choose another activity from the list below, or why not create a new event? To do so, you can select "Start again" from the menu to the left of the text-input field.😁',
       )
       @bot_threads_view.activity_list(postback)
     else
@@ -103,7 +107,7 @@ class BotEventsView
 
   def choose_date(postback)
     postback.reply(
-      text: "Please enter the date of your event e.g. #{ Date.today.strftime('%d/%m/%Y') }"
+      text: "Please enter the date of your event e.g. #{ Date.tomorrow.strftime('%d/%m/%Y') }"
       )
   end
 
@@ -128,7 +132,7 @@ class BotEventsView
 
   def choose_correct_time(postback)
     postback.reply(
-      text: "Oops...🤔 It looks like that time might be in the past, or you have not entered the correct time. Try 8:00 or 17:30 for example."
+      text: "Oops...🤔 It looks like that time might be in the past, or you have not entered the correct format. Try 8:00 or 17h30 for example."
       )
   end
 
@@ -139,6 +143,10 @@ class BotEventsView
   end
 
   def full_list_1(postback)
+    postback.reply(
+    text: "Choose your activity from the list below."
+    )
+    postback.type
     postback.reply(
       attachment: {
         type: "template",

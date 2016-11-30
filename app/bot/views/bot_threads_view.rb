@@ -75,6 +75,10 @@ class BotThreadsView
 
   def activity_list(postback)
     postback.reply(
+    text: "Choose an activity from the list below, or choose 'surprise me' if you're feeling adventurous..."
+    )
+    postback.type
+    postback.reply(
       attachment: {
         type: "template",
         payload: {
