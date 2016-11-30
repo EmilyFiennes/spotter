@@ -318,7 +318,7 @@ class BotEventsView
             elements: [
               {
                 title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.start_at.strftime('%H:%M')}. Ends at: #{event.start_at.strftime('%H:%M')}",
-                subtitle: "#{event.description} (#{event.max_participants} participants)",
+                subtitle: "#{event.address} (#{event.max_participants} participants)",
                 buttons: [
                   { type: 'postback', title: 'Create this event', payload: "creation"},
                   { type: 'postback', title: 'Cancel and start again', payload: "start_again"}
