@@ -51,7 +51,7 @@ activity_names.each do |activity_name|
 end
 
 users = [] # Generating 10 users (girls)
-10.times do
+9.times do
   last_name = Faker::Name.last_name
   first_name = first_name_girl.sample
   users <<  User.create(
@@ -60,7 +60,7 @@ users = [] # Generating 10 users (girls)
     password: "secret",
     address: user_addresses.sample,
     bio: Faker::StarWars.quote,
-    facebook_picture_url: picture_girl.sample,
+    facebook_picture_url: picture_girl.shift,
     gender: "woman",
     email: "#{first_name}.#{last_name}@gmail.com",
     #facebook_messenger_psid:
@@ -69,7 +69,7 @@ end
 
 # Generating 10 users (boys)
 
-10.times do
+9.times do
   last_name = Faker::Name.last_name
   first_name = first_name_boy.sample
   users << User.create(
@@ -78,7 +78,7 @@ end
     password: "secret",
     address: user_addresses.sample,
     bio: Faker::StarWars.quote,
-    facebook_picture_url: picture_boy.sample,
+    facebook_picture_url: picture_boy.shift,
     gender: "man",
     email: "#{first_name}.#{last_name}@gmail.com",
     #facebook_messenger_psid:
