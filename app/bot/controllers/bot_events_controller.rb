@@ -155,14 +155,6 @@ class BotEventsController
     @bot_events_view.full_list_3(response)
   end
 
-  def gets_activity_4(response)
-    @bot_events_view.full_list_4(response)
-  end
-
-  def gets_activity_5(response)
-    @bot_events_view.full_list_5(response)
-  end
-
   def set_create_activity(response)
     user = current_user(response)
     user.session['create_event_data']['activity_name'] = response.payload.split.last

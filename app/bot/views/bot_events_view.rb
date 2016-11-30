@@ -28,6 +28,7 @@ class BotEventsView
     else
       event_elements << {
         title: "I didn't find what I'm looking for 😢 ",
+        image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499808/no-result_rrdowh.png",
         buttons: [
           { type: 'postback', title: "Start again", payload: "start_again" }
         ]
@@ -46,7 +47,6 @@ class BotEventsView
   end
 
   def ask_confirm_participation(response, event)
-    payload = "confirm #{event.id}"
     response.reply(
       attachment: {
         type: 'template',
@@ -54,7 +54,7 @@ class BotEventsView
           template_type: 'button',
           text: 'Would you like to confirm your participation at this event?',
           buttons: [
-            { type: 'postback', title: 'Confirm', payload: payload }
+            { type: 'postback', title: 'Confirm', payload: "confirm #{event.id}"}
           ]
         }
       }
@@ -73,7 +73,7 @@ class BotEventsView
                 subtitle: "#{event.activity.name} with #{event.user.first_name}, on #{event.start_at.strftime('%d-%m-%Y')} at #{event.start_at.strftime('%H:%M')}",
                 image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
                 buttons: [
-                  { type: 'postback', title: 'View on website', payload: "view"}
+                  { type: 'web_url', title: 'View on website', url: "https://rails-spotter-app.herokuapp.com/events/#{event.id}" }
                 ]
               }
             ]
@@ -148,28 +148,28 @@ class BotEventsView
           elements: [
             {
               title: "Running",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499823/running_ttmlbm.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Running' }
               ]
             },
             {
               title: "Bowling",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454946/bowling_yusozi.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Bowling' }
               ]
             },
             {
               title: "Swimming",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499835/swimming_dlditb.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Swimming' }
               ]
             },
             {
               title: "Tennis",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454973/tennis_qiusvb.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Tennis' }
               ]
@@ -196,31 +196,66 @@ class BotEventsView
           top_element_style: "compact",
           elements: [
             {
-              title: "Badminton",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              title: "Basketball",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454939/basketball_tkllyn.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Basketball' }
               ]
             },
             {
               title: "Biking",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499795/biking_vo74qp.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Biking' }
               ]
             },
             {
-              title: "Climbing",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              title: "Soccer",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454934/soccer_dmfmyq.png",
               buttons: [
-                { type: 'postback', title: "Select", payload: 'choose_activity Climbing' }
+                { type: 'postback', title: "Select", payload: 'choose_activity Soccer' }
               ]
             },
             {
               title: "Rugby",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454927/rugby_s8fruc.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Rugby' }
+              ]
+            }
+          ],
+          buttons: [
+            {
+              title: "view more",
+              type: "postback",
+              payload: "view_more_activities_3"
+            }
+          ]
+        }
+      }
+    )
+  end
+
+  def full_list_3(postback)
+    postback.reply(
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "list",
+          top_element_style: "compact",
+          elements: [
+            {
+              title: "Badminton",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499790/badminton_t2xxff.jpg",
+              buttons: [
+                { type: 'postback', title: "Select", payload: 'choose_activity Badminton' }
+              ]
+            },
+            {
+              title: "Roller",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499817/roller_oggat6.png",
+              buttons: [
+                { type: 'postback', title: "Select", payload: 'choose_activity Roller' }
               ]
             }
           ],

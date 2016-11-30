@@ -19,18 +19,8 @@ Facebook::Messenger::Thread.set({
   call_to_actions: [
     {
       type: 'postback',
-      title: 'Find an activity',
-      payload: 'FIND'
-    },
-    {
-      type: 'postback',
-      title: 'Create an activity',
-      payload: 'CREATE'
-    },
-    {
-      type: 'web_url',
-      title: 'View my dashboard',
-      url: 'https://rails-spotter-app.herokuapp.com/users/#{params[:id]}'
+      title: 'Start again',
+      payload: 'start_again'
     },
     {
       type: 'web_url',
@@ -42,9 +32,9 @@ Facebook::Messenger::Thread.set({
 )
 
 Bot.on :message do |message|
-  timestamp = message.messaging['timestamp'].to_i / 1000
-  date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
-  puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
+  # timestamp = message.messaging['timestamp'].to_i / 1000
+  # date = DateTime.strptime(timestamp.to_s, '%s').strftime('%d-%m-%Y %H:%M')
+  # puts "Received '#{message.inspect}' from #{message.sender} at #{date}"
 
   case message.text
   when /hello/i
@@ -125,6 +115,8 @@ Bot.on :postback do |postback|
     @bot_events_controller.gets_address(postback)
   when /view_more_activities_2/
     @bot_events_controller.gets_activity_2(postback)
+  when /view_more_activities_3/
+    @bot_events_controller.gets_activity_3(postback)
   when /view_more_activities_1/
     @bot_events_controller.gets_activity_1(postback)
   when /choose_level/

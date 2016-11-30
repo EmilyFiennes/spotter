@@ -82,31 +82,31 @@ class BotThreadsView
           elements: [
             {
             title: "Running",
-            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499823/running_ttmlbm.png",
             buttons: [
               { type: 'postback', title: "Select", payload: 'find_activity Running' }
             ]},
             {
             title: "Swimming",
-            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499835/swimming_dlditb.png",
             buttons: [
               { type: 'postback', title: "Select", payload: 'find_activity Swimming' }
             ]},
             {
             title: "Soccer",
-            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454934/soccer_dmfmyq.png",
             buttons: [
               { type: 'postback', title: "Select", payload: 'find_activity Soccer' }
             ]},
             {
             title: "Tennis",
-            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454973/tennis_qiusvb.png",
             buttons: [
               { type: 'postback', title: "Select", payload: 'find_activity Tennis' }
             ]},
             {
             title: "Surprise me",
-            image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+            image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454968/surprise-me_unlwon.png",
             buttons: [
               { type: 'postback', title: "Select", payload: 'find_activity  Surprise' }
             ]}
