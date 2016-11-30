@@ -8,7 +8,9 @@
   <div class="banner-user-description">
     <%= image_tag @user.facebook_picture_url, {class: "avatar-large"} %>
     <h1><%= @user.display_name %></h1>
-    <p class="poppins">Last activity: <%= @user.participating_events.first.activity.name %></p>
+    <% if @user.participating_events.present? %>
+      <p class="poppins">Last activity: <%= @user.participating_events.first.activity.name %></p>
+    <% end %>
   </div>
 </div>
 <% if @user == current_user %>
