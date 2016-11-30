@@ -78,7 +78,7 @@ class BotEventsController
 
   def set_date_today(response)
     user = current_user(response)
-    user.session['create_event_data']['date'] = Date.tomorrow.midnight
+    user.session['create_event_data']['date'] = Date.today
     user.save
   end
 
@@ -112,6 +112,8 @@ class BotEventsController
   def set_start_time(response)
     user = current_user(response)
     begin
+      start_time = Time.parse(response.text)
+      raise if start_time.hour == 0
       user.session['create_event_data']['start_time'] = Time.parse(response.text)
       user.save
       return true
@@ -133,7 +135,7 @@ class BotEventsController
     begin
       start_time = user.session['create_event_data']['start_time']
       end_time = Time.parse(response.text)
-      raise if start_time > end_time
+      raise if start_time > end_time || end_time.hour == 0
       user.session['create_event_data']['end_time'] = Time.parse(response.text)
       user.save
       return true

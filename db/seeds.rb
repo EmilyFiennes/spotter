@@ -7,21 +7,21 @@ event_addresses = ["107 Cours Balguerie Stuttenberg, Bordeaux", "73 Rue Leyteire
 user_addresses = ["97 Rue Hortense, Bordeaux", "61 Rue de Libourne, Bordeaux", "36 Rue Surson, Bordeaux", "206 Avenue Victor Hugo, Le Bouscat", "19 Allée Ganda, Bordeaux", "51 Rue Mac Carthy, Bordeaux", "49 Rue Paul Doumer, Merignac", "59 Rue Boutin, Bordeaux", "41 Rue de Pessac, Bordeaux", "61 Rue du Pas-Saint-Georges, Bordeaux"]
 
 # 20 real activities
-activity_names = ["Swimming", "Running", "Bowling", "Rugby", "Soccer", "Tennis", "Petanque", "Badminton", "Basketball", "Biking", "Climbing", "Golf", "Hiking", "Roller", "Squash", "Surfing", "Skating", "Volley", "Workout", "Skiing"]
+activity_names = ["Swimming", "Running", "Bowling", "Rugby", "Soccer", "Tennis", "Badminton", "Basketball", "Biking", "Roller"]
 
 # 5 fake descriptions
 descriptions = ["Looking for cool mates to practice!", "Let's gather together and kick our butt", "Join me and have some fun", "I'm new in this city and looking for sport buddies", "I've been a coach for 5 years and I'm here to make you a champion"]
 
 # Faker
-first_name_girl = ["Audrey", "Emily", "Jane", "Alice", "Barbara"]
-first_name_boy = ["Seb", "Mathieu", "Johnny", "Paul", "Henry"]
+first_name_girl = ["Audrey", "Emily", "Jane", "Alice", "Barbara", "Sophie", "Kate", "Doris", "Janice"]
+first_name_boy = ["Seb", "Mathieu", "Johnny", "Paul", "Henry", "Steve", "Brian", "James", "Horace"]
 
 # 3 levels
 levels = ["newbie","intermediate","champion"]
 
 # 10 fake portraits
-picture_girl = ["https://cdn.pixabay.com/photo/2015/09/02/13/24/girl-919048_640.jpg", "http://vignette1.wikia.nocookie.net/camphalfbloodroleplay/images/4/4b/Photo_33.jpg/revision/latest?cb=20131216021409", "https://pbs.twimg.com/profile_images/674428042626908160/CbBgASTK.jpg", "https://whitmanstars.files.wordpress.com/2013/02/screen-shot-2013-02-07-at-10-14-08-pm.png", "http://www.legorafi.fr/wp-content/uploads/2013/04/iStock_000011434000XSmall.jpg"]
-picture_boy = ["https://scontent.cdninstagram.com/hphotos-xap1/t51.2885-15/e15/11055705_1413935155580535_1015724446_n.jpg", "http://msnbcmedia.msn.com/j/MSNBC/Components/Photo/_new/120611-Rathmann-vsmall.380;380;7;70;0.jpg", "http://blog.prestonmerchant.com/.a/6a00d8354c461f69e2013485fdc1c2970c-pi", "http://actorstheatre.org/wp-content/uploads/2012/12/Michael-Whatley-Headshot-1024x682.jpg", "http://www.personal-sport-trainer.com/blog/wp-content/uploads/2013/02/coach-sportif-toulouse1.jpg"]
+picture_girl = ["http://res.cloudinary.com/dfexzh84z/image/upload/v1480502820/g-vaiana_ubjgxr.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502853/g-savannah_jquuus.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502832/g-orsi_wlxigm.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502860/g-nur_izbrhy.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502871/g-morgane_e6nmzo.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502851/g-lea_dgwic4.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502823/g-charlotte_sfakvi.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502808/g-chantal_lfuod2.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502868/g-camille_modmk8.png"]
+picture_boy = ["http://res.cloudinary.com/dfexzh84z/image/upload/v1480502816/b-rudy_krnz6j.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502785/b-pierre_ppcfzm.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502704/b-laurent_phj33i.jpg", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502849/b-jimmy_hzwbmy.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502798/b-edouard_fcii8r.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502743/b-benoit_wdhv4n.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502783/b-arnaud_gvtkzi.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502759/b-antoine2_pdtr77.png", "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502689/b-antoine1_qxkv9r.jpg"]
 
 # Generating 20 activities
 activities = []
@@ -31,8 +31,8 @@ activity_names.each do |activity_name|
   )
 end
 
-users = [] # Generating 5 users (girls)
-5.times do
+users = [] # Generating 10 users (girls)
+10.times do
   last_name = Faker::Name.last_name
   first_name = first_name_girl.sample
   users <<  User.create(
@@ -48,9 +48,9 @@ users = [] # Generating 5 users (girls)
   )
 end
 
-# Generating 5 users (boys)
+# Generating 10 users (boys)
 
-5.times do
+10.times do
   last_name = Faker::Name.last_name
   first_name = first_name_boy.sample
   users << User.create(
@@ -67,9 +67,9 @@ end
 end
 
 
-# Generating 10 events
+# Generating 20 events
 events = []
-10.times do
+20.times do
   events << Event.create(
     start_at: DateTime.now + (0..5).to_a.sample,
     end_at: DateTime.now + (6..10).to_a.sample,
@@ -83,8 +83,8 @@ events = []
   )
 end
 
-# Generating 30 participations
-30.times do
+# Generating 40 participations
+40.times do
   user = users.sample
   event = events.sample
   unless event.participants.count >= event.max_participants && event.participants.include?(user)
