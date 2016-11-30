@@ -28,7 +28,7 @@ class BotEventsView
     else
       event_elements << {
         title: "I didn't find what I'm looking for 😢 ",
-        image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480456235/no_event_ejqe0o.png",
+        image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499808/no-result_rrdowh.png",
         buttons: [
           { type: 'postback', title: "Start again", payload: "start_again" }
         ]
@@ -148,7 +148,7 @@ class BotEventsView
           elements: [
             {
               title: "Running",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499823/running_ttmlbm.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Running' }
               ]
@@ -162,7 +162,7 @@ class BotEventsView
             },
             {
               title: "Swimming",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499835/swimming_dlditb.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Swimming' }
               ]
@@ -204,7 +204,7 @@ class BotEventsView
             },
             {
               title: "Biking",
-              image_url: "https://conceptdraw.com/a2327c3/p13/preview/640/pict--running-man-people-pictograms---vector-stencils-library.png--diagram-flowchart-example.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499795/biking_vo74qp.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Biking' }
               ]
@@ -221,6 +221,41 @@ class BotEventsView
               image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480454927/rugby_s8fruc.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Rugby' }
+              ]
+            }
+          ],
+          buttons: [
+            {
+              title: "view more",
+              type: "postback",
+              payload: "view_more_activities_3"
+            }
+          ]
+        }
+      }
+    )
+  end
+
+  def full_list_3(postback)
+    postback.reply(
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "list",
+          top_element_style: "compact",
+          elements: [
+            {
+              title: "Badminton",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499790/badminton_t2xxff.jpg",
+              buttons: [
+                { type: 'postback', title: "Select", payload: 'choose_activity Badminton' }
+              ]
+            },
+            {
+              title: "Roller",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499817/roller_oggat6.png",
+              buttons: [
+                { type: 'postback', title: "Select", payload: 'choose_activity Roller' }
               ]
             }
           ],

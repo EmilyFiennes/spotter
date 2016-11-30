@@ -115,6 +115,8 @@ Bot.on :postback do |postback|
     @bot_events_controller.gets_address(postback)
   when /view_more_activities_2/
     @bot_events_controller.gets_activity_2(postback)
+  when /view_more_activities_3/
+    @bot_events_controller.gets_activity_3(postback)
   when /view_more_activities_1/
     @bot_events_controller.gets_activity_1(postback)
   when /choose_level/
