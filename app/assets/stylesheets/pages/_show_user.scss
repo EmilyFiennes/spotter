@@ -64,11 +64,15 @@ h2 {
 
 
 // Dashboard
+
+.wrapper {
+  padding: 50px;
+}
 .wrapper-container-cards {
-  background-color: white;
   width: 100%;
   height: 100%;
   margin: 0;
+  background-color: white;
 }
 
 .container-cards-participant {
@@ -94,7 +98,6 @@ h2 {
   padding: 20px 0px;
   border-bottom: 1px solid #CCCCCC;
   margin-bottom: 40px;
-  background-color: #F3F3F3;
 }
 
 .card p {
@@ -107,6 +110,13 @@ h2 {
 
 .card-block-right {
   flex: 0 0 80%;
+}
+
+.block-left img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  margin-right: 20px;
 }
 
 .block-top {
@@ -126,8 +136,16 @@ h2 {
   align-items: center;
 }
 
+.block-top-left-left img {
+  margin-right: 20px;
+}
+
 .block-top-left-right {
   flex: 0 0 60%;
+}
+
+.block-top-left-right {
+  margin-right: 20px;
 }
 
 .block-top-middle {
@@ -144,12 +162,12 @@ h2 {
   align-items: center;
 }
 
-.block-top-middle-right {
-  flex: 0 0 60%;
+.block-top-middle-left img {
+  margin-right: 20px;
 }
 
-.block-top-middle-right h2 {
-
+.block-top-middle-right {
+  flex: 0 0 60%;
 }
 
 .block-top-right {
@@ -188,7 +206,6 @@ h2 {
 // Footer
 .footer {
   width: 100%;
-  height: 100px;
   background-color: black;
   display: flex;
   flex-direction: column;
@@ -204,3 +221,61 @@ h2 {
   opacity: 0.4;
 }
 
+// Mobile View
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    height: 100%;
+  }
+  .block-left img {
+    width: 100%;
+    height: 100%;
+  }
+  .card-block-right {
+    flex-direction: column;
+    height: 600px;
+  }
+  .block-top {
+    flex-direction: column;
+    height: 600px;
+  }
+   .block-top-left-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .block-top-left-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .block-top-middle-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .block-top-middle-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .block-top-right {
+    display: flex;
+    flex-direction: row;
+    height: 600px;
+  }
+  .block-top-right-top {
+    flex: 0 0 40%;
+    display: flex;
+    justify-content: center;
+  }
+  .block-top-right-bottom {
+    flex: 0 0 60%;
+    display: flex;
+    justify-content: center;
+  }
+  .block-bottom {
+    display: flex;
+    justify-content: center;
+  }
+}
