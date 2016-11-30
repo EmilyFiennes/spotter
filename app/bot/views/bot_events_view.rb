@@ -317,7 +317,7 @@ class BotEventsView
             template_type: "generic",
             elements: [
               {
-                title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.end_at.strftime('%H:%M')}. Ends at: #{event.start_at.strftime('%H:%M')}",
+                title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.start_at.strftime('%H:%M')}. Ends at: #{event.end_at.strftime('%H:%M')}",
                 subtitle: "#{event.address} (#{event.max_participants} participants)",
                 buttons: [
                   { type: 'postback', title: 'Create this event', payload: "creation"},
