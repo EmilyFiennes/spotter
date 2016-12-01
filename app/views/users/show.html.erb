@@ -3,131 +3,74 @@
     <%= image_tag "logo_spotter.svg" %>
   <% end %>
 </div>
-<div class="banner-profile">
-  <div class="banner-grey"></div>
+<div class="banner-grey"></div>
+
+<div class="banner-profile text-center">
   <div class="banner-user-description">
-  <% if @user.facebook_picture_url.present? %>
-    <%= image_tag @user.facebook_picture_url, {class: "avatar-large"} %>
-  <% else %>
-    <%= image_tag "avatar_vide.jpg", {class: "avatar-large"} %>
-  <% end %>
-    <h1><%= @user.display_name %></h1>
-    <% if @user.participating_events.present? %>
-      <p class="poppins">Last activity: <%= @user.participating_events.last.activity.name %></p>
+    <% if @user.facebook_picture_url.present? %>
+      <%= image_tag @user.facebook_picture_url, {class: "avatar-large"} %>
+    <% else %>
+      <%= image_tag "avatar_vide.jpg", {class: "avatar-large"} %>
     <% end %>
+    <h1><%= @user.display_name %></h1>
+    <p class="poppins">
+      <% if @user.participating_events.present? %>
+        Last activity: <%= @user.participating_events.last.activity.name %>
+      <% else %>
+        No activity yet - In the starting blocks!
+      <% end %>
+    </p>
   </div>
 </div>
-<div class="wrapper">
-  <div class="wrapper-container-cards">
-    <div class="container-cards-owner">
-      <h2>Events I have organized</h2>
-      <% @user.events.each do |event| %>
-        <div class="card">
-          <div class="card-block-left">
-            <div class="block-left">
+
+<div class="wrapper-dark">
+  <div class="container">
+    <h2>Events <%= @user.first_name %> is organizing</h2>
+  </div>
+</div>
+
+<% if @user.events.present? %>
+
+  <div class="container">
+    <% @user.events.each do |event| %>
+      <div class="card">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3">
+            <div class="event-card-picture text-center">
               <%= image_tag "#{event.activity.name.downcase}.png" %>
             </div>
           </div>
-          <div class="card-block-right">
-            <div class="block-top">
-              <div class="block-top-left">
-                <div class="block-top-left-left">
-                  <%= image_tag 'icon-date.png' %>
-                </div>
-                <div class="block-top-left-right">
-                  <h2><%= event.start_at.strftime("%d %b %Y") %></h2>
-                  <p class="poppins"><%= event.start_at.strftime("%H:%m") %> - <%= event.end_at.strftime("%H:%m") %></p>
-                </div>
-              </div>
-              <div class="block-top-middle">
-                <div class="block-top-middle-left">
-                  <%= image_tag 'icon-place.png' %>
-                </div>
-                <div class="block-top-middle-right">
-                  <h2>Address</h2>
-                  <p class="poppins"><%= event.address %></p>
-                </div>
-              </div>
-              <div class="block-top-right">
-                <div class="block-top-right-top">
-                  <% if event.participants.count > 0 %>
-                    <h2 class="text-center"><%= event.participants.count %> <%= "participant".pluralize(event.participants.count)%></h2>
-                  <% else %>
-                    <h2>No participants yet</h2>
-                  <% end %>
-                </div>
-                <div class="block-top-right-bottom">
-                  <% event.participants.first(2).each do |participant| %>
-                    <div class="event-participant-picture">
-                      <% if participant.facebook_picture_url.present? %>
-                        <%= link_to user_path(participant) do %>
-                          <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
-                          <% end %>
-                      <% else %>
-                        <%= link_to user_path(participant) do %>
-                          <%= image_tag "avatar_vide.jpg", {class: "avatar"} %>
-                        <% end %>
-                      <% end %>
-                    </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-
-            <div class="block-bottom">
-              <div class="block-bottom-left-first see-button">
-                <%= link_to event_path(event) do %>
-                  <p class="text-center">SEE EVENT</p>
-                <% end %>
-              </div>
-              <% if event.user == current_user %>
-                <div class="block-bottom-left-second cancel-button">
-                  <p><%= link_to "DELETE EVENT", event_path(event), method: :delete, data: {confirm: "Do you really want to delete this item?"},  class: "text-center" %></p>
-                </div>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-    <div class="wrapper-container-cards">
-      <div class="container-cards-participant">
-        <h2>Events I'm participating in</h2>
-        <% @user_participations.each do |participation| %>
-          <div class="card">
-            <div class="card-block-left">
-              <div class="block-left">
-                <%= image_tag "#{participation.event.activity.name.downcase}.png" %>
-              </div>
-            </div>
-            <div class="card-block-right">
-              <div class="block-top">
-                <div class="block-top-left">
-                  <div class="block-top-left-left">
+          <div class="col-xs-12 col-sm-9">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4">
+                <div class="event-card-info">
+                  <div class="event-card-info-picto">
                     <%= image_tag 'icon-date.png' %>
                   </div>
-                  <div class="block-top-left-right">
-                    <h2><%= participation.event.start_at.strftime("%d %b %Y") %></h2>
-                    <p class="poppins"><%= participation.event.start_at.strftime("%H:%m") %> - <%= participation.event.end_at.strftime("%H:%m") %></p>
+                  <div class="event-card-info-data">
+                    <h2><%= event.start_at.strftime("%d %b %Y") %></h2>
+                    <p class="poppins"><%= event.start_at.strftime("%H:%m") %> - <%= event.end_at.strftime("%H:%m") %></p>
                   </div>
                 </div>
-                <div class="block-top-middle">
-                  <div class="block-top-middle-left">
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <div class="event-card-info">
+                  <div class="event-card-info-picto">
                     <%= image_tag 'icon-place.png' %>
                   </div>
-                  <div class="block-top-middle-right">
+                  <div class="event-card-info-data">
                     <h2>Address</h2>
-                    <p class="poppins"><%= participation.event.address %></p>
+                    <p class="poppins"><%= event.address %></p>
                   </div>
                 </div>
-                <div class="block-top-right">
-                  <div class="block-top-right-top">
-                    <h2 class="text-center"><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <div class="event-card-participants">
+                  <div class="event-card-participants-data">
+                    <h2 class="text-center"><%= event.participants.count %> <%= "participant".pluralize(event.participants.count)%></h2>
                   </div>
-                  <div class="block-top-right-bottom">
-                    <% participation.event.participants.first(2).each do |participant| %>
+                  <div class="event-card-participants-photo">
+                    <% event.participants.first(3).each do |participant| %>
                       <div class="event-participant-picture">
                         <% if participant.facebook_picture_url.present? %>
                           <%= link_to user_path(participant) do %>
@@ -143,24 +86,127 @@
                   </div>
                 </div>
               </div>
-              <div class="block-bottom">
-                <div class="block-bottom-left-first see-button">
-                  <%= link_to event_path(participation.event) do %>
-                    <p class="text-center">SEE EVENT</p>
-                  <% end %>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="event-buttons">
+                    <div>
+                      <%= link_to "SEE EVENT", event_path(event), {class: "btn see-button"} %>
+                    </div>
+                    <% if event.user == current_user %>
+                      <div>
+                        <%= link_to "DELETE EVENT", event_path(event), method: :delete, data: {confirm: "Do you really want to delete this event?"},  class: "btn cancel-button" %>
+                      </div>
+                    <% end %>
+                  </div>
                 </div>
-                <% if participation.user = current_user %>
-                <div class="block-bottom-left-second cancel-participation-button">
-                  <p><%= link_to "CANCEL PARTICIPATION", participation_path(participation), method: :delete, data: {confirm: "Do you really want to cancel your participation?"},  class: "text-center" %></p>
-                </div>
-                <% end %>
               </div>
             </div>
           </div>
-        <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
+  </div>
 
+<% else %>
+
+  <div class="no-event text-center">
+    <%= image_tag "no-result.png" %>
+    <p><%= @user.first_name %> hasn't organized any event yet...</p>
+  </div>
+<% end %>
+
+<div class="wrapper-dark">
+  <div class="container">
+    <h2>Events <%= @user.first_name %> is participating in</h2>
+  </div>
 </div>
+
+<% if @user_participations.present? %>
+
+  <div class="container">
+    <% @user_participations.each do |participation| %>
+      <div class="card">
+        <div class="row">
+          <div class="col-xs-12 col-sm-3">
+            <div class="event-card-picture text-center">
+              <%= image_tag "#{participation.event.activity.name.downcase}.png" %>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-9">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4">
+                <div class="event-card-info">
+                  <div class="event-card-info-picto">
+                    <%= image_tag 'icon-date.png' %>
+                  </div>
+                  <div class="event-card-info-data">
+                    <h2><%= participation.event.start_at.strftime("%d %b %Y") %></h2>
+                    <p class="poppins"><%= participation.event.start_at.strftime("%H:%m") %> - <%= participation.event.end_at.strftime("%H:%m") %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <div class="event-card-info">
+                  <div class="event-card-info-picto">
+                    <%= image_tag 'icon-place.png' %>
+                  </div>
+                  <div class="event-card-info-data">
+                    <h2>Address</h2>
+                    <p class="poppins"><%= participation.event.address %></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-12 col-sm-4">
+                <div class="event-card-participants">
+                  <div class="event-card-participants-data">
+                    <h2 class="text-center"><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
+                  </div>
+                  <div class="event-card-participants-photo">
+                    <% participation.event.participants.first(3).each do |participant| %>
+                      <div class="event-participant-picture">
+                        <% if participant.facebook_picture_url.present? %>
+                          <%= link_to user_path(participant) do %>
+                            <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to user_path(participant) do %>
+                            <%= image_tag "avatar_vide.jpg", {class: "avatar"} %>
+                          <% end %>
+                        <% end %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="event-buttons">
+                    <div>
+                      <%= link_to "SEE EVENT", event_path(participation.event), {class: "btn see-button"} %>
+                    </div>
+                    <% if participation.user == current_user %>
+                      <div>
+                        <%= link_to "CANCEL PARTICIPATION", participation_path(participation), method: :delete, data: {confirm: "Do you really want to cancel your participation?"}, class: "btn cancel-participation-button" %>
+                      </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+<% else %>
+
+  <div class="no-event text-center">
+    <%= image_tag "no-result.png" %>
+    <p><%= @user.first_name %> hasn't participated to any event yet...</p>
+  </div>
+<% end %>
+
+<!-- </div> -->
 
 <%= render 'shared/footer' %>

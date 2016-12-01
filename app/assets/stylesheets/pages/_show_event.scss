@@ -1,7 +1,4 @@
 // Event Banner
-html {
-  background-color: black;
-}
 
 body {
   font-family: 'Roboto Condensed', sans-serif;
@@ -106,7 +103,8 @@ body {
 }
 
 .event-participant-picture img:hover {
-  border: 1px solid #CCCCCC;
+  border: 1px solid white;
+  cursor: pointer;
 }
 
 .poppins {
