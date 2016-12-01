@@ -80,9 +80,7 @@
                 <% end %>
               </div>
               <div class="block-bottom-left-second cancel-button">
-                <%= link_to do %>
-                  <p class="text-center">CANCEL EVENT</p>
-                <% end %>
+                <p><%= link_to "CANCEL EVENT", event_path(event), method: :delete, data: {confirm: "Do you really want to delete this item?"}, class: "text-center"%></p>
               </div>
             </div>
           </div>
