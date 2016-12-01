@@ -14,7 +14,6 @@ class BotThreadsController
       "find_event_data" => {},
       "create_event_data" => {}
     }
-    user.session["step"] = "welcome"
     user.save
     @bot_threads_view.initial_choice(response)
   end
