@@ -3,7 +3,7 @@
  * (margin/padding adjustments)
  * ------------------------------------- */
 
-.wrapper {
+.wrapper-home {
     padding: 75px 0;
     background-size: cover;
     min-height: 530px;
@@ -47,8 +47,10 @@
   padding-top: 80px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   div {
     margin-right: 30px;
+    margin-top: 30px;
   }
 }
 
