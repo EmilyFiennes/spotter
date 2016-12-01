@@ -6,7 +6,11 @@
 <div class="banner-profile">
   <div class="banner-grey"></div>
   <div class="banner-user-description">
+  <% if @user.facebook_picture_url.present? %>
     <%= image_tag @user.facebook_picture_url, {class: "avatar-large"} %>
+  <% else %>
+    <%= image_tag "avatar_vide.jpg", {class: "avatar-large"} %>
+  <% end %>
     <h1><%= @user.display_name %></h1>
     <% if @user.participating_events.present? %>
       <p class="poppins">Last activity: <%= @user.participating_events.first.activity.name %></p>
@@ -55,8 +59,14 @@
                 <div class="block-top-right-bottom">
                   <% event.participants.first(2).each do |participant| %>
                     <div class="event-participant-picture">
-                      <%= link_to user_path(participant) do %>
-                        <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                      <% if participant.facebook_picture_url.present? %>
+                        <%= link_to user_path(participant) do %>
+                          <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                          <% end %>
+                      <% else %>
+                        <%= link_to user_path(participant) do %>
+                          <%= image_tag "avatar_vide.jpg", {class: "avatar"} %>
+                        <% end %>
                       <% end %>
                     </div>
                   <% end %>
@@ -118,8 +128,14 @@
                   <div class="block-top-right-bottom">
                     <% participation.event.participants.first(2).each do |participant| %>
                       <div class="event-participant-picture">
-                        <%= link_to user_path(participant) do %>
-                          <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                        <% if participant.facebook_picture_url.present? %>
+                          <%= link_to user_path(participant) do %>
+                            <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                          <% end %>
+                        <% else %>
+                          <%= link_to user_path(participant) do %>
+                            <%= image_tag "avatar_vide.jpg", {class: "avatar"} %>
+                          <% end %>
                         <% end %>
                       </div>
                     <% end %>
