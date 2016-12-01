@@ -8,53 +8,69 @@
 <div class= event-title>
   <h1 class="text-center"><%= @event.activity.name %> session </h1>
 </div>
-<div class="event-information">
-  <div class="event-information-left">
-    <div class="left-block">
-      <%= image_tag "icon-date.png" %>
-    </div>
-    <div class="right-block">
-      <div class="top-block">
-        <p><strong><%= @date %></strong></p>
-      </div>
-      <div class="bottom-block">
-        <p class="poppins"><%= @start_time %> - <%= @end_time %></p>
-      </div>
-    </div>
-  </div>
-  <div class="event-information-middle">
-    <div class="left-block">
-      <%= image_tag "icon-place.png" %>
-    </div>
-    <div class="right-block">
-      <div class="top-block">
-        <p><strong>Address</strong></p>
-      </div>
-      <div class="bottom-block">
-        <p class="poppins"><%= @event.address %></p>
-      </div>
-    </div>
-  </div>
-  <div class="event-information-right">
-    <div class="top-block-center">
-      <% if @event.participants.count > 0 %>
-        <p class="text-center"><strong><%= @event.participants.count %> <%= "participant".pluralize(@event.participants.count)%></strong></p>
-      <% else %>
-        <p><strong>No participants yet ⛄️</strong></p>
-      <% end %>
-    </div>
-    <div class="bottom-block-center">
-      <% @event.participants.first(5).each do |participant| %>
-        <div class="event-participant-picture">
-          <%= link_to user_path(participant) do %>
-            <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
-          <% end %>
+
+<div class="information-wrapper">
+  <div class="container">
+    <div class="row">
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="event-information">
+          <div class="left-block">
+            <%= image_tag "icon-date.png" %>
+          </div>
+          <div class="right-block">
+<!--             <div class="top-block"> -->
+              <p><strong><%= @date %></strong></p>
+<!--             </div>
+            <div class="bottom-block"> -->
+              <p class="poppins"><%= @start_time %> - <%= @end_time %></p>
+<!--             </div> -->
+          </div>
         </div>
-      <% end %>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="event-information">
+          <div class="left-block">
+            <%= image_tag "icon-place.png" %>
+          </div>
+          <div class="right-block">
+<!--             <div class="top-block"> -->
+              <p><strong>Address</strong></p>
+<!--             </div> -->
+<!--             <div class="bottom-block"> -->
+              <p class="poppins"><%= @event.address %></p>
+<!--             </div> -->
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-4">
+        <div class="event-information-participants">
+          <div class="top-block">
+            <% if @event.participants.count > 0 %>
+              <p class="text-center"><strong><%= @event.participants.count %> <%= "participant".pluralize(@event.participants.count)%></strong></p>
+            <% else %>
+              <p><strong>No participants yet ⛄️</strong></p>
+            <% end %>
+          </div>
+          <div class="bottom-block">
+            <% @event.participants.first(5).each do |participant| %>
+              <div class="event-participant-picture">
+                <%= link_to user_path(participant) do %>
+                  <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-<div>
+
+
+
 <div class="event-description">
   <div class="event-owner">
     <div class="event-owner-picture">
@@ -69,9 +85,11 @@
       <p class="text-center poppins">" <%= @event.description %> "</p>
     </div>
   </div>
-  <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=650x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>'); background-repeat:no-repeat; background-size:100% auto;">
-  </div>
 </div>
+
+ <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=650x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>'); background-repeat:no-repeat; background-size:100% auto;">
+</div>
+
 <div class="footer">
   <p class="poppins text-center">“One man can be a crucial ingredient on a team, but one man cannot make a team.” - Kareem Abdul-Jabbar (NBA)</p>
   <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
