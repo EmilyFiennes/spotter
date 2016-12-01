@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :show, :delete ]
+  skip_before_action :authenticate_user!, only: [ :show ]
 
   def show
     @user = current_user
@@ -10,11 +10,10 @@ class EventsController < ApplicationController
   end
 
   def destroy
-    user = current_user
     @event = Event.find(params[:id])
     if @event.destroy
       flash[:alert] = "Your event #{@event.activity.name} on #{@event.start_at} has been successfully deleted."
     end
-    redirect_to user_path(user)
+    redirect_to user_path(@event.user)
   end
 end

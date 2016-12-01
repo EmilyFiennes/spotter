@@ -73,6 +73,7 @@
                 </div>
               </div>
             </div>
+
             <div class="block-bottom">
               <div class="block-bottom-left-first see-button">
                 <%= link_to event_path(event) do %>
@@ -80,7 +81,9 @@
                 <% end %>
               </div>
               <div class="block-bottom-left-second cancel-button">
-                <p><%= link_to "CANCEL EVENT", event_path(event), method: :delete, data: {confirm: "Do you really want to delete this item?"}, class: "text-center"%></p>
+                <p>
+                  <%= link_to "toto", event_path(event), method: :delete %>
+                </p>
               </div>
             </div>
           </div>
