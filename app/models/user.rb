@@ -17,6 +17,7 @@ class User < ApplicationRecord
     user_params[:token] = auth.credentials.token
     user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue Time.now + 1000.days
     user_params[:gender] = auth.extra.raw_info.gender
+    raise
 
     user_data_file = RestClient.get "https://graph.facebook.com/v2.8/me?fields=picture&access_token=#{ENV['FB_GRAPH_ACCESS_TOKEN']}"
     user_data = JSON.parse(user_data_file)
