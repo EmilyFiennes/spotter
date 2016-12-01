@@ -1,1 +1,18 @@
 // Your footer style
+// Footer
+.footer {
+  width: 100%;
+  min-height: 100px;
+  background-color: rgb(20,20,20);
+  text-align: center;
+  padding: 15px;
+}
+
+.footer p {
+  color: white;
+  font-size: 13px;
+}
+
+.footer p:last-child {
+  opacity: 0.4;
+}
