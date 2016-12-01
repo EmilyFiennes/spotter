@@ -131,7 +131,7 @@ Bot.on :postback do |postback|
   end
 end
 
-def current_user(response)
-  User.find_by(messenger_id: response.sender['id'])
-end
+# def current_user(response)
+#   User.find_by(messenger_id: response.sender['id'])
+# end
 

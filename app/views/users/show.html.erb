@@ -80,11 +80,11 @@
                   <p class="text-center">SEE EVENT</p>
                 <% end %>
               </div>
-              <div class="block-bottom-left-second cancel-button">
-                <p>
-                  <%= link_to "toto", event_path(event), method: :delete %>
-                </p>
-              </div>
+              <% if event.user == current_user %>
+                <div class="block-bottom-left-second cancel-button">
+                  <p><%= link_to "DELETE EVENT", event_path(event), method: :delete, data: {confirm: "Do you really want to delete this item?"},  class: "text-center" %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
