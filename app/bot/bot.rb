@@ -76,7 +76,7 @@ Bot.on :message do |message|
       @bot_events_controller.confirm_event_info(message)
     else
       message.reply(
-        text: "Now where are your manners? Say 'hello' to start 😎"
+        text: "What's that you say? Say 'hello' to start 😎"
       )
     end
   end
@@ -84,6 +84,7 @@ end
 
 Bot.on :postback do |postback|
   puts "Received '#{postback.inspect}' from #{postback.sender}"
+
 
   case postback.payload
   when 'FIND'

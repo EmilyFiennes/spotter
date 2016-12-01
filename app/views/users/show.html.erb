@@ -35,8 +35,8 @@
                   <%= image_tag 'icon-date.png' %>
                 </div>
                 <div class="block-top-left-right">
-                  <h2><%= event.start_at.strftime("%d %b %Y") %></h2>
-                  <p class="poppins"><%= event.start_at.strftime("%H:%m") %> - <%= event.end_at.strftime("%H:%m") %></p>
+                  <h2><%= event.start_at.strftime("%d %m %Y") %></h2>
+                  <p class="poppins"><%= event.start_at.strftime("%H:%M") %> - <%= event.end_at.strftime("%H:%M") %></p>
                 </div>
               </div>
               <div class="block-top-middle">
@@ -109,8 +109,8 @@
                     <%= image_tag 'icon-date.png' %>
                   </div>
                   <div class="block-top-left-right">
-                    <h2><%= participation.event.start_at.strftime("%d %b %Y") %></h2>
-                    <p class="poppins"><%= participation.event.start_at.strftime("%H:%m") %> - <%= participation.event.end_at.strftime("%H:%m") %></p>
+                    <h2><%= participation.event.start_at.strftime("%d %m %Y") %></h2>
+                    <p class="poppins"><%= participation.event.start_at.strftime("%H:%M") %> - <%= participation.event.end_at.strftime("%H:%M") %></p>
                   </div>
                 </div>
                 <div class="block-top-middle">

@@ -139,7 +139,7 @@ class BotEventsView
 
   def enter_address(postback)
     postback.reply(
-      text: "Please enter an address for your activity. This can be the meeting point. Alternatively, you'll be able to add specific details to the event description in just a jiffy. Be a specific as possible 😉."
+      text: "Please enter a meeting point. You can add specific details later. Be a specific as possible 😉."
       )
   end
 

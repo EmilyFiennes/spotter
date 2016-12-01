@@ -11,9 +11,9 @@
           <div class="flex-content">
             <div class="mytext">
               <%= image_tag 'logo_spotter.svg' %>
-              <h1>Stop training on your own</h1>
+              <h1>Don't work out alone</h1>
               <!-- <h1>Don't train alone anymore</h1> -->
-              <p>Join us for fun and efficient activities</p>
+              <p>Meet people, train harder, join the fun</p>
               <!-- <p>Join us and your trainings will be more efficient and more fun.</p> -->
             </div>
             <div class="btn-block">
@@ -25,9 +25,9 @@
               </div>
               <div class="btn btn-profile">
                 <% if user_signed_in? %>
-                  <%= link_to "View my profile", user_path(current_user), {class: "link"} %>
+                  <%= link_to "Manage my activities", user_path(current_user), {class: "link"} %>
                 <% else %>
-                  <%= link_to "View my profile", omniauth_authorize_path(:user, :facebook), {class: "link"} %>
+                  <%= link_to "Manage my activities", omniauth_authorize_path(:user, :facebook), {class: "link"} %>
                 <% end %>
               </div>
             </div>
@@ -40,7 +40,7 @@
 <div class="container">
   <div class="community-section">
     <div class="testimonial-container text-center">
-      <p>Take part of Spotter's fantastic community</p>
+      <p>Be a part of Spotter's fantastic community</p>
     </div>
     <div class="item-container">
       <% User.all.sample(19).each do |user| %>
