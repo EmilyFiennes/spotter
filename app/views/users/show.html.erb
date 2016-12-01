@@ -149,11 +149,11 @@
                     <p class="text-center">SEE EVENT</p>
                   <% end %>
                 </div>
+                <% if participation.user = current_user %>
                 <div class="block-bottom-left-second cancel-participation-button">
-                  <%= link_to do %>
-                    <p class="text-center">CANCEL PARTICIPATION</p>
-                  <% end %>
+                  <p><%= link_to "CANCEL PARTICIPATION", participation_path(participation), method: :delete, data: {confirm: "Do you really want to cancel your participation?"},  class: "text-center" %></p>
                 </div>
+                <% end %>
               </div>
             </div>
           </div>
