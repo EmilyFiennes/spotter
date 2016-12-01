@@ -9,6 +9,22 @@
   <h1 class="text-center"><%= @event.activity.name %> session </h1>
 </div>
 
+<div class="event-description">
+  <div class="event-owner">
+    <div class="event-owner-picture">
+      <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large"}%>
+    </div>
+    <div class="event-owner-content">
+      <p class="text-center"><strong>Organised by
+        <%= link_to user_path(@event.user) do %>
+          <%= @event.user.first_name %>
+        <% end %>
+      </strong></p>
+      <p class="text-center poppins">" <%= @event.description %> "</p>
+    </div>
+  </div>
+</div>
+
 <div class="information-wrapper">
   <div class="container">
     <div class="row">
@@ -19,12 +35,8 @@
             <%= image_tag "icon-date.png" %>
           </div>
           <div class="right-block">
-<!--             <div class="top-block"> -->
               <p><strong><%= @date %></strong></p>
-<!--             </div>
-            <div class="bottom-block"> -->
               <p class="poppins"><%= @start_time %> - <%= @end_time %></p>
-<!--             </div> -->
           </div>
         </div>
       </div>
@@ -35,12 +47,8 @@
             <%= image_tag "icon-place.png" %>
           </div>
           <div class="right-block">
-<!--             <div class="top-block"> -->
               <p><strong>Address</strong></p>
-<!--             </div> -->
-<!--             <div class="bottom-block"> -->
               <p class="poppins"><%= @event.address %></p>
-<!--             </div> -->
           </div>
         </div>
       </div>
@@ -69,29 +77,9 @@
   </div>
 </div>
 
-
-
-<div class="event-description">
-  <div class="event-owner">
-    <div class="event-owner-picture">
-      <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large"}%>
-    </div>
-    <div class="event-owner-content">
-      <p class="text-center"><strong>Organised by
-        <%= link_to user_path(@event.user) do %>
-          <%= @event.user.first_name %>
-        <% end %>
-      </strong></p>
-      <p class="text-center poppins">" <%= @event.description %> "</p>
-    </div>
-  </div>
+<div class="map text-center">
+  <%= image_tag "https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=600x400&maptype=roadmap&markers=color:red%7Clabel:C%7C#{@event.latitude},#{@event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}" %>
 </div>
 
- <div class="map" style="background-image: url('https://maps.googleapis.com/maps/api/staticmap?&zoom=14&size=650x300&maptype=roadmap&markers=color:red%7Clabel:C%7C<%="#{@event.latitude}"%>,<%="#{@event.longitude}"%>&key=<%="#{ENV['GOOGLE_API_BROWSER_KEY']}"%>'); background-repeat:no-repeat; background-size:100% auto;">
-</div>
-
-<div class="footer">
-  <p class="poppins text-center">“One man can be a crucial ingredient on a team, but one man cannot make a team.” - Kareem Abdul-Jabbar (NBA)</p>
-  <p class="poppins text-center">Made with love by Emily, Audrey, Mathieu and Sebastien</p>
-</div>
+<%= render 'shared/footer' %>
 
