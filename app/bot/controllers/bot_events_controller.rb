@@ -245,6 +245,7 @@ class BotEventsController
       max_participants: user.session['create_event_data']['max_participants'],
       description: user.session['create_event_data']['description'],
       user: user)
+    user.session['step'] = ""
     @bot_events_view.show_created_event(response, event)
   end
 

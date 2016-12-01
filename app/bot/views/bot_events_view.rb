@@ -317,9 +317,8 @@ class BotEventsView
             template_type: "generic",
             elements: [
               {
-                title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.start_at.strftime('%d-%m-%Y')}. Ends at: #{event.start_at.strftime('%H:%M')}",
-                subtitle: "Max participants: #{event.max_participants}. Event description: #{event.description}",
-                image_url: "https://maps.googleapis.com/maps/api/staticmap?&zoom=13&size=500x300&maptype=roadmap&markers=color:red%7Clabel:C%7C#{event.latitude},#{event.longitude}&key=#{ENV['GOOGLE_API_BROWSER_KEY']}",
+                title: "#{event.activity.name} on #{event.start_at.strftime('%d-%m-%Y')}. Starts at: #{event.start_at.strftime('%H:%M')}. Ends at: #{event.end_at.strftime('%H:%M')}",
+                subtitle: "#{event.address} (#{event.max_participants} participants)",
                 buttons: [
                   { type: 'postback', title: 'Create this event', payload: "creation"},
                   { type: 'postback', title: 'Cancel and start again', payload: "start_again"}

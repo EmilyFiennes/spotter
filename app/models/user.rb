@@ -17,15 +17,14 @@ class User < ApplicationRecord
     user_params[:token] = auth.credentials.token
     user_params[:token_expiry] = Time.at(auth.credentials.expires_at) rescue Time.now + 1000.days
     user_params[:gender] = auth.extra.raw_info.gender
-    raise
+    facebook_id = auth.extra.raw_info.id
 
-    user_data_file = RestClient.get "https://graph.facebook.com/v2.8/me?fields=picture&access_token=#{ENV['FB_GRAPH_ACCESS_TOKEN']}"
+    user_data_file = RestClient.get "https://graph.facebook.com/v2.8/#{facebook_id}?fields=picture&access_token=#{ENV['FB_GRAPH_ACCESS_TOKEN']}"
     user_data = JSON.parse(user_data_file)
     user_params[:picture_stamp] = user_data['picture']['data']['url'].scan(/\d{8,}/).second
 
-
-    user = User.where(provider: auth.provider, uid: auth.uid).first
     user = User.where(picture_stamp: user_params[:picture_stamp]).first
+    user ||= User.where(provider: auth.provider, uid: auth.uid).first
     user ||= User.where(email: auth.info.email).first # User did a regular sign up in the past.
     if user
       user.update(user_params)
