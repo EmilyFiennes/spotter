@@ -4,7 +4,7 @@ class ParticipationsController < ApplicationController
   def destroy
     @participation = Participation.find(params[:id])
     if @participation.destroy
-      flash[:alert] = "Your participation #{@participation.event.activity.name} has been successfully deleted."
+      flash[:success] = "You are no longer participating in the #{@participation.event.activity.name} session with #{@participation.user.name} on #{@participation.event.start_at.strftime('%d-%m-%Y')}"
     end
     redirect_to user_path(@participation.user)
   end

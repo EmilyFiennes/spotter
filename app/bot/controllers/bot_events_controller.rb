@@ -107,7 +107,7 @@ class BotEventsController
     user = current_user(response)
     begin
       start_time = Time.parse(response.text)
-      raise if start_time.hour == 0
+      raise if start_time.hour == 0 || response.text.include?(".")
       user.session['create_event_data']['start_time'] = Time.parse(response.text)
       user.save
       return true
@@ -245,7 +245,12 @@ class BotEventsController
       max_participants: user.session['create_event_data']['max_participants'],
       description: user.session['create_event_data']['description'],
       user: user)
-    user.session['step'] = ""
+    user.session = {
+      "step" => "",
+      "find_event_data" => {},
+      "create_event_data" => {}
+    }
+    user.save
     @bot_events_view.show_created_event(response, event)
   end
 
