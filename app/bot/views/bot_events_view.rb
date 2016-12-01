@@ -157,7 +157,7 @@ class BotEventsView
           elements: [
             {
               title: "Running",
-              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480499823/running_ttmlbm.png",
+              image_url: "http://res.cloudinary.com/dcutvpvia/image/upload/v1480597493/running_bpszwu.png",
               buttons: [
                 { type: 'postback', title: "Select", payload: 'choose_activity Running' }
               ]
