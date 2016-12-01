@@ -13,7 +13,7 @@
   <% end %>
     <h1><%= @user.display_name %></h1>
     <% if @user.participating_events.present? %>
-      <p class="poppins">Last activity: <%= @user.participating_events.first.activity.name %></p>
+      <p class="poppins">Last activity: <%= @user.participating_events.last.activity.name %></p>
     <% end %>
   </div>
 </div>
@@ -51,7 +51,7 @@
               <div class="block-top-right">
                 <div class="block-top-right-top">
                   <% if event.participants.count > 0 %>
-                    <h2><%= event.participants.count %> <%= "participant".pluralize(event.participants.count)%></h2>
+                    <h2 class="text-center"><%= event.participants.count %> <%= "participant".pluralize(event.participants.count)%></h2>
                   <% else %>
                     <h2>No participants yet</h2>
                   <% end %>
@@ -90,7 +90,7 @@
       <% end %>
     </div>
   </div>
-  <% if @user == current_user %>
+
     <div class="wrapper-container-cards">
       <div class="container-cards-participant">
         <h2>Events I'm participating in</h2>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="block-top-right">
                   <div class="block-top-right-top">
-                    <h2><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
+                    <h2 class="text-center"><%= participation.event.participants.count %> <%= "participant".pluralize(participation.event.participants.count)%></h2>
                   </div>
                   <div class="block-top-right-bottom">
                     <% participation.event.participants.first(2).each do |participant| %>
@@ -148,7 +148,7 @@
                     <p class="text-center">SEE EVENT</p>
                   <% end %>
                 </div>
-                <div class="block-bottom-left-second see-button">
+                <div class="block-bottom-left-second cancel-participation-button">
                   <%= link_to do %>
                     <p class="text-center">CANCEL PARTICIPATION</p>
                   <% end %>
@@ -159,7 +159,7 @@
         <% end %>
       </div>
     </div>
-  <% end %>
+
 </div>
 <div class="footer">
   <p class="poppins text-center">“One man can be a crucial ingredient on a team, but one man cannot make a team.” - Kareem Abdul-Jabbar (NBA)</p>

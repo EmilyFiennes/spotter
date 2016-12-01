@@ -204,10 +204,14 @@ h2 {
 }
 
 .see-button p {
-  border: 1px solid grey;
+  border: 1px solid #0084FF;
   border-radius: 5px;
   padding: 5px;
   margin-right: 5px;
+  width: 100px;
+  background-color: #0084FF;
+  color: white;
+  font-family: 'Poppins', sans-serif;
 }
 
 .see-button a:hover {
@@ -215,12 +219,28 @@ h2 {
 }
 
 .cancel-button p {
-  border: 1px solid grey;
+  border: 1px solid #0084FF;
   border-radius: 5px;
   padding: 5px;
+  width: 130px;
+  color: #0084FF;
+  font-family: 'Poppins', sans-serif;
 }
 
 .cancel-button a:hover {
+  text-decoration: none;
+}
+
+.cancel-participation-button p {
+  border: 1px solid #0084FF;
+  border-radius: 5px;
+  padding: 5px;
+  width: 200px;
+  color: #0084FF;
+  font-family: 'Poppins', sans-serif;
+}
+
+.cancel-participation-button a:hover {
   text-decoration: none;
 }
 
@@ -243,10 +263,11 @@ h2 {
 }
 
 // Mobile View
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
   .card {
     flex-direction: column;
     height: 100%;
+    padding: 0px;
   }
   .block-left img {
     width: 100%;
@@ -254,11 +275,15 @@ h2 {
   }
   .card-block-right {
     flex-direction: column;
-    height: 600px;
+    height: 400px;
   }
   .block-top {
+    flex: 0 0 30%;
     flex-direction: column;
-    height: 600px;
+    height: 300px;
+  }
+  .block-top-left {
+    flex: 0 0 35%;
   }
    .block-top-left-left {
     display: flex;
@@ -269,6 +294,9 @@ h2 {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+  .block-top-middle {
+    flex: 0 0 30%;
   }
   .block-top-middle-left {
     display: flex;
@@ -281,6 +309,7 @@ h2 {
     justify-content: center;
   }
   .block-top-right {
+    flex: 0 0 30%;
     display: flex;
     flex-direction: row;
     height: 600px;
@@ -293,9 +322,10 @@ h2 {
   .block-top-right-bottom {
     flex: 0 0 60%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
   }
   .block-bottom {
+    padding-top: 10px;
     display: flex;
     justify-content: center;
   }
