@@ -84,7 +84,7 @@ end
 
 Bot.on :postback do |postback|
   puts "Received '#{postback.inspect}' from #{postback.sender}"
-
+  user = User.messenger_identification(message)
 
   case postback.payload
   when 'FIND'
