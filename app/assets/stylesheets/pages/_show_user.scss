@@ -203,6 +203,27 @@ h2 {
   display: inline-block;
 }
 
+.see-button p {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin-right: 5px;
+}
+
+.see-button a:hover {
+  text-decoration: none;
+}
+
+.cancel-button p {
+  border: 1px solid grey;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.cancel-button a:hover {
+  text-decoration: none;
+}
+
 // Footer
 .footer {
   width: 100%;
