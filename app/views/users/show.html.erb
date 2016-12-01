@@ -73,17 +73,18 @@
                 </div>
               </div>
             </div>
+
             <div class="block-bottom">
               <div class="block-bottom-left-first see-button">
                 <%= link_to event_path(event) do %>
                   <p class="text-center">SEE EVENT</p>
                 <% end %>
               </div>
-              <div class="block-bottom-left-second cancel-button">
-                <%= link_to do %>
-                  <p class="text-center">CANCEL EVENT</p>
-                <% end %>
-              </div>
+              <% if event.user == current_user %>
+                <div class="block-bottom-left-second cancel-button">
+                  <p><%= link_to "DELETE EVENT", event_path(event), method: :delete, data: {confirm: "Do you really want to delete this item?"},  class: "text-center" %></p>
+                </div>
+              <% end %>
             </div>
           </div>
         </div>
@@ -148,11 +149,11 @@
                     <p class="text-center">SEE EVENT</p>
                   <% end %>
                 </div>
+                <% if participation.user = current_user %>
                 <div class="block-bottom-left-second cancel-participation-button">
-                  <%= link_to do %>
-                    <p class="text-center">CANCEL PARTICIPATION</p>
-                  <% end %>
+                  <p><%= link_to "CANCEL PARTICIPATION", participation_path(participation), method: :delete, data: {confirm: "Do you really want to cancel your participation?"},  class: "text-center" %></p>
                 </div>
+                <% end %>
               </div>
             </div>
           </div>

@@ -12,7 +12,11 @@
 <div class="event-description">
   <div class="event-owner">
     <div class="event-owner-picture">
-      <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large"}%>
+      <% if @event.user.facebook_picture_url.present? %>
+        <%= image_tag @event.user.facebook_picture_url, {class: "avatar-large"}%>
+      <% else %>
+        <%= image_tag "avatar_vide.jpg", {class: "avatar-large"} %>
+      <% end %>
     </div>
     <div class="event-owner-content">
       <p class="text-center"><strong>Organised by
@@ -65,8 +69,14 @@
           <div class="bottom-block">
             <% @event.participants.first(5).each do |participant| %>
               <div class="event-participant-picture">
-                <%= link_to user_path(participant) do %>
-                  <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                <% if participant.facebook_picture_url.present? %>
+                  <%= link_to user_path(participant) do %>
+                    <%= image_tag participant.facebook_picture_url, {class: "avatar"} %>
+                  <% end %>
+                <% else %>
+                  <%= link_to user_path(participant) do %>
+                    <%= image_tag "avatar_vide.jpg", {class: "avatar"} %>
+                    <% end %>
                 <% end %>
               </div>
             <% end %>
