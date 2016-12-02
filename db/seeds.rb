@@ -36,7 +36,7 @@ picture_boy = ["http://res.cloudinary.com/dfexzh84z/image/upload/v1480502816/b-r
   "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502704/b-laurent_phj33i.jpg",
   "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502849/b-jimmy_hzwbmy.png",
   "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502798/b-edouard_fcii8r.png",
-  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502743/b-benoit_wdhv4n.png",
+  "http://res.cloudinary.com/dfexzh84z/image/upload/v1480667431/g-luc_fqfx40.png",
   "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502783/b-arnaud_gvtkzi.png",
   "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502759/b-antoine2_pdtr77.png",
   "http://res.cloudinary.com/dfexzh84z/image/upload/v1480502689/b-antoine1_qxkv9r.jpg"
